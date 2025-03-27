@@ -1,47 +1,24 @@
-# Problem 1
-# Problem 1 – Investigating the Range as a Function of the Angle of Projection
-
-## 🎯 Amaç
-Fırlatma açısına göre menzilin nasıl değiştiğini incelemek.
-
----
-
-## 📘 Teorik Arka Plan
-Bir cismin yatay menzili şu formülle verilir:
-
-\[
-R = \frac{v_0^2 \cdot \sin(2\theta)}{g}
-\]
-
-Burada:
-- \( R \): menzil
-- \( v_0 \): ilk hız
-- \( \theta \): fırlatma açısı
-- \( g = 9.81 \, m/s^2 \): yerçekimi ivmesi
-
----
-
-## 💻 Python Simülasyonu
-
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Parametreler
-v0 = 20  # m/s
-g = 9.81
-angles = np.linspace(0, 90, 500)
-radians = np.radians(angles)
+# Define initial conditions
+v0 = 20  # initial velocity in meters per second
+g = 9.81  # gravitational acceleration in meters per second squared
 
-# Menzil hesaplama
+# Create a list of launch angles from 0 to 90 degrees
+angles = np.linspace(0, 90, 500)  # angle values in degrees
+radians = np.radians(angles)  # convert degrees to radians
+
+# Calculate the horizontal range for each angle
 range_values = (v0**2) * np.sin(2 * radians) / g
 
-# Grafik çizimi
-plt.figure(figsize=(10,5))
-plt.plot(angles, range_values)
-plt.title("Fırlatma Açısına Göre Menzil")
-plt.xlabel("Açı (derece)")
-plt.ylabel("Menzil (m)")
+# Plot the range as a function of launch angle
+plt.figure(figsize=(10, 5))
+plt.plot(angles, range_values, color="blue", linewidth=2)
+plt.title("Range as a Function of Launch Angle")
+plt.xlabel("Launch Angle (degrees)")
+plt.ylabel("Range (meters)")
 plt.grid(True)
+plt.tight_layout()
 plt.show()
-
