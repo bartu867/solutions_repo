@@ -1,5 +1,3 @@
----
-
 ## 📘 Family of Solutions from Governing Equations
 
 The motion of a projectile is derived from Newton’s second law. Assuming no air resistance:
