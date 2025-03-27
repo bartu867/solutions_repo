@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 2 - Physics and Mathematics</title>
+<title>Problem 2 – Investigating the Dynamics of a Forced Damped Pendulum - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 2";
+        var mkdocs_page_name = "Problem 2 \u2013 Investigating the Dynamics of a Forced Damped Pendulum";
         var mkdocs_page_input_path = "1 Physics/1 Mechanics/Problem_2.md";
         var mkdocs_page_url = null;
       </script>
@@ -48,8 +48,14 @@
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Problem 1</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2 – Investigating the Dynamics of a Forced Damped Pendulum</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#goal">🎯 Goal</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#theoretical-background">📘 Theoretical Background</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#python-simulation">💻 Python Simulation</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +169,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">1 Mechanics</li>
-<li class="breadcrumb-item active">Problem 2</li>
+<li class="breadcrumb-item active">Problem 2 – Investigating the Dynamics of a Forced Damped Pendulum</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,7 +177,70 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-2">Problem 2</h1>
+<h1 id="problem-2-investigating-the-dynamics-of-a-forced-damped-pendulum">Problem 2 – Investigating the Dynamics of a Forced Damped Pendulum</h1>
+<p><strong>Physics</strong> | <strong>Mechanics</strong> | <strong>KW1 Assignment</strong><br/>
+<strong>Author:</strong> Bartu867<br/>
+<strong>Date:</strong> March 27, 2025</p>
+<hr/>
+<h2 id="goal">🎯 Goal</h2>
+<p>Analyze the motion of a forced damped pendulum and observe how different parameters influence its behavior — including regular, resonant, and chaotic motion.</p>
+<hr/>
+<h2 id="theoretical-background">📘 Theoretical Background</h2>
+<p>The motion of a forced damped pendulum is governed by the second-order nonlinear differential equation:</p>
+<div class="arithmatex">\[
+\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \omega_0^2 \sin(\theta) = A \cos(\omega t)
+\]</div>
+<p>Where:<br/>
+- <span class="arithmatex">\( \theta \)</span>: angular displacement<br/>
+- <span class="arithmatex">\( b \)</span>: damping coefficient<br/>
+- <span class="arithmatex">\( \omega_0 \)</span>: natural frequency<br/>
+- <span class="arithmatex">\( A \)</span>: amplitude of external force<br/>
+- <span class="arithmatex">\( \omega \)</span>: driving frequency  </p>
+<hr/>
+<h2 id="python-simulation">💻 Python Simulation</h2>
+<p>Below is a Python simulation of the pendulum using the Runge-Kutta 4th order method.</p>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="parameters">Parameters</h1>
+<p>b = 0.5              # damping
+w0 = 1.5             # natural frequency
+A = 1.2              # driving force amplitude
+w = 0.666            # driving frequency
+dt = 0.04            # time step
+T = 100              # total time</p>
+<h1 id="time-array">Time array</h1>
+<p>t = np.arange(0, T, dt)</p>
+<h1 id="arrays-for-theta-and-omega">Arrays for theta and omega</h1>
+<p>theta = np.zeros_like(t)
+omega = np.zeros_like(t)</p>
+<h1 id="initial-conditions">Initial conditions</h1>
+<p>theta[0] = 0.2
+omega[0] = 0.0</p>
+<h1 id="runge-kutta-4th-order-method">Runge-Kutta 4th order method</h1>
+<p>for i in range(1, len(t)):
+    k1_theta = dt * omega[i - 1]
+    k1_omega = dt * (-b * omega[i - 1] - w0**2 * np.sin(theta[i - 1]) + A * np.cos(w * t[i - 1]))</p>
+<pre><code>k2_theta = dt * (omega[i - 1] + 0.5 * k1_omega)
+k2_omega = dt * (-b * (omega[i - 1] + 0.5 * k1_omega) - w0**2 * np.sin(theta[i - 1] + 0.5 * k1_theta) + A * np.cos(w * (t[i - 1] + 0.5 * dt)))
+
+k3_theta = dt * (omega[i - 1] + 0.5 * k2_omega)
+k3_omega = dt * (-b * (omega[i - 1] + 0.5 * k2_omega) - w0**2 * np.sin(theta[i - 1] + 0.5 * k2_theta) + A * np.cos(w * (t[i - 1] + 0.5 * dt)))
+
+k4_theta = dt * (omega[i - 1] + k3_omega)
+k4_omega = dt * (-b * (omega[i - 1] + k3_omega) - w0**2 * np.sin(theta[i - 1] + k3_theta) + A * np.cos(w * (t[i - 1] + dt)))
+
+theta[i] = theta[i - 1] + (k1_theta + 2 * k2_theta + 2 * k3_theta + k4_theta) / 6
+omega[i] = omega[i - 1] + (k1_omega + 2 * k2_omega + 2 * k3_omega + k4_omega) / 6
+</code></pre>
+<h1 id="plotting">Plotting</h1>
+<p>plt.figure(figsize=(10, 5))
+plt.plot(t, theta)
+plt.title("Forced Damped Pendulum – Angular Displacement Over Time")
+plt.xlabel("Time (s)")
+plt.ylabel("Angle (rad)")
+plt.grid(True)
+plt.show()</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
