@@ -171,26 +171,52 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<p>```python
-import numpy as np
-import matplotlib.pyplot as plt</p>
-<h1 id="define-initial-conditions">Define initial conditions</h1>
-<p>v0 = 20  # initial velocity in meters per second
-g = 9.81  # gravitational acceleration in meters per second squared</p>
-<h1 id="create-a-list-of-launch-angles-from-0-to-90-degrees">Create a list of launch angles from 0 to 90 degrees</h1>
-<p>angles = np.linspace(0, 90, 500)  # angle values in degrees
-radians = np.radians(angles)  # convert degrees to radians</p>
-<h1 id="calculate-the-horizontal-range-for-each-angle">Calculate the horizontal range for each angle</h1>
-<p>range_values = (v0**2) * np.sin(2 * radians) / g</p>
-<h1 id="plot-the-range-as-a-function-of-launch-angle">Plot the range as a function of launch angle</h1>
-<p>plt.figure(figsize=(10, 5))
-plt.plot(angles, range_values, color="blue", linewidth=2)
-plt.title("Range as a Function of Launch Angle")
-plt.xlabel("Launch Angle (degrees)")
-plt.ylabel("Range (meters)")
-plt.grid(True)
-plt.tight_layout()
-plt.show()</p>
+<hr/>
+<h2 id="family-of-solutions-from-governing-equations">📘 Family of Solutions from Governing Equations</h2>
+<p>The motion of a projectile is derived from Newton’s second law. Assuming no air resistance:</p>
+<ul>
+<li>
+<p>Horizontal motion:<br/>
+<span class="arithmatex">\( x(t) = v_0 \cos(\theta) \cdot t \)</span></p>
+</li>
+<li>
+<p>Vertical motion:<br/>
+<span class="arithmatex">\( y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2}gt^2 \)</span></p>
+</li>
+</ul>
+<p>The time of flight <span class="arithmatex">\( T \)</span> is:<br/>
+[
+T = \frac{2v_0 \sin(\theta)}{g}
+]</p>
+<p>The horizontal range <span class="arithmatex">\( R \)</span> becomes:<br/>
+[
+R = v_0 \cos(\theta) \cdot T = \frac{v_0^2 \sin(2\theta)}{g}
+]</p>
+<p>Each combination of <span class="arithmatex">\( v_0 \)</span>, <span class="arithmatex">\( \theta \)</span>, and <span class="arithmatex">\( g \)</span> defines a unique solution in the family of projectile trajectories.</p>
+<hr/>
+<h2 id="effect-of-parameters-on-the-range-curve">📊 Effect of Parameters on the Range Curve</h2>
+<ul>
+<li><strong>Initial velocity <span class="arithmatex">\( v_0 \)</span></strong>: Directly affects the range quadratically. A higher velocity results in a longer range.</li>
+<li><strong>Gravitational acceleration <span class="arithmatex">\( g \)</span></strong>: Inversely affects the range. A lower gravity (e.g. Moon) increases the range.</li>
+<li><strong>Projection angle <span class="arithmatex">\( \theta \)</span></strong>: The range is maximum at 45°, and symmetric about 45° (e.g., 30° and 60° give same range).</li>
+</ul>
+<p>These effects can be visualized by altering parameters in the Python simulation.</p>
+<hr/>
+<h2 id="limitations-of-the-idealized-model">⚠️ Limitations of the Idealized Model</h2>
+<ul>
+<li>Assumes no air resistance (drag), which is unrealistic in real-world applications.</li>
+<li>Assumes flat ground and constant gravity, ignoring curvature of Earth and altitude changes.</li>
+<li>Does not account for wind or spin of the projectile.</li>
+</ul>
+<hr/>
+<h2 id="suggestions-for-a-more-realistic-model">🧠 Suggestions for a More Realistic Model</h2>
+<ul>
+<li>Introduce <strong>air resistance</strong> using a drag force term:<br/>
+<span class="arithmatex">\( F_d = -kv \)</span> or <span class="arithmatex">\( F_d = -kv^2 \)</span></li>
+<li>Add <strong>wind effects</strong> as a constant or time-varying horizontal force.</li>
+<li>Include <strong>launch height</strong> or uneven terrain modeling.</li>
+<li>Extend to <strong>2D vector-based simulations</strong> using numerical integration (e.g., Runge-Kutta methods).</li>
+</ul>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
