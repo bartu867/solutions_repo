@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 2 - Physics and Mathematics</title>
+<title>🛰️ Problem 2 – Escape Velocity and Celestial Bodies - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 2";
+        var mkdocs_page_name = "\ud83d\udef0\ufe0f Problem 2 \u2013 Escape Velocity and Celestial Bodies";
         var mkdocs_page_input_path = "1 Physics/2 Gravity/Problem_2.md";
         var mkdocs_page_url = null;
       </script>
@@ -56,8 +56,14 @@
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Problem 1 – Orbital Period and Orbital Radius</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">🛰️ Problem 2 – Escape Velocity and Celestial Bodies</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#goal">🎯 Goal</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#theoretical-background">📘 Theoretical Background</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#python-simulation">💻 Python Simulation</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_3/">Problem 3</a>
@@ -163,7 +169,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">2 Gravity</li>
-<li class="breadcrumb-item active">Problem 2</li>
+<li class="breadcrumb-item active">🛰️ Problem 2 – Escape Velocity and Celestial Bodies</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,7 +177,47 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-2">Problem 2</h1>
+<h1 id="problem-2-escape-velocity-and-celestial-bodies">🛰️ Problem 2 – Escape Velocity and Celestial Bodies</h1>
+<p><strong>Physics</strong> | <strong>Gravity</strong> | <strong>KW1 Assignment</strong><br/>
+<strong>Author:</strong> Bartu867<br/>
+<strong>Date:</strong> March 27, 2025</p>
+<hr/>
+<h2 id="goal">🎯 Goal</h2>
+<p>Examine how escape velocity varies with the mass and radius of a celestial body.<br/>
+Understand the concept of escape velocity and simulate how different planetary parameters affect it using Python.</p>
+<hr/>
+<h2 id="theoretical-background">📘 Theoretical Background</h2>
+<p>The escape velocity <span class="arithmatex">\( v_e \)</span> is the minimum speed required for an object to break free from the gravitational pull of a massive body, without any further propulsion.</p>
+<p>The formula is derived from energy conservation:<br/>
+[
+v_e = \sqrt{\frac{2GM}{R}}
+]</p>
+<p>Where:
+- <span class="arithmatex">\( v_e \)</span>: escape velocity (m/s)
+- <span class="arithmatex">\( G \)</span>: gravitational constant <span class="arithmatex">\( 6.674 \times 10^{-11} \, \text{Nm}^2/\text{kg}^2 \)</span>
+- <span class="arithmatex">\( M \)</span>: mass of the celestial body (kg)
+- <span class="arithmatex">\( R \)</span>: radius of the celestial body (m)</p>
+<hr/>
+<h2 id="python-simulation">💻 Python Simulation</h2>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="constants">Constants</h1>
+<p>G = 6.674e-11  # Gravitational constant</p>
+<h1 id="example-celestial-body-masses-kg-and-radii-m">Example celestial body masses (kg) and radii (m)</h1>
+<p>masses = np.array([5.972e24, 6.39e23, 1.898e27])  # Earth, Mars, Jupiter
+radii = np.array([6.371e6, 3.3895e6, 6.9911e7])   # Earth, Mars, Jupiter
+names = ['Earth', 'Mars', 'Jupiter']</p>
+<h1 id="escape-velocity-calculation">Escape velocity calculation</h1>
+<p>v_escape = np.sqrt(2 * G * masses / radii)</p>
+<h1 id="plotting">Plotting</h1>
+<p>plt.figure(figsize=(10,6))
+plt.bar(names, v_escape, color='crimson')
+plt.title("Escape Velocity for Different Celestial Bodies")
+plt.ylabel("Escape Velocity (m/s)")
+plt.grid(axis='y')
+plt.tight_layout()
+plt.show()</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
