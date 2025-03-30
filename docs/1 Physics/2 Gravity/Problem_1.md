@@ -1,6 +1,6 @@
-# Problem 1 – Orbital Period and Orbital Radius
+# 🌍 Problem 1 – Orbital Period and Orbital Radius
 
-**Physics | Gravity | KW1 Assignment**  
+**Physics** | **Gravity** | **KW1 Assignment**  
 **Author:** Bartu867  
 **Date:** March 29, 2025
 
@@ -35,17 +35,15 @@ Where:
 
 ---
 
-## 🖥️ Python Simulation
+## 🧪 Python Simulation
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-```
-
 
 # Constants
-G = 6.674e-11               # gravitational constant (m^3/kg/s^2)
-M = 5.9722e24               # mass of the Earth (kg)
+G = 6.674e-11  # gravitational constant (m^3/kg/s^2)
+M = 5.9722e24  # mass of the Earth (kg)
 
 # Orbital radius values (from 7e6 to 4.2e7 meters)
 r = np.linspace(7e6, 4.2e7, 500)
