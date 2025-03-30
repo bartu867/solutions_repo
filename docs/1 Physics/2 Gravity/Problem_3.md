@@ -30,9 +30,10 @@ F = ma \Rightarrow a = \frac{GM}{r^2}
 \]
 
 Depending on the initial velocity vector:
-- If \( v < v_{orbit} \), it falls back to Earth  
-- If \( v = v_{orbit} \), it enters circular orbit  
-- If \( v > v_{escape} \), it escapes Earth's gravity  
+
+- If \( v < v_{\text{orbit}} \), it falls back to Earth.
+- If \( v = v_{\text{orbit}} \), it enters circular orbit.
+- If \( v > v_{\text{escape}} \), it escapes Earth's gravity.
 
 We will simulate the trajectory by numerically integrating the motion under gravitational acceleration.
 
@@ -65,13 +66,14 @@ velocities = np.zeros((steps, 2))
 positions[0] = r0
 velocities[0] = v0
 
+# Simulation loop
 for i in range(1, steps):
     r = positions[i-1]
     v = velocities[i-1]
     dist = np.linalg.norm(r)
     
     if dist < R:
-        positions = positions[:i]
+        positions = positions[:i]  # Break if the object is within Earth's radius
         break
     
     # Gravitational acceleration
@@ -81,13 +83,13 @@ for i in range(1, steps):
     velocities[i] = v + a * dt
     positions[i] = r + velocities[i] * dt
 
-# Plotting
-x = positions[:, 0] / 1000  # convert to km
-y = positions[:, 1] / 1000
+# Plotting the trajectory
+x = positions[:, 0] / 1000  # Convert to km
+y = positions[:, 1] / 1000  # Convert to km
 
 plt.figure(figsize=(8,8))
 plt.plot(x, y, label='Payload trajectory')
-circle = plt.Circle((0, 0), R/1000, color='blue', alpha=0.5, label='Earth')
+circle = plt.Circle((0, 0), R / 1000, color='blue', alpha=0.5, label='Earth')
 plt.gca().add_patch(circle)
 plt.xlabel("x position (km)")
 plt.ylabel("y position (km)")
