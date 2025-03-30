@@ -21,7 +21,7 @@ Kepler's Third Law states that the square of the orbital period \( T \) is propo
 T^2 \propto r^3
 \]
 
-For circular orbits, using Newton’s law of gravitation and centripetal force, the orbital period can be derived as:
+Using Newton’s law of gravitation and centripetal force, we can derive the formula for circular orbits:
 
 \[
 T = 2\pi \sqrt{\frac{r^3}{GM}}
@@ -31,7 +31,7 @@ Where:
 - \( T \): orbital period (seconds)  
 - \( r \): orbital radius (meters)  
 - \( G \): gravitational constant \( (6.674 \times 10^{-11} \, \text{Nm}^2/\text{kg}^2) \)  
-- \( M \): mass of the central body (kg)
+- \( M \): mass of Earth \( (5.972 \times 10^{24} \, \text{kg}) \)
 
 ---
 
@@ -43,7 +43,7 @@ import matplotlib.pyplot as plt
 
 # Constants
 G = 6.674e-11  # gravitational constant (m^3/kg/s^2)
-M = 5.9722e24  # mass of the Earth (kg)
+M = 5.972e24   # mass of Earth (kg)
 
 # Orbital radius values (from 7e6 to 4.2e7 meters)
 r = np.linspace(7e6, 4.2e7, 500)
