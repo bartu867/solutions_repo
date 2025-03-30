@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 3 - Physics and Mathematics</title>
+<title>🛰️ Problem 3 – Trajectories of a Freely Released Payload Near Earth - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 3";
+        var mkdocs_page_name = "\ud83d\udef0\ufe0f Problem 3 \u2013 Trajectories of a Freely Released Payload Near Earth";
         var mkdocs_page_input_path = "1 Physics/2 Gravity/Problem_3.md";
         var mkdocs_page_url = null;
       </script>
@@ -58,8 +58,14 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">🛰️ Problem 2 – Escape Velocity and Celestial Bodies</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 3</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">🛰️ Problem 3 – Trajectories of a Freely Released Payload Near Earth</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#goal">🎯 Goal</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#theoretical-background">📘 Theoretical Background</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#python-simulation">💻 Python Simulation</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +169,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">2 Gravity</li>
-<li class="breadcrumb-item active">Problem 3</li>
+<li class="breadcrumb-item active">🛰️ Problem 3 – Trajectories of a Freely Released Payload Near Earth</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,7 +177,81 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-3">Problem 3</h1>
+<h1 id="problem-3-trajectories-of-a-freely-released-payload-near-earth">🛰️ Problem 3 – Trajectories of a Freely Released Payload Near Earth</h1>
+<p><strong>Physics</strong> | <strong>Gravity</strong> | <strong>KW1 Assignment</strong><br/>
+<strong>Author:</strong> Bartu867<br/>
+<strong>Date:</strong> March 29, 2025</p>
+<hr/>
+<h2 id="goal">🎯 Goal</h2>
+<p>Simulate and analyze the possible trajectories of a payload released near Earth from a moving spacecraft.<br/>
+Determine whether the object enters orbit, falls to Earth, or escapes into space depending on initial conditions.</p>
+<hr/>
+<h2 id="theoretical-background">📘 Theoretical Background</h2>
+<p>When an object is released from a spacecraft near Earth, it will follow a trajectory determined by its initial velocity and position relative to Earth's gravity.</p>
+<p>Using Newton's law of universal gravitation:</p>
+<div class="arithmatex">\[
+F = \frac{GMm}{r^2}
+\]</div>
+<p>The motion of the payload follows Newton's second law:</p>
+<div class="arithmatex">\[
+F = ma \Rightarrow a = \frac{GM}{r^2}
+\]</div>
+<p>Depending on the initial velocity vector:
+- If <span class="arithmatex">\( v &lt; v_{orbit} \)</span>, it falls back to Earth<br/>
+- If <span class="arithmatex">\( v = v_{orbit} \)</span>, it enters circular orbit<br/>
+- If <span class="arithmatex">\( v &gt; v_{escape} \)</span>, it escapes Earth's gravity  </p>
+<p>We will simulate the trajectory by numerically integrating the motion under gravitational acceleration.</p>
+<hr/>
+<h2 id="python-simulation">💻 Python Simulation</h2>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="constants">Constants</h1>
+<p>G = 6.674e-11              # gravitational constant (m^3/kg/s^2)
+M = 5.972e24               # mass of Earth (kg)
+R = 6.371e6                # radius of Earth (m)</p>
+<h1 id="initial-conditions">Initial conditions</h1>
+<p>r0 = np.array([7.0e6, 0])                      # initial position (just above Earth surface)
+v0 = np.array([0, 8000])                       # initial velocity in m/s (tangential)</p>
+<h1 id="simulation-parameters">Simulation parameters</h1>
+<p>dt = 1                                          # time step (seconds)
+steps = 10000                                   # number of steps</p>
+<h1 id="arrays-to-store-trajectory">Arrays to store trajectory</h1>
+<p>positions = np.zeros((steps, 2))
+velocities = np.zeros((steps, 2))</p>
+<h1 id="set-initial-values">Set initial values</h1>
+<p>positions[0] = r0
+velocities[0] = v0</p>
+<p>for i in range(1, steps):
+    r = positions[i-1]
+    v = velocities[i-1]
+    dist = np.linalg.norm(r)</p>
+<pre><code>if dist &lt; R:
+    positions = positions[:i]
+    break
+
+# Gravitational acceleration
+a = -G * M * r / dist**3
+
+# Update velocity and position (Euler method)
+velocities[i] = v + a * dt
+positions[i] = r + velocities[i] * dt
+</code></pre>
+<h1 id="plotting">Plotting</h1>
+<p>x = positions[:, 0] / 1000  # convert to km
+y = positions[:, 1] / 1000</p>
+<p>plt.figure(figsize=(8,8))
+plt.plot(x, y, label='Payload trajectory')
+circle = plt.Circle((0, 0), R/1000, color='blue', alpha=0.5, label='Earth')
+plt.gca().add_patch(circle)
+plt.xlabel("x position (km)")
+plt.ylabel("y position (km)")
+plt.title("Trajectory of Payload Released Near Earth")
+plt.axis("equal")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
