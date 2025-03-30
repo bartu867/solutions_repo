@@ -43,7 +43,7 @@ import matplotlib.pyplot as plt
 
 # Constants
 G = 6.674e-11  # gravitational constant (m^3/kg/s^2)
-M = 5.972e24   # mass of Earth (kg)
+M = 5.972e24   # mass of the Earth (kg)
 
 # Orbital radius values (from 7e6 to 4.2e7 meters)
 r = np.linspace(7e6, 4.2e7, 500)
@@ -60,3 +60,4 @@ plt.ylabel("Orbital Period (Hours)")
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+```
