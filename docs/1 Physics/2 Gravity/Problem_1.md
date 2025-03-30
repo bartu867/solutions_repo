@@ -40,6 +40,8 @@ Where:
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
+```
+
 
 # Constants
 G = 6.674e-11               # gravitational constant (m^3/kg/s^2)
