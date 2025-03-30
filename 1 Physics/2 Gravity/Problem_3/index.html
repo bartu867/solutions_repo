@@ -196,10 +196,12 @@ F = \frac{GMm}{r^2}
 <div class="arithmatex">\[
 F = ma \Rightarrow a = \frac{GM}{r^2}
 \]</div>
-<p>Depending on the initial velocity vector:
-- If <span class="arithmatex">\( v &lt; v_{orbit} \)</span>, it falls back to Earth<br/>
-- If <span class="arithmatex">\( v = v_{orbit} \)</span>, it enters circular orbit<br/>
-- If <span class="arithmatex">\( v &gt; v_{escape} \)</span>, it escapes Earth's gravity  </p>
+<p>Depending on the initial velocity vector:</p>
+<ul>
+<li>If <span class="arithmatex">\( v &lt; v_{\text{orbit}} \)</span>, it falls back to Earth.</li>
+<li>If <span class="arithmatex">\( v = v_{\text{orbit}} \)</span>, it enters circular orbit.</li>
+<li>If <span class="arithmatex">\( v &gt; v_{\text{escape}} \)</span>, it escapes Earth's gravity.</li>
+</ul>
 <p>We will simulate the trajectory by numerically integrating the motion under gravitational acceleration.</p>
 <hr/>
 <h2 id="python-simulation">💻 Python Simulation</h2>
@@ -222,12 +224,13 @@ velocities = np.zeros((steps, 2))</p>
 <h1 id="set-initial-values">Set initial values</h1>
 <p>positions[0] = r0
 velocities[0] = v0</p>
+<h1 id="simulation-loop">Simulation loop</h1>
 <p>for i in range(1, steps):
     r = positions[i-1]
     v = velocities[i-1]
     dist = np.linalg.norm(r)</p>
 <pre><code>if dist &lt; R:
-    positions = positions[:i]
+    positions = positions[:i]  # Break if the object is within Earth's radius
     break
 
 # Gravitational acceleration
@@ -237,12 +240,12 @@ a = -G * M * r / dist**3
 velocities[i] = v + a * dt
 positions[i] = r + velocities[i] * dt
 </code></pre>
-<h1 id="plotting">Plotting</h1>
-<p>x = positions[:, 0] / 1000  # convert to km
-y = positions[:, 1] / 1000</p>
+<h1 id="plotting-the-trajectory">Plotting the trajectory</h1>
+<p>x = positions[:, 0] / 1000  # Convert to km
+y = positions[:, 1] / 1000  # Convert to km</p>
 <p>plt.figure(figsize=(8,8))
 plt.plot(x, y, label='Payload trajectory')
-circle = plt.Circle((0, 0), R/1000, color='blue', alpha=0.5, label='Earth')
+circle = plt.Circle((0, 0), R / 1000, color='blue', alpha=0.5, label='Earth')
 plt.gca().add_patch(circle)
 plt.xlabel("x position (km)")
 plt.ylabel("y position (km)")
