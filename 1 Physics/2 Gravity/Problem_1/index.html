@@ -191,7 +191,7 @@ Analyze this for circular orbits and simulate the behavior using Python for diff
 <div class="arithmatex">\[
 T^2 \propto r^3
 \]</div>
-<p>For circular orbits, using Newton’s law of gravitation and centripetal force, the orbital period can be derived as:</p>
+<p>Using Newton’s law of gravitation and centripetal force, we can derive the formula for circular orbits:</p>
 <div class="arithmatex">\[
 T = 2\pi \sqrt{\frac{r^3}{GM}}
 \]</div>
@@ -199,7 +199,7 @@ T = 2\pi \sqrt{\frac{r^3}{GM}}
 - <span class="arithmatex">\( T \)</span>: orbital period (seconds)<br/>
 - <span class="arithmatex">\( r \)</span>: orbital radius (meters)<br/>
 - <span class="arithmatex">\( G \)</span>: gravitational constant <span class="arithmatex">\( (6.674 \times 10^{-11} \, \text{Nm}^2/\text{kg}^2) \)</span><br/>
-- <span class="arithmatex">\( M \)</span>: mass of the central body (kg)</p>
+- <span class="arithmatex">\( M \)</span>: mass of Earth <span class="arithmatex">\( (5.972 \times 10^{24} \, \text{kg}) \)</span></p>
 <hr/>
 <h2 id="python-simulation">🧪 Python Simulation</h2>
 <p>```python
@@ -207,7 +207,7 @@ import numpy as np
 import matplotlib.pyplot as plt</p>
 <h1 id="constants">Constants</h1>
 <p>G = 6.674e-11  # gravitational constant (m^3/kg/s^2)
-M = 5.9722e24  # mass of the Earth (kg)</p>
+M = 5.972e24   # mass of Earth (kg)</p>
 <h1 id="orbital-radius-values-from-7e6-to-42e7-meters">Orbital radius values (from 7e6 to 4.2e7 meters)</h1>
 <p>r = np.linspace(7e6, 4.2e7, 500)</p>
 <h1 id="orbital-period-calculation-using-keplers-3rd-law">Orbital period calculation using Kepler's 3rd Law</h1>
