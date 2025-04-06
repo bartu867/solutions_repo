@@ -248,8 +248,7 @@ $$R = \frac{v_0^2 \cdot \sin(2\theta)}{g}\]</div>
 </ul>
 <hr/>
 <h2 id="python-helper-code-just-for-later-use">💻 Python Helper Code (Just for Later Use)</h2>
-<p><img alt="alt text" src="../image-2.png"/>
-```python
+<p>```python
 import numpy as np</p>
 <hr/>
 <h1 id="constants">Constants</h1>
@@ -278,7 +277,7 @@ import numpy as np</p>
 </ul>
 <hr/>
 <h2 id="python-code-range-vs-launch-angle">💻 Python Code: Range vs Launch Angle</h2>
-<p><img alt="alt text" src="../image-1.png"/>
+<p><img alt="alt text" src="image-1.png"/>
 ```python
 import numpy as np
 import matplotlib.pyplot as plt</p>
@@ -341,6 +340,8 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()</p>
+<h2 id="range-vs-angle-v0-50-100-150-ms">🎯 Range vs Angle (v₀ = 50, 100, 150 m/s)</h2>
+<p><img alt="Initial Velocities" src="../images/1.png"/></p>
 <h1 id="3-practical-applications-real-world-relevance-of-projectile-motion">🌍 3️⃣ Practical Applications – Real-World Relevance of Projectile Motion</h1>
 <p>Projectile motion isn't just a classroom example—it’s used in many industries and scientific fields. Below are major real-world applications and extensions of the basic model.</p>
 <hr/>
@@ -454,8 +455,7 @@ plt.show()</p>
 <div class="arithmatex">\[R(\theta)=\frac{v_0^2\cdot\sin(2\theta)}{g}\]</div>
 <hr/>
 <h2 id="python-code-ideal-range-function">💻 Python Code – Ideal Range Function</h2>
-<p><img alt="alt text" src="image.png"/>
-```python
+<p>```python
 import numpy as np
 import matplotlib.pyplot as plt</p>
 <h1 id="ideal-range-equation">Ideal range equation</h1>
@@ -491,6 +491,9 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 from scipy.optimize import root_scalar</p>
+<h2 id="earth-vs-moon-same-speed-different-gravity">🌍 Earth vs Moon – Same Speed, Different Gravity</h2>
+<p>Lower gravity (like on the Moon) allows the projectile to stay in air longer → greater range.</p>
+<p><img alt="Earth vs Moon" src="../images/2.png"/></p>
 <p>def range_with_height(v0, g, theta_deg, h):
     theta_rad = np.radians(theta_deg)
     vy = v0 * np.sin(theta_rad)
