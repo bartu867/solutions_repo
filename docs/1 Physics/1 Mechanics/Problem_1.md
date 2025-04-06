@@ -1,34 +1,35 @@
 # 🛰️ Problem 1 – Investigating the Range as a Function of the Angle of Projection
 **Physics** | **Mechanics** | **KW1 Assignment**  
 **Author:** Bartu867  
-**Date:** March 29, 2025
+**Date:** March 29, 2025  
+
 ---
-## 🎯 Goal
+
+## 🎯 Goal  
 Simulate and analyze the possible trajectories of a projectile launched at different angles.  
 Determine how the range depends on the angle of projection and calculate the range for different initial velocities.
 
 ---
 
-## 📘 Theoretical Background
+## 📘 Theoretical Background  
 Projectile motion can be described by the following equations. The horizontal range of a projectile, ignoring air resistance, is given by:
 
 $$
 R = \frac{v_0^2 \sin(2\theta)}{g}
 $$
 
-Where:
-- \( v_0 \) is the initial velocity
-- \( \theta \) is the angle of projection
-- \( g \) is the gravitational acceleration
+Where:  
+- \( v_0 \) is the initial velocity  
+- \( \theta \) is the angle of projection  
+- \( g \) is the gravitational acceleration  
 
 In the case of air resistance, the equation becomes more complicated and requires numerical methods to solve.
 
 ---
 
-## 💻 Python Simulation
+## 💻 Python Simulation – Without Air Resistance
 
-![alt text](image.png)
----
+![Range vs Angle](image.png)
 
 ```python
 import numpy as np
@@ -56,6 +57,13 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
+```
+
+---
+
+## 💻 Python Simulation – With Air Resistance
+
+```python
 # Additional code for air resistance simulation
 def simulate_projectile_with_air_resistance(v0, theta, k, m):
     # Initial conditions
@@ -90,10 +98,12 @@ def simulate_projectile_with_air_resistance(v0, theta, k, m):
 
         # Break if projectile hits the ground
         if y_values[i] < 0:
+            x_values = x_values[:i+1]
+            y_values = y_values[:i+1]
             break
 
     return x_values, y_values
-![alt text](image-2.png)
+
 # Simulate projectile with air resistance
 k = 0.1  # Drag coefficient
 m = 1    # Mass of the projectile
@@ -109,4 +119,6 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
+```
 
+![Trajectory with Air Resistance](image-2.png)
