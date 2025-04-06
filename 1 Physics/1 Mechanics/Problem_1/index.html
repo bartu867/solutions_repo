@@ -54,8 +54,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#python-simulation-without-air-resistance">💻 Python Simulation – Without Air Resistance</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#python-simulation-with-air-resistance">💻 Python Simulation – With Air Resistance</a>
-</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2 – Investigating the Dynamics of a Forced Damped Pendulum</a>
@@ -201,23 +199,55 @@ R = \frac{v_0^2 \sin(2\theta)}{g}
 <hr/>
 <h2 id="python-simulation-without-air-resistance">💻 Python Simulation – Without Air Resistance</h2>
 <p><img alt="Range vs Angle" src="../image.png"/></p>
-<pre><code class="language-python">import numpy as np
-import matplotlib.pyplot as plt
-
-# Constants
-g = 9.81  # gravitational acceleration (m/s^2)
-
-# Function to calculate the range
-def calculate_range(v0, theta):
-    return (v0 ** 2 * np.sin(2 * np.radians(theta))) / g
-
-# Range calculation without air resistance
-theta_values = np.arange(0, 91, 1)  # Angle range from 0 to 90 degrees
+<p>import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="constants">Constants</h1>
+<p>g = 9.81  # gravitational acceleration (m/s^2)</p>
+<h1 id="function-to-calculate-the-range">Function to calculate the range</h1>
+<p>def calculate_range(v0, theta):
+    return (v0 ** 2 * np.sin(2 * np.radians(theta))) / g</p>
+<h1 id="range-calculation-without-air-resistance">Range calculation without air resistance</h1>
+<p>theta_values = np.arange(0, 91, 1)  # Angle range from 0 to 90 degrees
 v0 = 100  # Initial velocity in m/s
-ranges = calculate_range(v0, theta_values)
-
-# Plotting the range vs. angle
-plt.figure(figsize=(8, 6))
+ranges = calculate_range(v0, theta_values)</p>
+<h1 id="plotting-the-range-vs-angle">Plotting the range vs. angle</h1>
+<p>plt.figure(figsize=(8, 6))
+plt.plot(theta_values, ranges, label='Range (No Air Resistance)', color='orange')
+plt.xlabel('Angle of Projection (degrees)')
+plt.ylabel('Range (meters)')
+plt.title('Range of a Projectile as a Function of Launch Angle')
+plt.grid(True)
+import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="constants_1">Constants</h1>
+<p>g = 9.81  # gravitational acceleration (m/s^2)</p>
+<h1 id="function-to-calculate-the-range_1">Function to calculate the range</h1>
+<p>def calculate_range(v0, theta):
+    return (v0 ** 2 * np.sin(2 * np.radians(theta))) / g</p>
+<h1 id="range-calculation-without-air-resistance_1">Range calculation without air resistance</h1>
+<p>theta_values = np.arange(0, 91, 1)  # Angle range from 0 to 90 degrees
+v0 = 100  # Initial velocity in m/s
+ranges = calculate_range(v0, theta_values)</p>
+<h1 id="plotting-the-range-vs-angle_1">Plotting the range vs. angle</h1>
+<p>plt.figure(figsize=(8, 6))
+plt.plot(theta_values, ranges, label='Range (No Air Resistance)', color='orange')
+plt.xlabel('Angle of Projection (degrees)')
+plt.ylabel('Range (meters)')
+plt.title('Range of a Projectile as a Function of Launch Angle')
+plt.grid(True)
+import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="constants_2">Constants</h1>
+<p>g = 9.81  # gravitational acceleration (m/s^2)</p>
+<h1 id="function-to-calculate-the-range_2">Function to calculate the range</h1>
+<p>def calculate_range(v0, theta):
+    return (v0 ** 2 * np.sin(2 * np.radians(theta))) / g</p>
+<h1 id="range-calculation-without-air-resistance_2">Range calculation without air resistance</h1>
+<p>theta_values = np.arange(0, 91, 1)  # Angle range from 0 to 90 degrees
+v0 = 100  # Initial velocity in m/s
+ranges = calculate_range(v0, theta_values)</p>
+<h1 id="plotting-the-range-vs-angle_2">Plotting the range vs. angle</h1>
+<p>plt.figure(figsize=(8, 6))
 plt.plot(theta_values, ranges, label='Range (No Air Resistance)', color='orange')
 plt.xlabel('Angle of Projection (degrees)')
 plt.ylabel('Range (meters)')
@@ -225,57 +255,57 @@ plt.title('Range of a Projectile as a Function of Launch Angle')
 plt.grid(True)
 plt.legend()
 plt.tight_layout()
-plt.show()
-</code></pre>
+plt.show()</p>
 <hr/>
 <h2 id="python-simulation-with-air-resistance">💻 Python Simulation – With Air Resistance</h2>
-<pre><code class="language-python"># Additional code for air resistance simulation
-def simulate_projectile_with_air_resistance(v0, theta, k, m):
+<hr/>
+<p><img alt="alt text" src="../image-1.png"/></p>
+<h1 id="additional-code-for-air-resistance-simulation">Additional code for air resistance simulation</h1>
+<p>def simulate_projectile_with_air_resistance(v0, theta, k, m):
     # Initial conditions
     x0, y0 = 0, 0
     vx0 = v0 * np.cos(np.radians(theta))
-    vy0 = v0 * np.sin(np.radians(theta))
+    vy0 = v0 * np.sin(np.radians(theta))</p>
+<pre><code># Time settings
+dt = 0.01
+t_max = 200
+t_values = np.arange(0, t_max, dt)
 
-    # Time settings
-    dt = 0.01
-    t_max = 200
-    t_values = np.arange(0, t_max, dt)
+# Arrays to store positions
+x_values = np.zeros(len(t_values))
+y_values = np.zeros(len(t_values))
+vx_values = np.zeros(len(t_values))
+vy_values = np.zeros(len(t_values))
 
-    # Arrays to store positions
-    x_values = np.zeros(len(t_values))
-    y_values = np.zeros(len(t_values))
-    vx_values = np.zeros(len(t_values))
-    vy_values = np.zeros(len(t_values))
+x_values[0], y_values[0] = x0, y0
+vx_values[0], vy_values[0] = vx0, vy0
 
-    x_values[0], y_values[0] = x0, y0
-    vx_values[0], vy_values[0] = vx0, vy0
+for i in range(1, len(t_values)):
+    # Air resistance
+    ax = -k * vx_values[i-1] / m
+    ay = -g - (k * vy_values[i-1] / m)
 
-    for i in range(1, len(t_values)):
-        # Air resistance
-        ax = -k * vx_values[i-1] / m
-        ay = -g - (k * vy_values[i-1] / m)
+    # Update velocities and positions
+    vx_values[i] = vx_values[i-1] + ax * dt
+    vy_values[i] = vy_values[i-1] + ay * dt
+    x_values[i] = x_values[i-1] + vx_values[i] * dt
+    y_values[i] = y_values[i-1] + vy_values[i] * dt
 
-        # Update velocities and positions
-        vx_values[i] = vx_values[i-1] + ax * dt
-        vy_values[i] = vy_values[i-1] + ay * dt
-        x_values[i] = x_values[i-1] + vx_values[i] * dt
-        y_values[i] = y_values[i-1] + vy_values[i] * dt
+    # Break if projectile hits the ground
+    if y_values[i] &lt; 0:
+        x_values = x_values[:i+1]
+        y_values = y_values[:i+1]
+        break
 
-        # Break if projectile hits the ground
-        if y_values[i] &lt; 0:
-            x_values = x_values[:i+1]
-            y_values = y_values[:i+1]
-            break
-
-    return x_values, y_values
-
-# Simulate projectile with air resistance
-k = 0.1  # Drag coefficient
+return x_values, y_values
+</code></pre>
+<p><img alt="alt text" src="../image.png"/></p>
+<h1 id="simulate-projectile-with-air-resistance">Simulate projectile with air resistance</h1>
+<p>k = 0.1  # Drag coefficient
 m = 1    # Mass of the projectile
-x_vals, y_vals = simulate_projectile_with_air_resistance(v0, 45, k, m)
-
-# Plotting the trajectory with air resistance
-plt.figure(figsize=(8, 6))
+x_vals, y_vals = simulate_projectile_with_air_resistance(v0, 45, k, m)</p>
+<h1 id="plotting-the-trajectory-with-air-resistance">Plotting the trajectory with air resistance</h1>
+<p>plt.figure(figsize=(8, 6))
 plt.plot(x_vals, y_vals, label='Projectile Trajectory (with Air Resistance)', color='blue')
 plt.xlabel('Distance (meters)')
 plt.ylabel('Height (meters)')
@@ -283,9 +313,8 @@ plt.title('Projectile Trajectory with Air Resistance')
 plt.grid(True)
 plt.legend()
 plt.tight_layout()
-plt.show()
-</code></pre>
-<p><img alt="Trajectory with Air Resistance" src="../image-2.png"/></p>
+plt.show()</p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
