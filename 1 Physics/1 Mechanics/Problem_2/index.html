@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 2 – Investigating the Dynamics of a Forced Damped Pendulum - Physics and Mathematics</title>
+<title>🔬 Physics Assignment – KW1 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 2 \u2013 Investigating the Dynamics of a Forced Damped Pendulum";
+        var mkdocs_page_name = "\ud83d\udd2c Physics Assignment \u2013 KW1";
         var mkdocs_page_input_path = "1 Physics/1 Mechanics/Problem_2.md";
         var mkdocs_page_url = null;
       </script>
@@ -48,12 +48,8 @@
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Problem_1/">🛰️ Problem 1 – Investigating the Range as a Function of the Angle of Projection</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2 – Investigating the Dynamics of a Forced Damped Pendulum</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">🔬 Physics Assignment – KW1</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#goal">🎯 Goal</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#theoretical-background">📘 Theoretical Background</a>
-</li>
 </ul>
 </li>
 </ul>
@@ -167,7 +163,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">1 Mechanics</li>
-<li class="breadcrumb-item active">Problem 2 – Investigating the Dynamics of a Forced Damped Pendulum</li>
+<li class="breadcrumb-item active">🔬 Physics Assignment – KW1</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -175,60 +171,37 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-2-investigating-the-dynamics-of-a-forced-damped-pendulum">Problem 2 – Investigating the Dynamics of a Forced Damped Pendulum</h1>
-<p><strong>Physics</strong> | <strong>Mechanics</strong> | <strong>KW1 Assignment</strong><br/>
+<h1 id="physics-assignment-kw1">🔬 Physics Assignment – KW1</h1>
+<p><strong>Topic:</strong> Mechanics – Oscillations &amp; Motion<br/>
 <strong>Author:</strong> Bartu867<br/>
-<strong>Date:</strong> March 27, 2025</p>
+<strong>Date:</strong> March 27, 2025  </p>
 <hr/>
+<h1 id="problem-1-investigating-the-dynamics-of-a-forced-damped-pendulum">Problem 1 – Investigating the Dynamics of a Forced Damped Pendulum</h1>
 <h2 id="goal">🎯 Goal</h2>
 <p>Analyze the motion of a forced damped pendulum and observe how different parameters influence its behavior — including regular, resonant, and chaotic motion.</p>
 <hr/>
 <h2 id="theoretical-background">📘 Theoretical Background</h2>
 <p>The motion of a forced damped pendulum is governed by the second-order nonlinear differential equation:</p>
-<div class="arithmatex">\[
-\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \omega_0^2 \sin(\theta) = A \cos(\omega t)
-\]</div>
-<p>Where:<br/>
-- <span class="arithmatex">\( \theta \)</span>: angular displacement<br/>
-- <span class="arithmatex">\( b \)</span>: damping coefficient<br/>
-- <span class="arithmatex">\( \omega_0 \)</span>: natural frequency<br/>
-- <span class="arithmatex">\( A \)</span>: amplitude of external force<br/>
-- <span class="arithmatex">\( \omega \)</span>: driving frequency  </p>
-<hr/>
-<h1 id="forced-damped-pendulum-runge-kutta-4th-order-method">📘 Forced Damped Pendulum – Runge-Kutta 4th Order Method</h1>
-<p>This simulation models the motion of a <strong>forced damped pendulum</strong> using the <strong>Runge-Kutta 4th-order method (RK4)</strong>. The pendulum is influenced by damping and an external periodic driving force.</p>
-<hr/>
-<h2 id="differential-equation-of-motion">⚙️ Differential Equation of Motion</h2>
-<p>The equation governing the forced damped pendulum is:</p>
-<div class="arithmatex">\[
-\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \omega_0^2 \sin(\theta) = A\cos(\omega t)
-\]</div>
+<p>d²θ/dt² + b(dθ/dt) + ω₀² sin(θ) = A cos(ωt)</p>
 <p>Where:
-- <span class="arithmatex">\(\theta\)</span> is the angular displacement (rad)
-- <span class="arithmatex">\(b\)</span> is the damping coefficient
-- <span class="arithmatex">\(\omega_0\)</span> is the natural frequency
-- <span class="arithmatex">\(A\)</span> is the driving force amplitude
-- <span class="arithmatex">\(\omega\)</span> is the driving frequency</p>
-<p>We rewrite this as a system of first-order differential equations:
-- Let <span class="arithmatex">\(\omega = \frac{d\theta}{dt}\)</span>
-- Then:</p>
-<div class="arithmatex">\[
-\frac{d\theta}{dt} = \omega \\
-\frac{d\omega}{dt} = -b\omega - \omega_0^2 \sin(\theta) + A \cos(\omega t)
-\]</div>
+- θ: angular displacement<br/>
+- b: damping coefficient<br/>
+- ω₀: natural frequency<br/>
+- A: amplitude of external force<br/>
+- ω: driving frequency  </p>
 <hr/>
-<h2 id="numerical-method-rk4">🧠 Numerical Method: RK4</h2>
-<p>The <strong>Runge-Kutta 4th-order method</strong> is used to numerically solve the system. For each time step <span class="arithmatex">\(dt\)</span>, we compute:</p>
-<ul>
-<li><span class="arithmatex">\(k_1\)</span>, <span class="arithmatex">\(k_2\)</span>, <span class="arithmatex">\(k_3\)</span>, <span class="arithmatex">\(k_4\)</span> for both <span class="arithmatex">\(\theta\)</span> and <span class="arithmatex">\(\omega\)</span></li>
-<li>Update rules:</li>
-</ul>
-<div class="arithmatex">\[
-\theta_{i+1} = \theta_i + \frac{1}{6}(k_1^\theta + 2k_2^\theta + 2k_3^\theta + k_4^\theta) \\
-\omega_{i+1} = \omega_i + \frac{1}{6}(k_1^\omega + 2k_2^\omega + 2k_3^\omega + k_4^\omega)
-\]</div>
+<h2 id="reformulated-system-first-order">🔢 Reformulated System (First-Order)</h2>
+<p>To apply numerical methods, the second-order ODE is transformed into two coupled first-order ODEs:</p>
+<p>Let ω = dθ/dt, then:</p>
+<p>dθ/dt = ω<br/>
+dω/dt = -bω - ω₀² sin(θ) + A cos(ωt)</p>
 <hr/>
-<h2 id="python-code">💻 Python Code</h2>
+<h2 id="numerical-method-runge-kutta-4th-order-rk4">🧠 Numerical Method: Runge-Kutta 4th Order (RK4)</h2>
+<p>The RK4 method is used to solve the equations. The update steps for each time interval dt:</p>
+<p>θₙ₊₁ = θₙ + (1/6)(k1_θ + 2k2_θ + 2k3_θ + k4_θ)<br/>
+ωₙ₊₁ = ωₙ + (1/6)(k1_ω + 2k2_ω + 2k3_ω + k4_ω)</p>
+<hr/>
+<h2 id="python-code-pendulum-simulation">💻 Python Code – Pendulum Simulation</h2>
 <p>```python
 import numpy as np
 import matplotlib.pyplot as plt</p>
