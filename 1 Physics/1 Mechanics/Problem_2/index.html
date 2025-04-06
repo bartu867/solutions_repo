@@ -50,6 +50,36 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">🔬 Physics Assignment – KW1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#small-angle-approximation">Small-Angle Approximation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#resonance-and-system-energy">Resonance and System Energy</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-analysis-of-dynamics">2. Analysis of Dynamics</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#regular-vs-chaotic-motion">Regular vs Chaotic Motion</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-practical-applications">3. Practical Applications</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#engineering-applications">🔹 Engineering Applications</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#electrical-systems">🔹 Electrical Systems</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#biomechanics">🔹 Biomechanics</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-implementation">4. Implementation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#numerical-modeling">🔹 Numerical Modeling</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -176,74 +206,213 @@
 <strong>Author:</strong> Bartu867<br/>
 <strong>Date:</strong> March 27, 2025  </p>
 <hr/>
-<h1 id="problem-1-investigating-the-dynamics-of-a-forced-damped-pendulum">Problem 1 – Investigating the Dynamics of a Forced Damped Pendulum</h1>
-<h2 id="goal">🎯 Goal</h2>
-<p>Analyze the motion of a forced damped pendulum and observe how different parameters influence its behavior — including regular, resonant, and chaotic motion.</p>
-<hr/>
-<h2 id="theoretical-background">📘 Theoretical Background</h2>
-<p>The motion of a forced damped pendulum is governed by the second-order nonlinear differential equation:</p>
-<p>d²θ/dt² + b(dθ/dt) + ω₀² sin(θ) = A cos(ωt)</p>
+<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
+<p>The motion of a forced damped pendulum is described by the nonlinear second-order differential equation:</p>
+<div class="arithmatex">\[
+\frac{d^2 \theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
+\]</div>
 <p>Where:
-- θ: angular displacement<br/>
-- b: damping coefficient<br/>
-- ω₀: natural frequency<br/>
-- A: amplitude of external force<br/>
-- ω: driving frequency  </p>
+- <span class="arithmatex">\( \theta(t) \)</span>: Angular displacement as a function of time<br/>
+- <span class="arithmatex">\( b \)</span>: Damping coefficient<br/>
+- <span class="arithmatex">\( g \)</span>: Gravitational acceleration<br/>
+- <span class="arithmatex">\( L \)</span>: Length of the pendulum<br/>
+- <span class="arithmatex">\( A \)</span>: Amplitude of the driving force<br/>
+- <span class="arithmatex">\( \omega \)</span>: Angular frequency of the external periodic force</p>
 <hr/>
-<h2 id="reformulated-system-first-order">🔢 Reformulated System (First-Order)</h2>
-<p>To apply numerical methods, the second-order ODE is transformed into two coupled first-order ODEs:</p>
-<p>Let ω = dθ/dt, then:</p>
-<p>dθ/dt = ω<br/>
-dω/dt = -bω - ω₀² sin(θ) + A cos(ωt)</p>
+<h3 id="small-angle-approximation">Small-Angle Approximation</h3>
+<p>When the angular displacement is small, we can use the approximation <span class="arithmatex">\( \sin(\theta) \approx \theta \)</span>. This simplifies the equation to:</p>
+<div class="arithmatex">\[
+\frac{d^2 \theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \theta = A \cos(\omega t)
+\]</div>
+<p>This form is linear and easier to analyze using analytical or numerical methods.</p>
 <hr/>
-<h2 id="numerical-method-runge-kutta-4th-order-rk4">🧠 Numerical Method: Runge-Kutta 4th Order (RK4)</h2>
-<p>The RK4 method is used to solve the equations. The update steps for each time interval dt:</p>
-<p>θₙ₊₁ = θₙ + (1/6)(k1_θ + 2k2_θ + 2k3_θ + k4_θ)<br/>
-ωₙ₊₁ = ωₙ + (1/6)(k1_ω + 2k2_ω + 2k3_ω + k4_ω)</p>
+<h3 id="resonance-and-system-energy">Resonance and System Energy</h3>
+<p>Resonance occurs when the driving frequency <span class="arithmatex">\( \omega \)</span> is close to the system’s natural frequency:</p>
+<div class="arithmatex">\[
+\omega_0 = \sqrt{\frac{g}{L}}
+\]</div>
+<p>At resonance, the energy input from the external force matches the natural oscillation frequency, potentially leading to large amplitude oscillations. Damping reduces these amplitudes by dissipating energy.</p>
+<h2 id="2-analysis-of-dynamics">2. Analysis of Dynamics</h2>
+<p>The dynamics of a forced damped pendulum are significantly affected by three key parameters:</p>
+<ul>
+<li><strong>Damping coefficient (b):</strong> Controls how quickly the motion dies out. Higher damping leads to faster energy loss and smaller oscillations.</li>
+<li><strong>Driving amplitude (A):</strong> The strength of the external periodic force. Increasing it can lead to more energetic motion and potentially chaotic behavior.</li>
+<li><strong>Driving frequency (ω):</strong> Determines how often the external force acts. When it matches the natural frequency <span class="arithmatex">\( \omega_0 \)</span>, resonance may occur.</li>
+</ul>
 <hr/>
-<h2 id="python-code-pendulum-simulation">💻 Python Code – Pendulum Simulation</h2>
-<p>```python
-import numpy as np
-import matplotlib.pyplot as plt</p>
-<h1 id="parameters">Parameters</h1>
-<p>b = 0.5              # damping coefficient
-w0 = 1.5             # natural frequency
-A = 1.2              # driving force amplitude
-w = 0.666            # driving frequency
-dt = 0.04            # time step
-T = 100              # total simulation time</p>
-<h1 id="time-array">Time array</h1>
-<p>t = np.arange(0, T, dt)</p>
-<h1 id="arrays-for-theta-and-omega">Arrays for theta and omega</h1>
-<p>theta = np.zeros_like(t)
-omega = np.zeros_like(t)</p>
+<h3 id="regular-vs-chaotic-motion">Regular vs Chaotic Motion</h3>
+<p>By varying the above parameters, the system can display:</p>
+<ul>
+<li><strong>Regular (Periodic) Motion:</strong> When parameters are moderate, the pendulum swings in a predictable, repeating manner.</li>
+<li><strong>Quasiperiodic Motion:</strong> The motion consists of multiple frequencies that never quite repeat.</li>
+<li><strong>Chaotic Motion:</strong> When certain thresholds are crossed, small changes in initial conditions can lead to drastically different outcomes. This is a hallmark of deterministic chaos.</li>
+</ul>
+<p>The transition from regular to chaotic motion is particularly interesting because it illustrates how nonlinearity and external forcing can result in unpredictable behavior in otherwise deterministic systems.</p>
+<h2 id="3-practical-applications">3. Practical Applications</h2>
+<p>The forced damped pendulum serves as a model for various real-world systems that involve oscillations, damping, and external driving forces. These systems span across different fields:</p>
+<hr/>
+<h3 id="engineering-applications">🔹 Engineering Applications</h3>
+<ul>
+<li><strong>Suspension bridges:</strong> Wind and traffic can act as periodic forces, while damping comes from internal friction and structural design.</li>
+<li><strong>Energy harvesting devices:</strong> Oscillating systems can convert kinetic energy into electrical energy, especially when tuned near resonance.</li>
+</ul>
+<hr/>
+<h3 id="electrical-systems">🔹 Electrical Systems</h3>
+<ul>
+<li><strong>Driven RLC Circuits:</strong> The voltage in an RLC (Resistor–Inductor–Capacitor) circuit under an alternating current behaves similarly to a forced damped pendulum. The current corresponds to the angular velocity, and the circuit elements represent damping, mass, and restoring force.</li>
+</ul>
+<hr/>
+<h3 id="biomechanics">🔹 Biomechanics</h3>
+<ul>
+<li><strong>Human gait dynamics:</strong> The swinging motion of limbs can be modeled as a damped driven oscillator, especially when considering walking or running with external rhythmic inputs (e.g., treadmill, exoskeleton support).</li>
+</ul>
+<p>These analogies help in designing control systems, optimizing performance, and understanding failure mechanisms under resonance or chaotic conditions.</p>
+<h2 id="4-implementation">4. Implementation</h2>
+<p>To explore the dynamics of a forced damped pendulum beyond analytical solutions, we use computational simulations.</p>
+<hr/>
+<h3 id="numerical-modeling">🔹 Numerical Modeling</h3>
+<p>import numpy as np</p>
+<h1 id="constants">Constants</h1>
+<p>g = 9.81
+L = 1.0
+b = 0.5
+A = 1.2
+omega = 2/3</p>
+<p>def pendulum_deriv(t, y):
+    theta, omega_theta = y
+    dtheta_dt = omega_theta
+    domega_dt = -b * omega_theta - (g / L) * np.sin(theta) + A * np.cos(omega * t)
+    return [dtheta_dt, domega_dt]</p>
+<p>import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp</p>
+<h1 id="time-settings">Time settings</h1>
+<p>t_span = (0, 50)
+t_eval = np.linspace(*t_span, 1000)</p>
 <h1 id="initial-conditions">Initial conditions</h1>
-<p>theta[0] = 0.2
-omega[0] = 0.0</p>
-<h1 id="runge-kutta-4th-order-method">Runge-Kutta 4th order method</h1>
-<p>for i in range(1, len(t)):
-    k1_theta = dt * omega[i - 1]
-    k1_omega = dt * (-b * omega[i - 1] - w0**2 * np.sin(theta[i - 1]) + A * np.cos(w * t[i - 1]))</p>
-<pre><code>k2_theta = dt * (omega[i - 1] + 0.5 * k1_omega)
-k2_omega = dt * (-b * (omega[i - 1] + 0.5 * k1_omega) - w0**2 * np.sin(theta[i - 1] + 0.5 * k1_theta) + A * np.cos(w * (t[i - 1] + 0.5 * dt)))
-
-k3_theta = dt * (omega[i - 1] + 0.5 * k2_omega)
-k3_omega = dt * (-b * (omega[i - 1] + 0.5 * k2_omega) - w0**2 * np.sin(theta[i - 1] + 0.5 * k2_theta) + A * np.cos(w * (t[i - 1] + 0.5 * dt)))
-
-k4_theta = dt * (omega[i - 1] + k3_omega)
-k4_omega = dt * (-b * (omega[i - 1] + k3_omega) - w0**2 * np.sin(theta[i - 1] + k3_theta) + A * np.cos(w * (t[i - 1] + dt)))
-
-theta[i] = theta[i - 1] + (k1_theta + 2 * k2_theta + 2 * k3_theta + k4_theta) / 6
-omega[i] = omega[i - 1] + (k1_omega + 2 * k2_omega + 2 * k3_omega + k4_omega) / 6
-</code></pre>
-<h1 id="plotting">Plotting</h1>
-<p>plt.figure(figsize=(10, 5))
-plt.plot(t, theta)
-plt.title("Forced Damped Pendulum – Angular Displacement Over Time")
-plt.xlabel("Time (s)")
-plt.ylabel("Angle (rad)")
+<p>y0 = [0.2, 0.0]</p>
+<h1 id="solve-using-runge-kutta">Solve using Runge-Kutta</h1>
+<p>sol = solve_ivp(pendulum_deriv, t_span, y0, t_eval=t_eval, method='RK45')</p>
+<h1 id="plot-vs-time">Plot θ vs time</h1>
+<p>plt.figure(figsize=(10, 4))
+plt.plot(sol.t, sol.y[0], label='θ(t)')
+plt.title('Angular Displacement vs Time')
+plt.xlabel('Time [s]')
+plt.ylabel('θ [rad]')
 plt.grid(True)
+plt.legend()
+plt.tight_layout()
 plt.show()</p>
+<p>The nonlinear differential equation:</p>
+<div class="arithmatex">\[
+\frac{d^2 \theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
+\]</div>
+<p>is solved using numerical methods such as the <strong>Runge-Kutta</strong> method. This allows us to simulate the motion for arbitrary initial conditions and parameter values.</p>
+<h4 id="python-code-differential-equation">Python Code: Differential Equation</h4>
+<p>```python
+import numpy as np</p>
+<h1 id="constants_1">Constants</h1>
+<p>g = 9.81        # gravitational acceleration (m/s^2)
+L = 1.0         # length of pendulum (m)
+b = 0.5         # damping coefficient
+A = 1.2         # amplitude of driving force
+omega = 2/3     # driving frequency</p>
+<h1 id="differential-equation-system">Differential equation system</h1>
+<p>def pendulum_deriv(t, y):
+    theta, omega_theta = y
+    dtheta_dt = omega_theta
+    domega_dt = -b * omega_theta - (g / L) * np.sin(theta) + A * np.cos(omega * t)
+    return [dtheta_dt, domega_dt]</p>
+<hr/>
+<h4 id="time-evolution-of-the-pendulum">Time Evolution of the Pendulum</h4>
+<p>We simulate and visualize the angular displacement <span class="arithmatex">\( \theta(t) \)</span> over time using the Runge-Kutta method (<code>solve_ivp</code> from <code>scipy.integrate</code>). This helps us understand how the pendulum responds to different damping and driving conditions.</p>
+<p>```python
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp</p>
+<h1 id="time-settings_1">Time settings</h1>
+<p>t_span = (0, 50)
+t_eval = np.linspace(*t_span, 1000)</p>
+<h1 id="initial-conditions_1">Initial conditions</h1>
+<p>y0 = [0.2, 0.0]</p>
+<h1 id="solve-using-runge-kutta_1">Solve using Runge-Kutta</h1>
+<p>sol = solve_ivp(pendulum_deriv, t_span, y0, t_eval=t_eval, method='RK45')</p>
+<h1 id="plot-vs-time_1">Plot θ vs time</h1>
+<p>plt.figure(figsize=(10, 4))
+plt.plot(sol.t, sol.y[0], label='θ(t)')
+plt.title('Angular Displacement vs Time')
+plt.xlabel('Time [s]')
+plt.ylabel('θ [rad]')
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()</p>
+<h4 id="phase-space-diagram">Phase Space Diagram</h4>
+<p>The phase space plot of angular velocity <span class="arithmatex">\( \omega(t) \)</span> versus angular position <span class="arithmatex">\( \theta(t) \)</span> provides insights into the nature of the motion. It helps distinguish between regular, damped, or chaotic behavior.</p>
+<p>```python</p>
+<h1 id="phase-space-plot-vs">Phase space plot: θ vs ω</h1>
+<p>theta_vals = sol.y[0]
+omega_vals = sol.y[1]</p>
+<p>plt.figure(figsize=(6, 6))
+plt.plot(theta_vals, omega_vals, lw=0.7)
+plt.title('Phase Space Diagram (θ vs ω)')
+plt.xlabel('θ [rad]')
+plt.ylabel('ω [rad/s]')
+plt.grid(True)
+plt.tight_layout()
+plt.show()</p>
+<h4 id="poincare-section">Poincaré Section</h4>
+<p>A Poincaré section is a tool used to detect chaotic behavior in dynamic systems. By sampling the state of the pendulum at regular intervals equal to the driving period, we can reveal patterns in the long-term behavior.
+```python</p>
+<h1 id="driving-period">Driving period</h1>
+<p>T_drive = 2 * np.pi / omega</p>
+<h1 id="sample-points-every-driving-period">Sample points: every driving period</h1>
+<p>poincare_t = np.arange(0, 50, T_drive)</p>
+<h1 id="interpolate-solution-at-poincare-times">Interpolate solution at poincare times</h1>
+<p>from scipy.interpolate import interp1d
+interp_theta = interp1d(sol.t, sol.y[0])
+interp_omega = interp1d(sol.t, sol.y[1])
+theta_p = interp_theta(poincare_t)
+omega_p = interp_omega(poincare_t)</p>
+<h1 id="plot-poincare-section">Plot Poincaré section</h1>
+<p>plt.figure(figsize=(6, 6))
+plt.plot(theta_p, omega_p, 'o', markersize=2)
+plt.title("Poincaré Section (Sampled Every Period)")
+plt.xlabel("θ [rad]")
+plt.ylabel("ω [rad/s]")
+plt.grid(True)
+plt.tight_layout()
+plt.show()</p>
+<h2 id="5-deliverables">5. Deliverables</h2>
+<ol>
+<li>
+<p><strong>A Markdown document with Python script</strong> implementing the simulation of a forced damped pendulum using numerical methods.</p>
+</li>
+<li>
+<p><strong>A detailed explanation of the differential equation</strong>, including small-angle approximation and resonance analysis.</p>
+</li>
+<li>
+<p><strong>Graphical representations</strong> of the system's behavior:</p>
+</li>
+<li>Time evolution plots <span class="arithmatex">\( \theta(t) \)</span></li>
+<li>Phase space diagrams <span class="arithmatex">\( \theta \)</span> vs <span class="arithmatex">\( \omega \)</span></li>
+<li>
+<p>Poincaré sections for detecting chaos</p>
+</li>
+<li>
+<p><strong>A discussion on model limitations</strong>, such as:</p>
+</li>
+<li>The use of small-angle approximation in early theory</li>
+<li>Ideal sinusoidal driving force (non-realistic in some applications)</li>
+<li>
+<p>No consideration of nonlinear damping or friction</p>
+</li>
+<li>
+<p><strong>Suggestions for future work:</strong></p>
+</li>
+<li>Introducing nonlinear damping (e.g., air resistance proportional to <span class="arithmatex">\( \omega^2 \)</span>)</li>
+<li>Using non-periodic or random external forces</li>
+<li>Exploring bifurcation diagrams and Lyapunov exponents for chaos analysis
+This assignment bridges theoretical physics and computational simulation, enhancing understanding of real-world oscillatory systems and nonlinear dynamics through both mathematical modeling and visualization.</li>
+</ol>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
