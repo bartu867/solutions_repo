@@ -29,6 +29,7 @@ In the case of air resistance, the equation becomes more complicated and require
 
 ![alt text](image.png)
 ---
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -92,7 +93,7 @@ def simulate_projectile_with_air_resistance(v0, theta, k, m):
             break
 
     return x_values, y_values
-
+![alt text](image-2.png)
 # Simulate projectile with air resistance
 k = 0.1  # Drag coefficient
 m = 1    # Mass of the projectile
