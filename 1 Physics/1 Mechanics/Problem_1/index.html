@@ -48,12 +48,6 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">🛰️ Problem 1 – Investigating the Range as a Function of the Angle of Projection</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#goal">🎯 Goal</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#theoretical-background">📘 Theoretical Background</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#python-simulation-without-air-resistance">💻 Python Simulation – Without Air Resistance</a>
-</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">🔬 Physics Assignment – KW1</a>
@@ -182,139 +176,290 @@
 <strong>Author:</strong> Bartu867<br/>
 <strong>Date:</strong> March 29, 2025  </p>
 <hr/>
-<h2 id="goal">🎯 Goal</h2>
-<p>Simulate and analyze the possible trajectories of a projectile launched at different angles.<br/>
-Determine how the range depends on the angle of projection and calculate the range for different initial velocities.</p>
+<h1 id="1-theoretical-foundation-projectile-motion">📘 1️⃣ Theoretical Foundation – Projectile Motion</h1>
+<p>Projectile motion is a classic example of 2D motion under constant acceleration (gravity). It can be broken into two components: <strong>horizontal motion</strong> and <strong>vertical motion</strong>.</p>
 <hr/>
-<h2 id="theoretical-background">📘 Theoretical Background</h2>
-<p>Projectile motion can be described by the following equations. The horizontal range of a projectile, ignoring air resistance, is given by:</p>
-<div class="arithmatex">\[
-R = \frac{v_0^2 \sin(2\theta)}{g}
-\]</div>
-<p>Where:<br/>
-- <span class="arithmatex">\( v_0 \)</span> is the initial velocity<br/>
-- <span class="arithmatex">\( \theta \)</span> is the angle of projection<br/>
-- <span class="arithmatex">\( g \)</span> is the gravitational acceleration  </p>
-<p>In the case of air resistance, the equation becomes more complicated and requires numerical methods to solve.</p>
+<h2 id="governing-equations-from-newtons-laws">⚙️ Governing Equations from Newton’s Laws</h2>
+<p>Newton’s Second Law (<span class="arithmatex">\(F = ma\)</span>) applied in the vertical direction gives constant downward acceleration due to gravity.</p>
+<p>We ignore air resistance and assume motion starts at ground level.</p>
 <hr/>
-<h2 id="python-simulation-without-air-resistance">💻 Python Simulation – Without Air Resistance</h2>
-<p><img alt="Range vs Angle" src="../image.png"/></p>
-<p>import numpy as np
-import matplotlib.pyplot as plt</p>
+<h3 id="horizontal-motion-no-acceleration">🔹 Horizontal Motion (No Acceleration)</h3>
+<ul>
+<li>Constant velocity (no force in x-direction)</li>
+<li>Displacement:</li>
+</ul>
+<p><span class="arithmatex">\(<span class="arithmatex">\(x(t) = v_0 \cdot \cos(\theta) \cdot t\)</span>\)</span></p>
+<hr/>
+<h3 id="vertical-motion-constant-acceleration">🔹 Vertical Motion (Constant Acceleration)</h3>
+<ul>
+<li>Acceleration is <span class="arithmatex">\(-g\)</span> (downward)</li>
+<li>Displacement:</li>
+</ul>
+<p><span class="arithmatex">\(<span class="arithmatex">\(y(t) = v_0 \cdot \sin(\theta) \cdot t - \frac{1}{2}gt^2\)</span>\)</span></p>
+<ul>
+<li>Vertical velocity:</li>
+</ul>
+<p><span class="arithmatex">\(<span class="arithmatex">\(v_y(t) = v_0 \cdot \sin(\theta) - gt\)</span>\)</span></p>
+<hr/>
+<h3 id="time-of-flight">🧮 Time of Flight</h3>
+<p>At landing, <span class="arithmatex">\(y = 0\)</span>:</p>
+<div class="arithmatex">\[0 = v_0 \cdot \sin(\theta) \cdot t - \frac{1}{2}gt^2\]</div>
+<p>Solving for total time <span class="arithmatex">\(t\)</span>:</p>
+<div class="arithmatex">\[t = \frac{2v_0 \cdot \sin(\theta)}{g}\]</div>
+<hr/>
+<h3 id="range-of-the-projectile">🎯 Range of the Projectile</h3>
+<p>Use total flight time in horizontal displacement:</p>
+<div class="arithmatex">\[R = x(t) = v_0 \cdot \cos(\theta) \cdot t\]</div>
+<p>Substitute <span class="arithmatex">\(t\)</span>:</p>
+<div class="arithmatex">\[R = v_0 \cdot \cos(\theta) \cdot \frac{2v_0 \cdot \sin(\theta)}{g}$$  
+$$R = \frac{v_0^2 \cdot \sin(2\theta)}{g}\]</div>
+<hr/>
+<h2 id="influence-of-parameters">🔁 Influence of Parameters</h2>
+<ul>
+<li>
+<p><strong>Initial Velocity (<span class="arithmatex">\(v_0\)</span>):</strong></p>
+<ul>
+<li>Range increases quadratically with <span class="arithmatex">\(v_0\)</span>.</li>
+<li>Doubling <span class="arithmatex">\(v_0\)</span> results in <span class="arithmatex">\(4\times\)</span> the range.</li>
+</ul>
+</li>
+<li>
+<p><strong>Gravitational Acceleration (<span class="arithmatex">\(g\)</span>):</strong></p>
+<ul>
+<li>Higher <span class="arithmatex">\(g\)</span> means shorter flight time and range.</li>
+<li>On the Moon (<span class="arithmatex">\(g \approx 1.6\)</span>), the range is much longer.</li>
+</ul>
+</li>
+<li>
+<p><strong>Angle (<span class="arithmatex">\(\theta\)</span>):</strong></p>
+<ul>
+<li>Range is maximum at <span class="arithmatex">\(\theta = 45^\circ\)</span>.</li>
+<li><span class="arithmatex">\(\sin(2\theta)\)</span> creates a symmetric curve around <span class="arithmatex">\(45^\circ\)</span>.</li>
+</ul>
+</li>
+</ul>
+<hr/>
+<h2 id="family-of-solutions">🧠 Family of Solutions</h2>
+<p>Changing <span class="arithmatex">\(v_0\)</span>, <span class="arithmatex">\(g\)</span>, or <span class="arithmatex">\(\theta\)</span> generates a <strong>family of projectile paths</strong> with different ranges and shapes. For example:</p>
+<ul>
+<li><span class="arithmatex">\(\theta = 30^\circ\)</span> and <span class="arithmatex">\(\theta = 60^\circ\)</span> → same range, different height and flight time</li>
+<li>Different <span class="arithmatex">\(v_0\)</span> values shift the entire trajectory up/down</li>
+<li>Different <span class="arithmatex">\(g\)</span> values (like Moon vs Earth) stretch the flight arc</li>
+</ul>
+<hr/>
+<h2 id="python-helper-code-just-for-later-use">💻 Python Helper Code (Just for Later Use)</h2>
+<p>```python
+import numpy as np</p>
+<hr/>
 <h1 id="constants">Constants</h1>
-<p>g = 9.81  # gravitational acceleration (m/s^2)</p>
-<h1 id="function-to-calculate-the-range">Function to calculate the range</h1>
-<p>def calculate_range(v0, theta):
-    return (v0 ** 2 * np.sin(2 * np.radians(theta))) / g</p>
-<h1 id="range-calculation-without-air-resistance">Range calculation without air resistance</h1>
-<p>theta_values = np.arange(0, 91, 1)  # Angle range from 0 to 90 degrees
-v0 = 100  # Initial velocity in m/s
-ranges = calculate_range(v0, theta_values)</p>
-<h1 id="plotting-the-range-vs-angle">Plotting the range vs. angle</h1>
-<p>plt.figure(figsize=(8, 6))
-plt.plot(theta_values, ranges, label='Range (No Air Resistance)', color='orange')
-plt.xlabel('Angle of Projection (degrees)')
-plt.ylabel('Range (meters)')
-plt.title('Range of a Projectile as a Function of Launch Angle')
-plt.grid(True)
+<p>g = 9.81  # m/s²</p>
+<h1 id="range-function">Range function</h1>
+<p>def range_formula(v0, theta_deg):
+    theta_rad = np.radians(theta_deg)
+    return (v0 ** 2 * np.sin(2 * theta_rad)) / g</p>
+<h1 id="2-analysis-of-the-range-numerical-simulation">📊 2️⃣ Analysis of the Range – Numerical Simulation</h1>
+<p>In this section, we simulate projectile range behavior with respect to the <strong>launch angle</strong> and analyze how <strong>initial velocity (<span class="arithmatex">\(v_0\)</span>)</strong> and <strong>gravitational acceleration (<span class="arithmatex">\(g\)</span>)</strong> influence the outcome.</p>
+<hr/>
+<h2 id="objective">🎯 Objective</h2>
+<ul>
+<li>Visualize the function:</li>
+</ul>
+<p><span class="arithmatex">\(<span class="arithmatex">\(R(\theta)=\frac{v_0^2\cdot\sin(2\theta)}{g}\)</span>\)</span></p>
+<ul>
+<li>Explore:</li>
+<li>The symmetry around <span class="arithmatex">\(\theta=45^\circ\)</span></li>
+<li>The effect of changing <span class="arithmatex">\(v_0\)</span> and <span class="arithmatex">\(g\)</span></li>
+<li>Optional: Non-zero launch height (extended model)</li>
+</ul>
+<hr/>
+<h2 id="python-code-range-vs-angle-multiple-cases">💻 Python Code: Range vs Angle (Multiple Cases)</h2>
+<p>```python
 import numpy as np
 import matplotlib.pyplot as plt</p>
 <h1 id="constants_1">Constants</h1>
-<p>g = 9.81  # gravitational acceleration (m/s^2)</p>
-<h1 id="function-to-calculate-the-range_1">Function to calculate the range</h1>
-<p>def calculate_range(v0, theta):
-    return (v0 ** 2 * np.sin(2 * np.radians(theta))) / g</p>
-<h1 id="range-calculation-without-air-resistance_1">Range calculation without air resistance</h1>
-<p>theta_values = np.arange(0, 91, 1)  # Angle range from 0 to 90 degrees
-v0 = 100  # Initial velocity in m/s
-ranges = calculate_range(v0, theta_values)</p>
-<h1 id="plotting-the-range-vs-angle_1">Plotting the range vs. angle</h1>
-<p>plt.figure(figsize=(8, 6))
-plt.plot(theta_values, ranges, label='Range (No Air Resistance)', color='orange')
-plt.xlabel('Angle of Projection (degrees)')
-plt.ylabel('Range (meters)')
-plt.title('Range of a Projectile as a Function of Launch Angle')
+<p>theta_deg = np.arange(0, 91, 1)  # angles from 0° to 90°
+theta_rad = np.radians(theta_deg)</p>
+<h1 id="function-to-calculate-range">Function to calculate range</h1>
+<p>def range_formula(v0, g, theta):
+    return (v0**2 * np.sin(2 * theta)) / g</p>
+<h1 id="parameters-to-compare">Parameters to compare</h1>
+<p>velocities = [50, 100, 150]  # m/s
+gravities = [9.81, 1.62]     # Earth &amp; Moon gravity</p>
+<h1 id="plot-range-vs-angle-for-different-initial-velocities-earth">Plot: Range vs Angle for different initial velocities (Earth)</h1>
+<p>plt.figure(figsize=(10, 5))
+for v0 in velocities:
+    R = range_formula(v0, 9.81, theta_rad)
+    plt.plot(theta_deg, R, label=f"v₀ = {v0} m/s")</p>
+<p>plt.title("Range vs Angle for Different Initial Velocities (g = 9.81 m/s²)")
+plt.xlabel("Launch Angle (degrees)")
+plt.ylabel("Range (meters)")
 plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()</p>
+<h1 id="plot-range-vs-angle-on-earth-vs-moon">Plot: Range vs Angle on Earth vs Moon</h1>
+<p>plt.figure(figsize=(10, 5))
+for g in gravities:
+    R = range_formula(100, g, theta_rad)
+    label = "Earth" if g == 9.81 else "Moon"
+    plt.plot(theta_deg, R, label=f"{label} (g = {g} m/s²)")</p>
+<p>plt.title("Range vs Angle: Earth vs Moon (v₀ = 100 m/s)")
+plt.xlabel("Launch Angle (degrees)")
+plt.ylabel("Range (meters)")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()</p>
+<h1 id="3-practical-applications-real-world-relevance-of-projectile-motion">🌍 3️⃣ Practical Applications – Real-World Relevance of Projectile Motion</h1>
+<p>Projectile motion is more than just a theoretical exercise — it has significant applications in <strong>sports</strong>, <strong>engineering</strong>, and even <strong>space science</strong>. Understanding the factors that affect a projectile's trajectory allows us to model and optimize systems in various domains.</p>
+<hr/>
+<h2 id="sports">🏀 Sports</h2>
+<p>Many sports involve curved projectile trajectories. Understanding these helps in performance analysis, training, and even video game physics engines.</p>
+<ul>
+<li><strong>Soccer</strong>: Curved free kicks follow projectile paths, especially when lofted.</li>
+<li><strong>Basketball</strong>: The launch angle of a jump shot determines its chance of scoring.</li>
+<li><strong>Golf</strong>: Club angle and speed determine the ball’s range and height.</li>
+</ul>
+<p>All of these can be modeled using:</p>
+<div class="arithmatex">\[R=\frac{v_0^2\cdot\sin(2\theta)}{g}\]</div>
+<p>But real cases often involve drag and spin.</p>
+<hr/>
+<h2 id="engineering">🏗️ Engineering</h2>
+<p>Engineers use projectile models in designing:</p>
+<ul>
+<li><strong>Military/defense systems</strong> (cannons, missiles, mortars)</li>
+<li><strong>Fireworks and flare trajectories</strong></li>
+<li><strong>Ballistics for forensics and law enforcement</strong></li>
+</ul>
+<p>Precise modeling requires adding:
+- Air drag (quadratic with speed)
+- Mass of projectile
+- Wind vectors</p>
+<hr/>
+<h2 id="astrophysics-space-science">🚀 Astrophysics &amp; Space Science</h2>
+<p>In astrophysics, projectile motion generalizes into <strong>orbital mechanics</strong>.</p>
+<ul>
+<li><strong>Rocket launches</strong> begin with curved trajectories under Earth's gravity</li>
+<li>Escape velocity and reentry modeling depends on projectile motion with air resistance and changing <span class="arithmatex">\(g\)</span></li>
+</ul>
+<p>Also:
+- Gravity is not constant:<br/>
+<span class="arithmatex">\(<span class="arithmatex">\(g=\frac{GM}{r^2}\)</span>\)</span>
+- Multi-stage motion must be modeled piecewise</p>
+<hr/>
+<h2 id="uneven-terrain">🌄 Uneven Terrain</h2>
+<p>In real life, projectiles may land:</p>
+<ul>
+<li>On <strong>inclined planes</strong></li>
+<li>Over <strong>hills, valleys, or obstacles</strong></li>
+</ul>
+<p>This breaks the assumption that the launch and landing height are equal. The range formula becomes invalid, and we must solve:</p>
+<div class="arithmatex">\[y(t)=h+v_0\cdot\sin(\theta)\cdot t-\frac{1}{2}gt^2\]</div>
+<p>using numerical methods to find <span class="arithmatex">\(t\)</span> when <span class="arithmatex">\(y(t)=y_{\text{target}}\)</span></p>
+<hr/>
+<h2 id="external-effects">🌬️ External Effects</h2>
+<h3 id="air-resistance">💨 Air Resistance</h3>
+<p>Air drag opposes motion. It depends on velocity and shape:</p>
+<div class="arithmatex">\[F_d=\frac{1}{2}C_d\rho Av^2\]</div>
+<p>This turns motion into a system of nonlinear differential equations. It shortens range and lowers height.</p>
+<h3 id="wind">🌪️ Wind</h3>
+<p>Wind can:
+- Increase or decrease horizontal velocity
+- Deflect projectile laterally</p>
+<p>Simulation must include a horizontal force term.</p>
+<h3 id="variable-gravity">🌕 Variable Gravity</h3>
+<p>Gravity changes with altitude or location:</p>
+<ul>
+<li>On other planets (e.g., Mars <span class="arithmatex">\(g=3.71\)</span>)</li>
+<li>At high altitudes</li>
+<li>Or due to large terrain differences</li>
+</ul>
+<p>Use altitude-based gravity:</p>
+<div class="arithmatex">\[g(h)=\frac{GM}{(R+h)^2}\]</div>
+<h2 id="for-accurate-modeling-in-atmospheric-reentry-or-lunar-missions">for accurate modeling in atmospheric reentry or lunar missions.</h2>
+<h2 id="summary">✅ Summary</h2>
+<p>Projectile motion is a versatile model with deep connections to reality. While the idealized equations are helpful, realistic modeling must incorporate:</p>
+<ul>
+<li>Uneven terrain  </li>
+<li>Drag &amp; wind  </li>
+<li>Non-zero launch/landing heights  </li>
+<li>Planet-specific gravity</li>
+</ul>
+<p>These improvements enable simulations that match the complexity of real-world systems.</p>
+<h1 id="4-implementation-simulating-projectile-motion-in-python">💻 4️⃣ Implementation – Simulating Projectile Motion in Python</h1>
+<p>In this section, we implement a Python-based simulation of projectile motion to analyze how <strong>range</strong> depends on launch angle, initial velocity, gravity, and launch height.</p>
+<p>We use the ideal range formula and extend it with optional height-based modeling.</p>
+<hr/>
+<h2 id="ideal-range-formula">📌 Ideal Range Formula</h2>
+<p>The ideal (no air resistance, flat ground) projectile range is given by:</p>
+<div class="arithmatex">\[R(\theta)=\frac{v_0^2\cdot\sin(2\theta)}{g}\]</div>
+<p>Where:
+- <span class="arithmatex">\(R\)</span> is the range (meters)<br/>
+- <span class="arithmatex">\(v_0\)</span> is the initial velocity (m/s)<br/>
+- <span class="arithmatex">\(\theta\)</span> is the launch angle (degrees)<br/>
+- <span class="arithmatex">\(g\)</span> is gravitational acceleration (m/s²)</p>
+<hr/>
+<h2 id="python-code-basic-implementation">💻 Python Code: Basic Implementation</h2>
+<p>```python
 import numpy as np
 import matplotlib.pyplot as plt</p>
-<h1 id="constants_2">Constants</h1>
-<p>g = 9.81  # gravitational acceleration (m/s^2)</p>
-<h1 id="function-to-calculate-the-range_2">Function to calculate the range</h1>
-<p>def calculate_range(v0, theta):
-    return (v0 ** 2 * np.sin(2 * np.radians(theta))) / g</p>
-<h1 id="range-calculation-without-air-resistance_2">Range calculation without air resistance</h1>
-<p>theta_values = np.arange(0, 91, 1)  # Angle range from 0 to 90 degrees
-v0 = 100  # Initial velocity in m/s
-ranges = calculate_range(v0, theta_values)</p>
-<h1 id="plotting-the-range-vs-angle_2">Plotting the range vs. angle</h1>
-<p>plt.figure(figsize=(8, 6))
-plt.plot(theta_values, ranges, label='Range (No Air Resistance)', color='orange')
-plt.xlabel('Angle of Projection (degrees)')
-plt.ylabel('Range (meters)')
-plt.title('Range of a Projectile as a Function of Launch Angle')
+<h1 id="ideal-range-function">Ideal range function</h1>
+<p>def ideal_range(v0, g, theta_deg):
+    theta_rad = np.radians(theta_deg)
+    return (v0**2 * np.sin(2 * theta_rad)) / g
+angles = np.arange(0, 91, 1)
+g = 9.81
+velocities = [50, 100, 150]</p>
+<p>plt.figure(figsize=(10, 5))
+for v0 in velocities:
+    ranges = ideal_range(v0, g, angles)
+    plt.plot(angles, ranges, label=f"v₀ = {v0} m/s")</p>
+<p>plt.title("Projectile Range vs Launch Angle")
+plt.xlabel("Launch Angle (degrees)")
+plt.ylabel("Range (meters)")
 plt.grid(True)
 plt.legend()
 plt.tight_layout()
-plt.show()</p>
-<hr/>
-<h2 id="python-simulation-with-air-resistance">💻 Python Simulation – With Air Resistance</h2>
-<hr/>
-<p><img alt="alt text" src="../image-1.png"/></p>
-<h1 id="additional-code-for-air-resistance-simulation">Additional code for air resistance simulation</h1>
-<p>def simulate_projectile_with_air_resistance(v0, theta, k, m):
-    # Initial conditions
-    x0, y0 = 0, 0
-    vx0 = v0 * np.cos(np.radians(theta))
-    vy0 = v0 * np.sin(np.radians(theta))</p>
-<pre><code># Time settings
-dt = 0.01
-t_max = 200
-t_values = np.arange(0, t_max, dt)
+plt.show()
+gravities = [9.81, 1.62]  # Earth and Moon gravity
+v0 = 100</p>
+<p>plt.figure(figsize=(10, 5))
+for g_val in gravities:
+    ranges = ideal_range(v0, g_val, angles)
+    label = "Earth" if g_val == 9.81 else "Moon"
+    plt.plot(angles, ranges, label=f"{label} (g = {g_val} m/s²)")</p>
+<p>plt.title("Range vs Angle: Earth vs Moon (v₀ = 100 m/s)")
+plt.xlabel("Launch Angle (degrees)")
+plt.ylabel("Range (meters)")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+from scipy.optimize import root_scalar</p>
+<p>def range_with_height(v0, g, theta_deg, h):
+    theta_rad = np.radians(theta_deg)
+    vy0 = v0 * np.sin(theta_rad)
+    vx0 = v0 * np.cos(theta_rad)</p>
+<pre><code>def y(t): return h + vy0 * t - 0.5 * g * t**2
 
-# Arrays to store positions
-x_values = np.zeros(len(t_values))
-y_values = np.zeros(len(t_values))
-vx_values = np.zeros(len(t_values))
-vy_values = np.zeros(len(t_values))
-
-x_values[0], y_values[0] = x0, y0
-vx_values[0], vy_values[0] = vx0, vy0
-
-for i in range(1, len(t_values)):
-    # Air resistance
-    ax = -k * vx_values[i-1] / m
-    ay = -g - (k * vy_values[i-1] / m)
-
-    # Update velocities and positions
-    vx_values[i] = vx_values[i-1] + ax * dt
-    vy_values[i] = vy_values[i-1] + ay * dt
-    x_values[i] = x_values[i-1] + vx_values[i] * dt
-    y_values[i] = y_values[i-1] + vy_values[i] * dt
-
-    # Break if projectile hits the ground
-    if y_values[i] &lt; 0:
-        x_values = x_values[:i+1]
-        y_values = y_values[:i+1]
-        break
-
-return x_values, y_values
+sol = root_scalar(y, bracket=[0.01, 100], method='brentq')
+t_flight = sol.root
+return vx0 * t_flight
 </code></pre>
-<p><img alt="alt text" src="../image.png"/></p>
-<h1 id="simulate-projectile-with-air-resistance">Simulate projectile with air resistance</h1>
-<p>k = 0.1  # Drag coefficient
-m = 1    # Mass of the projectile
-x_vals, y_vals = simulate_projectile_with_air_resistance(v0, 45, k, m)</p>
-<h1 id="plotting-the-trajectory-with-air-resistance">Plotting the trajectory with air resistance</h1>
-<p>plt.figure(figsize=(8, 6))
-plt.plot(x_vals, y_vals, label='Projectile Trajectory (with Air Resistance)', color='blue')
-plt.xlabel('Distance (meters)')
-plt.ylabel('Height (meters)')
-plt.title('Projectile Trajectory with Air Resistance')
+<p>heights = [0, 20, 50]
+v0 = 100
+g = 9.81</p>
+<p>plt.figure(figsize=(10, 5))
+for h in heights:
+    ranges = [range_with_height(v0, g, angle, h) for angle in angles]
+    plt.plot(angles, ranges, label=f"Launch Height = {h} m")</p>
+<p>plt.title("Projectile Range vs Angle (with Launch Height)")
+plt.xlabel("Launch Angle (degrees)")
+plt.ylabel("Range (meters)")
 plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()</p>
-<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
