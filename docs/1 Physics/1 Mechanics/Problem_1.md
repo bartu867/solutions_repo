@@ -90,7 +90,7 @@ Changing $v_0$, $g$, or $\theta$ generates a **family of projectile paths** with
 
 ---
 
-## 💻 Python Helper Code (Just for Later Use)
+## 💻 Python Code 
 ```python
 import numpy as np
 from scipy.optimize import root_scalar
