@@ -520,6 +520,14 @@ v0 = 100  # initial velocity in m/s
 angles = np.linspace(0, 90, 500)  # angles in degrees
 heights = [0, 20, 50]  # launch heights in meters</p>
 <h1 id="function-to-calculate-projectile-range-with-launch-height">Function to calculate projectile range with launch height</h1>
+<p>import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="constants_1">Constants</h1>
+<p>g = 9.81  # gravitational acceleration in m/s²
+v0 = 100  # initial velocity in m/s
+angles = np.linspace(0, 90, 500)  # angles in degrees
+heights = [0, 20, 50]  # launch heights in meters</p>
+<h1 id="function-to-calculate-projectile-range-with-launch-height_1">Function to calculate projectile range with launch height</h1>
 <p>def range_with_height(v0, g, angle, h):
     angle_rad = np.radians(angle)
     term1 = v0 * np.cos(angle_rad) / g
@@ -537,7 +545,6 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()</p>
-<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
