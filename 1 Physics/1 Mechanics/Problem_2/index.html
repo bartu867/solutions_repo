@@ -54,10 +54,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#theoretical-background">📘 Theoretical Background</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#python-simulation">💻 Python Simulation</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#below-is-a-python-simulation-of-the-pendulum-using-the-runge-kutta-4th-order-method">Below is a Python simulation of the pendulum using the Runge-Kutta 4th order method.</a>
-</li>
 </ul>
 </li>
 </ul>
@@ -199,20 +195,50 @@
 - <span class="arithmatex">\( A \)</span>: amplitude of external force<br/>
 - <span class="arithmatex">\( \omega \)</span>: driving frequency  </p>
 <hr/>
-<h2 id="python-simulation">💻 Python Simulation</h2>
-<h2 id="below-is-a-python-simulation-of-the-pendulum-using-the-runge-kutta-4th-order-method">Below is a Python simulation of the pendulum using the Runge-Kutta 4th order method.</h2>
-<p><img alt="alt text" src="../image-2.png"/>
-<img alt="alt text" src="../image-3.png"/></p>
+<h1 id="forced-damped-pendulum-runge-kutta-4th-order-method">📘 Forced Damped Pendulum – Runge-Kutta 4th Order Method</h1>
+<p>This simulation models the motion of a <strong>forced damped pendulum</strong> using the <strong>Runge-Kutta 4th-order method (RK4)</strong>. The pendulum is influenced by damping and an external periodic driving force.</p>
+<hr/>
+<h2 id="differential-equation-of-motion">⚙️ Differential Equation of Motion</h2>
+<p>The equation governing the forced damped pendulum is:</p>
+<div class="arithmatex">\[
+\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \omega_0^2 \sin(\theta) = A\cos(\omega t)
+\]</div>
+<p>Where:
+- <span class="arithmatex">\(\theta\)</span> is the angular displacement (rad)
+- <span class="arithmatex">\(b\)</span> is the damping coefficient
+- <span class="arithmatex">\(\omega_0\)</span> is the natural frequency
+- <span class="arithmatex">\(A\)</span> is the driving force amplitude
+- <span class="arithmatex">\(\omega\)</span> is the driving frequency</p>
+<p>We rewrite this as a system of first-order differential equations:
+- Let <span class="arithmatex">\(\omega = \frac{d\theta}{dt}\)</span>
+- Then:</p>
+<div class="arithmatex">\[
+\frac{d\theta}{dt} = \omega \\
+\frac{d\omega}{dt} = -b\omega - \omega_0^2 \sin(\theta) + A \cos(\omega t)
+\]</div>
+<hr/>
+<h2 id="numerical-method-rk4">🧠 Numerical Method: RK4</h2>
+<p>The <strong>Runge-Kutta 4th-order method</strong> is used to numerically solve the system. For each time step <span class="arithmatex">\(dt\)</span>, we compute:</p>
+<ul>
+<li><span class="arithmatex">\(k_1\)</span>, <span class="arithmatex">\(k_2\)</span>, <span class="arithmatex">\(k_3\)</span>, <span class="arithmatex">\(k_4\)</span> for both <span class="arithmatex">\(\theta\)</span> and <span class="arithmatex">\(\omega\)</span></li>
+<li>Update rules:</li>
+</ul>
+<div class="arithmatex">\[
+\theta_{i+1} = \theta_i + \frac{1}{6}(k_1^\theta + 2k_2^\theta + 2k_3^\theta + k_4^\theta) \\
+\omega_{i+1} = \omega_i + \frac{1}{6}(k_1^\omega + 2k_2^\omega + 2k_3^\omega + k_4^\omega)
+\]</div>
+<hr/>
+<h2 id="python-code">💻 Python Code</h2>
 <p>```python
 import numpy as np
 import matplotlib.pyplot as plt</p>
 <h1 id="parameters">Parameters</h1>
-<p>b = 0.5              # damping
+<p>b = 0.5              # damping coefficient
 w0 = 1.5             # natural frequency
 A = 1.2              # driving force amplitude
 w = 0.666            # driving frequency
 dt = 0.04            # time step
-T = 100              # total time</p>
+T = 100              # total simulation time</p>
 <h1 id="time-array">Time array</h1>
 <p>t = np.arange(0, T, dt)</p>
 <h1 id="arrays-for-theta-and-omega">Arrays for theta and omega</h1>
@@ -244,8 +270,7 @@ plt.title("Forced Damped Pendulum – Angular Displacement Over Time")
 plt.xlabel("Time (s)")
 plt.ylabel("Angle (rad)")
 plt.grid(True)
-plt.show()
-'''</p>
+plt.show()</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
