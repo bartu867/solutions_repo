@@ -32,7 +32,9 @@ Where:
 ## 💻 Python Simulation
 
 Below is a Python simulation of the pendulum using the Runge-Kutta 4th order method.
-
+---
+![alt text](image-2.png)
+![alt text](image-3.png)
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
