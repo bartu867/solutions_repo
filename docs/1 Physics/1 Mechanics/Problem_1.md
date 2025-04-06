@@ -440,6 +440,16 @@ angles = np.linspace(0, 90, 500)  # angles in degrees
 heights = [0, 20, 50]  # launch heights in meters
 
 # Function to calculate projectile range with launch height
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+g = 9.81  # gravitational acceleration in m/s²
+v0 = 100  # initial velocity in m/s
+angles = np.linspace(0, 90, 500)  # angles in degrees
+heights = [0, 20, 50]  # launch heights in meters
+
+# Function to calculate projectile range with launch height
 def range_with_height(v0, g, angle, h):
     angle_rad = np.radians(angle)
     term1 = v0 * np.cos(angle_rad) / g
@@ -459,4 +469,3 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
----
