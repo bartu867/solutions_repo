@@ -430,9 +430,23 @@ def range_with_height(v0, g, theta_deg, h):
     return vx * t_flight
 
 # Plot for different launch heights
-heights = [0, 20, 50]
-v0 = 100
+import numpy as np
+import matplotlib.pyplot as plt
 
+# Constants
+g = 9.81  # gravitational acceleration in m/s²
+v0 = 100  # initial velocity in m/s
+angles = np.linspace(0, 90, 500)  # angles in degrees
+heights = [0, 20, 50]  # launch heights in meters
+
+# Function to calculate projectile range with launch height
+def range_with_height(v0, g, angle, h):
+    angle_rad = np.radians(angle)
+    term1 = v0 * np.cos(angle_rad) / g
+    term2 = v0 * np.sin(angle_rad) + np.sqrt((v0 * np.sin(angle_rad))**2 + 2 * g * h)
+    return term1 * term2
+
+# Plotting
 plt.figure(figsize=(10, 5))
 for h in heights:
     ranges = [range_with_height(v0, g, angle, h) for angle in angles]
@@ -445,6 +459,4 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
-
-
-[def]: image.png
+---
