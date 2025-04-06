@@ -1,10 +1,11 @@
-# Problem 2 – Investigating the Dynamics of a Forced Damped Pendulum
-
-**Physics** | **Mechanics** | **KW1 Assignment**  
+# 🔬 Physics Assignment – KW1  
+**Topic:** Mechanics – Oscillations & Motion  
 **Author:** Bartu867  
-**Date:** March 27, 2025
+**Date:** March 27, 2025  
 
 ---
+
+# Problem 1 – Investigating the Dynamics of a Forced Damped Pendulum
 
 ## 🎯 Goal
 
@@ -16,65 +17,38 @@ Analyze the motion of a forced damped pendulum and observe how different paramet
 
 The motion of a forced damped pendulum is governed by the second-order nonlinear differential equation:
 
-\[
-\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \omega_0^2 \sin(\theta) = A \cos(\omega t)
-\]
-
-Where:  
-- \( \theta \): angular displacement  
-- \( b \): damping coefficient  
-- \( \omega_0 \): natural frequency  
-- \( A \): amplitude of external force  
-- \( \omega \): driving frequency  
-
----
-
-
-# 📘 Forced Damped Pendulum – Runge-Kutta 4th Order Method
-
-This simulation models the motion of a **forced damped pendulum** using the **Runge-Kutta 4th-order method (RK4)**. The pendulum is influenced by damping and an external periodic driving force.
-
----
-
-## ⚙️ Differential Equation of Motion
-
-The equation governing the forced damped pendulum is:
-
-$$
-\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \omega_0^2 \sin(\theta) = A\cos(\omega t)
-$$
+d²θ/dt² + b(dθ/dt) + ω₀² sin(θ) = A cos(ωt)
 
 Where:
-- $\theta$ is the angular displacement (rad)
-- $b$ is the damping coefficient
-- $\omega_0$ is the natural frequency
-- $A$ is the driving force amplitude
-- $\omega$ is the driving frequency
-
-We rewrite this as a system of first-order differential equations:
-- Let $\omega = \frac{d\theta}{dt}$
-- Then:
-
-$$
-\frac{d\theta}{dt} = \omega \\
-\frac{d\omega}{dt} = -b\omega - \omega_0^2 \sin(\theta) + A \cos(\omega t)
-$$
+- θ: angular displacement  
+- b: damping coefficient  
+- ω₀: natural frequency  
+- A: amplitude of external force  
+- ω: driving frequency  
 
 ---
 
-## 🧠 Numerical Method: RK4
+## 🔢 Reformulated System (First-Order)
 
-The **Runge-Kutta 4th-order method** is used to numerically solve the system. For each time step $dt$, we compute:
+To apply numerical methods, the second-order ODE is transformed into two coupled first-order ODEs:
 
-- $k_1$, $k_2$, $k_3$, $k_4$ for both $\theta$ and $\omega$
-- Update rules:
+Let ω = dθ/dt, then:
 
-$$
-\theta_{i+1} = \theta_i + \frac{1}{6}(k_1^\theta + 2k_2^\theta + 2k_3^\theta + k_4^\theta) \\
-\omega_{i+1} = \omega_i + \frac{1}{6}(k_1^\omega + 2k_2^\omega + 2k_3^\omega + k_4^\omega)
-$$
+dθ/dt = ω  
+dω/dt = -bω - ω₀² sin(θ) + A cos(ωt)
+
 ---
-## 💻 Python Code
+
+## 🧠 Numerical Method: Runge-Kutta 4th Order (RK4)
+
+The RK4 method is used to solve the equations. The update steps for each time interval dt:
+
+θₙ₊₁ = θₙ + (1/6)(k1_θ + 2k2_θ + 2k3_θ + k4_θ)  
+ωₙ₊₁ = ωₙ + (1/6)(k1_ω + 2k2_ω + 2k3_ω + k4_ω)
+
+---
+
+## 💻 Python Code – Pendulum Simulation
 
 ```python
 import numpy as np
