@@ -93,15 +93,7 @@ Changing $v_0$, $g$, or $\theta$ generates a **family of projectile paths** with
 ## 💻 Python Helper Code (Just for Later Use)
 ```python
 import numpy as np
----
-
-# Constants
-g = 9.81  # m/s²
-
-# Range function
-def range_formula(v0, theta_deg):
-    theta_rad = np.radians(theta_deg)
-    return (v0 ** 2 * np.sin(2 * theta_rad)) / g
+from scipy.optimize import root_scalar
 # 📊 2️⃣ Analysis of the Range – Numerical Investigation
 
 We now numerically investigate how the **range of a projectile** depends on various parameters:
@@ -124,38 +116,48 @@ $$R(\theta)=\frac{v_0^2\cdot\sin(2\theta)}{g}$$
 - $\theta$: launch angle  
 - $g$: gravitational acceleration
 
----
-
-## 💻 Python Code: Range vs Launch Angle
-![alt text](image-1.png)
-```python
+# 📦 Libraries
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.optimize import root_scalar
 
+# 🎯 Ideal range formula
 def ideal_range(v0, g, theta_deg):
     theta_rad = np.radians(theta_deg)
     return (v0**2 * np.sin(2 * theta_rad)) / g
 
-# Angle values
-angles = np.arange(0, 91, 1)  # 0° to 90°
+# 🧮 Launch height model
+def range_with_height(v0, g, theta_deg, h):
+    theta_rad = np.radians(theta_deg)
+    vy = v0 * np.sin(theta_rad)
+    vx = v0 * np.cos(theta_rad)
 
-# Plot for different initial velocities
-g = 9.81  # Earth gravity
+    def y(t): return h + vy * t - 0.5 * g * t**2
+    sol = root_scalar(y, bracket=[0.01, 100], method='brentq')
+    t_flight = sol.root
+    return vx * t_flight
+
+# 🔁 Angle values
+angles = np.arange(0, 91, 1)
+
+# ✅ Graph 1: Different initial velocities
+g = 9.81
 velocities = [50, 100, 150]
 
 plt.figure(figsize=(10, 5))
 for v0 in velocities:
     ranges = ideal_range(v0, g, angles)
     plt.plot(angles, ranges, label=f"v₀ = {v0} m/s")
-
-plt.title("Range vs Launch Angle – Different Initial Velocities")
+plt.title("Range vs Angle – Different Initial Velocities")
 plt.xlabel("Launch Angle (degrees)")
 plt.ylabel("Range (meters)")
 plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
-gravities = [9.81, 1.62]  # Earth and Moon
+
+# ✅ Graph 2: Earth vs Moon
+gravities = [9.81, 1.62]
 v0 = 100
 
 plt.figure(figsize=(10, 5))
@@ -171,18 +173,21 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
-from scipy.optimize import root_scalar
+---
+# ✅ Graph 3: Launch height simulation
+heights = [0, 20, 50]
 
-def range_with_height(v0, g, theta_deg, h):
-    theta_rad = np.radians(theta_deg)
-    vy = v0 * np.sin(theta_rad)
-    vx = v0 * np.cos(theta_rad)
-
-    def y(t): return h + vy * t - 0.5 * g * t**2
-
-    sol = root_scalar(y, bracket=[0.01, 100], method='brentq')
-    t_flight = sol.root
-    return vx * t_flight
+plt.figure(figsize=(10, 5))
+for h in heights:
+    ranges = [range_with_height(v0, g, angle, h) for angle in angles]
+    plt.plot(angles, ranges, label=f"Height = {h} m")
+plt.title("Range vs Angle – Different Launch Heights")
+plt.xlabel("Launch Angle (degrees)")
+plt.ylabel("Range (meters)")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
 
 # Compare different launch heights
 heights = [0, 20, 50]
@@ -372,7 +377,8 @@ import matplotlib.pyplot as plt
 # Ideal range equation
 def ideal_range(v0, g, theta_deg):
     theta_rad = np.radians(theta_deg)
-    return (v0**2 * np.sin(2 * theta_rad)) / g
+    return (v0**2 * np.sin(2 * theta_rad)) /g
+
 angles = np.arange(0, 91, 1)
 g = 9.81  # Earth gravity
 velocities = [50, 100, 150]  # m/s
