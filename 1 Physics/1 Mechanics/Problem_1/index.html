@@ -249,14 +249,8 @@ $$R = \frac{v_0^2 \cdot \sin(2\theta)}{g}\]</div>
 <hr/>
 <h2 id="python-helper-code-just-for-later-use">💻 Python Helper Code (Just for Later Use)</h2>
 <p>```python
-import numpy as np</p>
-<hr/>
-<h1 id="constants">Constants</h1>
-<p>g = 9.81  # m/s²</p>
-<h1 id="range-function">Range function</h1>
-<p>def range_formula(v0, theta_deg):
-    theta_rad = np.radians(theta_deg)
-    return (v0 ** 2 * np.sin(2 * theta_rad)) / g</p>
+import numpy as np
+from scipy.optimize import root_scalar</p>
 <h1 id="2-analysis-of-the-range-numerical-investigation">📊 2️⃣ Analysis of the Range – Numerical Investigation</h1>
 <p>We now numerically investigate how the <strong>range of a projectile</strong> depends on various parameters:</p>
 <ul>
@@ -275,32 +269,42 @@ import numpy as np</p>
 <li><span class="arithmatex">\(\theta\)</span>: launch angle  </li>
 <li><span class="arithmatex">\(g\)</span>: gravitational acceleration</li>
 </ul>
-<hr/>
-<h2 id="python-code-range-vs-launch-angle">💻 Python Code: Range vs Launch Angle</h2>
-<p><img alt="alt text" src="image-1.png"/>
-```python
-import numpy as np
-import matplotlib.pyplot as plt</p>
+<h1 id="libraries">📦 Libraries</h1>
+<p>import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import root_scalar</p>
+<h1 id="ideal-range-formula">🎯 Ideal range formula</h1>
 <p>def ideal_range(v0, g, theta_deg):
     theta_rad = np.radians(theta_deg)
     return (v0**2 * np.sin(2 * theta_rad)) / g</p>
-<h1 id="angle-values">Angle values</h1>
-<p>angles = np.arange(0, 91, 1)  # 0° to 90°</p>
-<h1 id="plot-for-different-initial-velocities">Plot for different initial velocities</h1>
-<p>g = 9.81  # Earth gravity
+<h1 id="launch-height-model">🧮 Launch height model</h1>
+<p>def range_with_height(v0, g, theta_deg, h):
+    theta_rad = np.radians(theta_deg)
+    vy = v0 * np.sin(theta_rad)
+    vx = v0 * np.cos(theta_rad)</p>
+<pre><code>def y(t): return h + vy * t - 0.5 * g * t**2
+sol = root_scalar(y, bracket=[0.01, 100], method='brentq')
+t_flight = sol.root
+return vx * t_flight
+</code></pre>
+<h1 id="angle-values">🔁 Angle values</h1>
+<p>angles = np.arange(0, 91, 1)</p>
+<h1 id="graph-1-different-initial-velocities">✅ Graph 1: Different initial velocities</h1>
+<p>g = 9.81
 velocities = [50, 100, 150]</p>
 <p>plt.figure(figsize=(10, 5))
 for v0 in velocities:
     ranges = ideal_range(v0, g, angles)
-    plt.plot(angles, ranges, label=f"v₀ = {v0} m/s")</p>
-<p>plt.title("Range vs Launch Angle – Different Initial Velocities")
+    plt.plot(angles, ranges, label=f"v₀ = {v0} m/s")
+plt.title("Range vs Angle – Different Initial Velocities")
 plt.xlabel("Launch Angle (degrees)")
 plt.ylabel("Range (meters)")
 plt.grid(True)
 plt.legend()
 plt.tight_layout()
-plt.show()
-gravities = [9.81, 1.62]  # Earth and Moon
+plt.show()</p>
+<h1 id="graph-2-earth-vs-moon">✅ Graph 2: Earth vs Moon</h1>
+<p>gravities = [9.81, 1.62]
 v0 = 100</p>
 <p>plt.figure(figsize=(10, 5))
 for g_val in gravities:
@@ -313,18 +317,21 @@ plt.ylabel("Range (meters)")
 plt.grid(True)
 plt.legend()
 plt.tight_layout()
-plt.show()
-from scipy.optimize import root_scalar</p>
-<p>def range_with_height(v0, g, theta_deg, h):
-    theta_rad = np.radians(theta_deg)
-    vy = v0 * np.sin(theta_rad)
-    vx = v0 * np.cos(theta_rad)</p>
-<pre><code>def y(t): return h + vy * t - 0.5 * g * t**2
-
-sol = root_scalar(y, bracket=[0.01, 100], method='brentq')
-t_flight = sol.root
-return vx * t_flight
-</code></pre>
+plt.show()</p>
+<hr/>
+<h1 id="graph-3-launch-height-simulation">✅ Graph 3: Launch height simulation</h1>
+<p>heights = [0, 20, 50]</p>
+<p>plt.figure(figsize=(10, 5))
+for h in heights:
+    ranges = [range_with_height(v0, g, angle, h) for angle in angles]
+    plt.plot(angles, ranges, label=f"Height = {h} m")
+plt.title("Range vs Angle – Different Launch Heights")
+plt.xlabel("Launch Angle (degrees)")
+plt.ylabel("Range (meters)")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()</p>
 <h1 id="compare-different-launch-heights">Compare different launch heights</h1>
 <p>heights = [0, 20, 50]
 v0 = 100
@@ -461,8 +468,8 @@ import matplotlib.pyplot as plt</p>
 <h1 id="ideal-range-equation">Ideal range equation</h1>
 <p>def ideal_range(v0, g, theta_deg):
     theta_rad = np.radians(theta_deg)
-    return (v0**2 * np.sin(2 * theta_rad)) / g
-angles = np.arange(0, 91, 1)
+    return (v0**2 * np.sin(2 * theta_rad)) /g</p>
+<p>angles = np.arange(0, 91, 1)
 g = 9.81  # Earth gravity
 velocities = [50, 100, 150]  # m/s</p>
 <p>plt.figure(figsize=(10, 5))
