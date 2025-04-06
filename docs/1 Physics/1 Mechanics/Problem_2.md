@@ -34,7 +34,8 @@ Where:
 Below is a Python simulation of the pendulum using the Runge-Kutta 4th order method.
 ---
 ![alt text](image-2.png)
-![alt text][def]
+![alt text](image-3.png)
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -83,6 +84,4 @@ plt.xlabel("Time (s)")
 plt.ylabel("Angle (rad)")
 plt.grid(True)
 plt.show()
-
-
-[def]: image-3.png
+'''

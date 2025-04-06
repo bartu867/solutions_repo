@@ -31,7 +31,51 @@ In the case of air resistance, the equation becomes more complicated and require
 
 ![Range vs Angle](image.png)
 
-```python
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+g = 9.81  # gravitational acceleration (m/s^2)
+
+# Function to calculate the range
+def calculate_range(v0, theta):
+    return (v0 ** 2 * np.sin(2 * np.radians(theta))) / g
+
+# Range calculation without air resistance
+theta_values = np.arange(0, 91, 1)  # Angle range from 0 to 90 degrees
+v0 = 100  # Initial velocity in m/s
+ranges = calculate_range(v0, theta_values)
+
+# Plotting the range vs. angle
+plt.figure(figsize=(8, 6))
+plt.plot(theta_values, ranges, label='Range (No Air Resistance)', color='orange')
+plt.xlabel('Angle of Projection (degrees)')
+plt.ylabel('Range (meters)')
+plt.title('Range of a Projectile as a Function of Launch Angle')
+plt.grid(True)
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+g = 9.81  # gravitational acceleration (m/s^2)
+
+# Function to calculate the range
+def calculate_range(v0, theta):
+    return (v0 ** 2 * np.sin(2 * np.radians(theta))) / g
+
+# Range calculation without air resistance
+theta_values = np.arange(0, 91, 1)  # Angle range from 0 to 90 degrees
+v0 = 100  # Initial velocity in m/s
+ranges = calculate_range(v0, theta_values)
+
+# Plotting the range vs. angle
+plt.figure(figsize=(8, 6))
+plt.plot(theta_values, ranges, label='Range (No Air Resistance)', color='orange')
+plt.xlabel('Angle of Projection (degrees)')
+plt.ylabel('Range (meters)')
+plt.title('Range of a Projectile as a Function of Launch Angle')
+plt.grid(True)
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -57,13 +101,11 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
-```
 
 ---
-
 ## 💻 Python Simulation – With Air Resistance
-
-```python
+---
+![alt text](image-1.png)
 # Additional code for air resistance simulation
 def simulate_projectile_with_air_resistance(v0, theta, k, m):
     # Initial conditions
@@ -103,7 +145,7 @@ def simulate_projectile_with_air_resistance(v0, theta, k, m):
             break
 
     return x_values, y_values
-
+![alt text](image.png)
 # Simulate projectile with air resistance
 k = 0.1  # Drag coefficient
 m = 1    # Mass of the projectile
@@ -119,6 +161,4 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
-```
-
-![Trajectory with Air Resistance](image-2.png)
+---
