@@ -350,36 +350,33 @@ Realistic projectile modeling must include:
 - Mass and surface area of the object  
 
 The basic model is only a starting point—these factors shape **real-world trajectories** 🌐
-## 💻 4️⃣ Implementation – Coding the Projectile Motion
-## 💻 4️⃣ Implementation – Coding the Projectile Motion
+## 4️⃣ Implementation – Coding the Projectile Motion
 
 We now translate the theoretical physics into working **Python code** using `numpy` and `matplotlib`.
 
 ---
 
-## 🌟 Goals
+## 🎯 Goals
 
-- ✅ Write a function to calculate **range** as a function of angle θ
-- ✅ Plot **range vs angle**
-- ✅ Try different values for:
+- Write a function to calculate **range** as a function of angle $\theta$
+- Plot **range vs angle**
+- Try different values for:
   - Initial velocity $v_0$
   - Gravitational acceleration $g$
 
 ---
 
-## 🧪 Governing Equation
+## 📘 Governing Equation
 
-The **ideal range equation** (no air resistance, flat terrain) is:
+The **ideal range equation** (no air resistance, flat terrain):
 
-$$
-R(\theta) = \frac{v_0^2 \cdot \sin(2\theta)}{g}
-$$
+$$R(\theta) = \frac{v_0^2 \cdot \sin(2\theta)}{g}$$
 
 Where:
-- $R$: horizontal range (meters)
-- $v_0$: initial velocity (m/s)
+- $R$: horizontal range (m)
+- $v_0$: initial speed (m/s)
 - $\theta$: angle of projection (degrees)
-- $g$: gravitational acceleration (m/s\(^2$))
+- $g$: gravitational acceleration (m/s²)
 
 ---
 
@@ -393,7 +390,7 @@ from scipy.optimize import root_scalar
 
 ---
 
-## 🧐 Function to Compute Ideal Range
+## 🔧 Function to Compute Ideal Range
 
 ```python
 def ideal_range(v0, g, theta_deg):
@@ -403,11 +400,11 @@ def ideal_range(v0, g, theta_deg):
 
 ---
 
-## 📊 Plot – Range vs Launch Angle (Single Setup)
+## 📊 Plot – Range vs Launch Angle
 
 ```python
-v0 = 100  # initial speed in m/s
-g = 9.81  # gravitational acceleration in m/s^2
+v0 = 100
+g = 9.81
 angles = np.arange(0, 91, 1)
 ranges = ideal_range(v0, g, angles)
 
@@ -423,7 +420,7 @@ plt.show()
 
 ---
 
-## 🧪 Different Initial Velocities
+## 🚀 Test with Different Initial Velocities
 
 ```python
 velocities = [50, 100, 150]
@@ -444,16 +441,16 @@ plt.show()
 
 ---
 
-## 🌍 Different Gravitational Accelerations
+## 🌍 Test with Different Gravities
 
 ```python
-g_values = [9.81, 3.71, 1.62]  # Earth, Mars, Moon
+g_values = [9.81, 3.71, 1.62]
 v0 = 100
 
 plt.figure(figsize=(10, 5))
 for g_val in g_values:
-    label = f"g = {g_val} m/s²"
     ranges = ideal_range(v0, g_val, angles)
+    label = f"g = {g_val} m/s²"
     plt.plot(angles, ranges, label=label)
 
 plt.title("Range vs Angle – Earth, Mars, Moon")
@@ -467,13 +464,11 @@ plt.show()
 
 ---
 
-## 🚀 Optional: Launch from a Height
+## 🧱 Optional: Launch from a Height
 
-The general formula when launching from height $h$ is:
+Formula:
 
-$$
-R = \frac{v_0 \cdot \cos(\theta)}{g} \left( v_0 \cdot \sin(\theta) + \sqrt{(v_0 \cdot \sin(\theta))^2 + 2gh} \right)
-$$
+$$R = \frac{v_0 \cdot \cos(\theta)}{g} \left(v_0 \cdot \sin(\theta) + \sqrt{(v_0 \cdot \sin(\theta))^2 + 2gh}\right)$$
 
 ```python
 def range_with_height(v0, g, angle, h):
@@ -504,7 +499,7 @@ plt.show()
 
 ## ✅ Summary
 
-- Range peaks at $\theta = 45^\circ$
-- Higher $v_0$ = longer range
-- Lower $g$ = longer time of flight = more range
-- Launching from height $h > 0$ significantly increases range
+- Maximum range at $\theta = 45^\circ$
+- Larger $v_0$ = longer range
+- Smaller $g$ = longer flight time
+- Launching from height ($h > 0$) extends range
