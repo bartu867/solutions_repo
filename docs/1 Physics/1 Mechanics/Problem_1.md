@@ -91,7 +91,6 @@ Changing $v_0$, $g$, or $\theta$ generates a **family of projectile paths** with
 ---
 
 ## 💻 Python Helper Code (Just for Later Use)
-![alt text](image-2.png)
 ```python
 import numpy as np
 ---
@@ -202,6 +201,8 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
+## 🎯 Range vs Angle (v₀ = 50, 100, 150 m/s)
+![Initial Velocities](../images/1.png)
 # 🌍 3️⃣ Practical Applications – Real-World Relevance of Projectile Motion
 
 Projectile motion isn't just a classroom example—it’s used in many industries and scientific fields. Below are major real-world applications and extensions of the basic model.
@@ -364,7 +365,6 @@ $$R(\theta)=\frac{v_0^2\cdot\sin(2\theta)}{g}$$
 ---
 
 ## 💻 Python Code – Ideal Range Function
-![alt text](image.png)
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -406,6 +406,11 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 from scipy.optimize import root_scalar
+## 🌍 Earth vs Moon – Same Speed, Different Gravity
+
+Lower gravity (like on the Moon) allows the projectile to stay in air longer → greater range.
+
+![Earth vs Moon](../images/2.png)
 
 def range_with_height(v0, g, theta_deg, h):
     theta_rad = np.radians(theta_deg)
