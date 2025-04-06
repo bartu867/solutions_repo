@@ -506,36 +506,33 @@ Realistic projectile modeling must include:
 - Mass and surface area of the object  
 
 The basic model is only a starting point—these factors shape **real-world trajectories** 🌐
-## 💻 4️⃣ Implementation – Coding the Projectile Motion
-## 💻 4️⃣ Implementation – Coding the Projectile Motion
+## 4️⃣ Implementation – Coding the Projectile Motion
 
 We now translate the theoretical physics into working **Python code** using `numpy` and `matplotlib`.
 
 ---
 
-## 🌟 Goals
+## 🎯 Goals
 
-- ✅ Write a function to calculate **range** as a function of angle θ
-- ✅ Plot **range vs angle**
-- ✅ Try different values for:
+- Write a function to calculate **range** as a function of angle $\theta$
+- Plot **range vs angle**
+- Try different values for:
   - Initial velocity $v_0$
   - Gravitational acceleration $g$
 
 ---
 
-## 🧪 Governing Equation
+## 📘 Governing Equation
 
-The **ideal range equation** (no air resistance, flat terrain) is:
+The **ideal range equation** (no air resistance, flat terrain):
 
-$$
-R(\theta) = \frac{v_0^2 \cdot \sin(2\theta)}{g}
-$$
+$$R(\theta) = \frac{v_0^2 \cdot \sin(2\theta)}{g}$$
 
 Where:
-- $R$: horizontal range (meters)
-- $v_0$: initial velocity (m/s)
+- $R$: horizontal range (m)
+- $v_0$: initial speed (m/s)
 - $\theta$: angle of projection (degrees)
-- $g$: gravitational acceleration (m/s\(^2$))
+- $g$: gravitational acceleration (m/s²)
 
 ---
 
@@ -547,15 +544,15 @@ import matplotlib.pyplot as plt
 from scipy.optimize import root_scalar
 </code></pre>
 <hr/>
-<h2 id="function-to-compute-ideal-range">🧐 Function to Compute Ideal Range</h2>
+<h2 id="function-to-compute-ideal-range">🔧 Function to Compute Ideal Range</h2>
 <pre><code class="language-python">def ideal_range(v0, g, theta_deg):
     theta_rad = np.radians(theta_deg)
     return (v0**2 * np.sin(2 * theta_rad)) / g
 </code></pre>
 <hr/>
-<h2 id="plot-range-vs-launch-angle-single-setup">📊 Plot – Range vs Launch Angle (Single Setup)</h2>
-<pre><code class="language-python">v0 = 100  # initial speed in m/s
-g = 9.81  # gravitational acceleration in m/s^2
+<h2 id="plot-range-vs-launch-angle">📊 Plot – Range vs Launch Angle</h2>
+<pre><code class="language-python">v0 = 100
+g = 9.81
 angles = np.arange(0, 91, 1)
 ranges = ideal_range(v0, g, angles)
 
@@ -569,7 +566,7 @@ plt.tight_layout()
 plt.show()
 </code></pre>
 <hr/>
-<h2 id="different-initial-velocities">🧪 Different Initial Velocities</h2>
+<h2 id="test-with-different-initial-velocities">🚀 Test with Different Initial Velocities</h2>
 <pre><code class="language-python">velocities = [50, 100, 150]
 
 plt.figure(figsize=(10, 5))
@@ -586,14 +583,14 @@ plt.tight_layout()
 plt.show()
 </code></pre>
 <hr/>
-<h2 id="different-gravitational-accelerations">🌍 Different Gravitational Accelerations</h2>
-<pre><code class="language-python">g_values = [9.81, 3.71, 1.62]  # Earth, Mars, Moon
+<h2 id="test-with-different-gravities">🌍 Test with Different Gravities</h2>
+<pre><code class="language-python">g_values = [9.81, 3.71, 1.62]
 v0 = 100
 
 plt.figure(figsize=(10, 5))
 for g_val in g_values:
-    label = f"g = {g_val} m/s²"
     ranges = ideal_range(v0, g_val, angles)
+    label = f"g = {g_val} m/s²"
     plt.plot(angles, ranges, label=label)
 
 plt.title("Range vs Angle – Earth, Mars, Moon")
@@ -605,11 +602,9 @@ plt.tight_layout()
 plt.show()
 </code></pre>
 <hr/>
-<h2 id="optional-launch-from-a-height">🚀 Optional: Launch from a Height</h2>
-<p>The general formula when launching from height <span class="arithmatex">\(h\)</span> is:</p>
-<div class="arithmatex">\[
-R = \frac{v_0 \cdot \cos(\theta)}{g} \left( v_0 \cdot \sin(\theta) + \sqrt{(v_0 \cdot \sin(\theta))^2 + 2gh} \right)
-\]</div>
+<h2 id="optional-launch-from-a-height">🧱 Optional: Launch from a Height</h2>
+<p>Formula:</p>
+<div class="arithmatex">\[R = \frac{v_0 \cdot \cos(\theta)}{g} \left(v_0 \cdot \sin(\theta) + \sqrt{(v_0 \cdot \sin(\theta))^2 + 2gh}\right)\]</div>
 <pre><code class="language-python">def range_with_height(v0, g, angle, h):
     angle_rad = np.radians(angle)
     term1 = v0 * np.cos(angle_rad) / g
@@ -634,10 +629,10 @@ plt.show()
 <hr/>
 <h2 id="summary">✅ Summary</h2>
 <ul>
-<li>Range peaks at <span class="arithmatex">\(\theta = 45^\circ\)</span></li>
-<li>Higher <span class="arithmatex">\(v_0\)</span> = longer range</li>
-<li>Lower <span class="arithmatex">\(g\)</span> = longer time of flight = more range</li>
-<li>Launching from height <span class="arithmatex">\(h &gt; 0\)</span> significantly increases range</li>
+<li>Maximum range at <span class="arithmatex">\(\theta = 45^\circ\)</span></li>
+<li>Larger <span class="arithmatex">\(v_0\)</span> = longer range</li>
+<li>Smaller <span class="arithmatex">\(g\)</span> = longer flight time</li>
+<li>Launching from height (<span class="arithmatex">\(h &gt; 0\)</span>) extends range</li>
 </ul>
 </div>
 </div><footer>
