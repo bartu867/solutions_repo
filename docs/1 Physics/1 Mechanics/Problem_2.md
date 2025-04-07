@@ -94,6 +94,8 @@ To explore the dynamics of a forced damped pendulum beyond analytical solutions,
 ---
 
 ### 🔹 Numerical Modeling
+
+```python
 import numpy as np
 
 # Constants
@@ -133,6 +135,7 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
+```
 
 The nonlinear differential equation:
 
@@ -159,7 +162,8 @@ def pendulum_deriv(t, y):
     dtheta_dt = omega_theta
     domega_dt = -b * omega_theta - (g / L) * np.sin(theta) + A * np.cos(omega * t)
     return [dtheta_dt, domega_dt]
-    
+```
+
 ---
 
 #### Time Evolution of the Pendulum
@@ -190,7 +194,7 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
-
+```
 
 #### Phase Space Diagram
 
@@ -209,10 +213,13 @@ plt.ylabel('ω [rad/s]')
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+```
 
 #### Poincaré Section
 
 A Poincaré section is a tool used to detect chaotic behavior in dynamic systems. By sampling the state of the pendulum at regular intervals equal to the driving period, we can reveal patterns in the long-term behavior.
+
+
 ```python
 # Driving period
 T_drive = 2 * np.pi / omega
@@ -236,6 +243,8 @@ plt.ylabel("ω [rad/s]")
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+```
+
 ## 5. Deliverables
 
 1. **A Markdown document with Python script** implementing the simulation of a forced damped pendulum using numerical methods.
