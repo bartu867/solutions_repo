@@ -80,6 +80,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#5-deliverables">5. Deliverables</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -271,29 +273,37 @@
 <p>To explore the dynamics of a forced damped pendulum beyond analytical solutions, we use computational simulations.</p>
 <hr/>
 <h3 id="numerical-modeling">🔹 Numerical Modeling</h3>
-<p>import numpy as np</p>
-<h1 id="constants">Constants</h1>
-<p>g = 9.81
+<pre><code class="language-python">import numpy as np
+
+# Constants
+g = 9.81
 L = 1.0
 b = 0.5
 A = 1.2
-omega = 2/3</p>
-<p>def pendulum_deriv(t, y):
+omega = 2/3
+
+def pendulum_deriv(t, y):
     theta, omega_theta = y
     dtheta_dt = omega_theta
     domega_dt = -b * omega_theta - (g / L) * np.sin(theta) + A * np.cos(omega * t)
-    return [dtheta_dt, domega_dt]</p>
-<p>import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp</p>
-<h1 id="time-settings">Time settings</h1>
-<p>t_span = (0, 50)
-t_eval = np.linspace(*t_span, 1000)</p>
-<h1 id="initial-conditions">Initial conditions</h1>
-<p>y0 = [0.2, 0.0]</p>
-<h1 id="solve-using-runge-kutta">Solve using Runge-Kutta</h1>
-<p>sol = solve_ivp(pendulum_deriv, t_span, y0, t_eval=t_eval, method='RK45')</p>
-<h1 id="plot-vs-time">Plot θ vs time</h1>
-<p>plt.figure(figsize=(10, 4))
+    return [dtheta_dt, domega_dt]
+
+
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Time settings
+t_span = (0, 50)
+t_eval = np.linspace(*t_span, 1000)
+
+# Initial conditions
+y0 = [0.2, 0.0]
+
+# Solve using Runge-Kutta
+sol = solve_ivp(pendulum_deriv, t_span, y0, t_eval=t_eval, method='RK45')
+
+# Plot θ vs time
+plt.figure(figsize=(10, 4))
 plt.plot(sol.t, sol.y[0], label='θ(t)')
 plt.title('Angular Displacement vs Time')
 plt.xlabel('Time [s]')
@@ -301,42 +311,48 @@ plt.ylabel('θ [rad]')
 plt.grid(True)
 plt.legend()
 plt.tight_layout()
-plt.show()</p>
+plt.show()
+</code></pre>
 <p>The nonlinear differential equation:</p>
 <div class="arithmatex">\[
 \frac{d^2 \theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
 \]</div>
 <p>is solved using numerical methods such as the <strong>Runge-Kutta</strong> method. This allows us to simulate the motion for arbitrary initial conditions and parameter values.</p>
 <h4 id="python-code-differential-equation">Python Code: Differential Equation</h4>
-<p>```python
-import numpy as np</p>
-<h1 id="constants_1">Constants</h1>
-<p>g = 9.81        # gravitational acceleration (m/s^2)
+<pre><code class="language-python">import numpy as np
+
+# Constants
+g = 9.81        # gravitational acceleration (m/s^2)
 L = 1.0         # length of pendulum (m)
 b = 0.5         # damping coefficient
 A = 1.2         # amplitude of driving force
-omega = 2/3     # driving frequency</p>
-<h1 id="differential-equation-system">Differential equation system</h1>
-<p>def pendulum_deriv(t, y):
+omega = 2/3     # driving frequency
+
+# Differential equation system
+def pendulum_deriv(t, y):
     theta, omega_theta = y
     dtheta_dt = omega_theta
     domega_dt = -b * omega_theta - (g / L) * np.sin(theta) + A * np.cos(omega * t)
-    return [dtheta_dt, domega_dt]</p>
+    return [dtheta_dt, domega_dt]
+</code></pre>
 <hr/>
 <h4 id="time-evolution-of-the-pendulum">Time Evolution of the Pendulum</h4>
 <p>We simulate and visualize the angular displacement <span class="arithmatex">\( \theta(t) \)</span> over time using the Runge-Kutta method (<code>solve_ivp</code> from <code>scipy.integrate</code>). This helps us understand how the pendulum responds to different damping and driving conditions.</p>
-<p>```python
-import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp</p>
-<h1 id="time-settings_1">Time settings</h1>
-<p>t_span = (0, 50)
-t_eval = np.linspace(*t_span, 1000)</p>
-<h1 id="initial-conditions_1">Initial conditions</h1>
-<p>y0 = [0.2, 0.0]</p>
-<h1 id="solve-using-runge-kutta_1">Solve using Runge-Kutta</h1>
-<p>sol = solve_ivp(pendulum_deriv, t_span, y0, t_eval=t_eval, method='RK45')</p>
-<h1 id="plot-vs-time_1">Plot θ vs time</h1>
-<p>plt.figure(figsize=(10, 4))
+<pre><code class="language-python">import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Time settings
+t_span = (0, 50)
+t_eval = np.linspace(*t_span, 1000)
+
+# Initial conditions
+y0 = [0.2, 0.0]
+
+# Solve using Runge-Kutta
+sol = solve_ivp(pendulum_deriv, t_span, y0, t_eval=t_eval, method='RK45')
+
+# Plot θ vs time
+plt.figure(figsize=(10, 4))
 plt.plot(sol.t, sol.y[0], label='θ(t)')
 plt.title('Angular Displacement vs Time')
 plt.xlabel('Time [s]')
@@ -344,43 +360,48 @@ plt.ylabel('θ [rad]')
 plt.grid(True)
 plt.legend()
 plt.tight_layout()
-plt.show()</p>
+plt.show()
+</code></pre>
 <h4 id="phase-space-diagram">Phase Space Diagram</h4>
 <p>The phase space plot of angular velocity <span class="arithmatex">\( \omega(t) \)</span> versus angular position <span class="arithmatex">\( \theta(t) \)</span> provides insights into the nature of the motion. It helps distinguish between regular, damped, or chaotic behavior.</p>
-<p>```python</p>
-<h1 id="phase-space-plot-vs">Phase space plot: θ vs ω</h1>
-<p>theta_vals = sol.y[0]
-omega_vals = sol.y[1]</p>
-<p>plt.figure(figsize=(6, 6))
+<pre><code class="language-python"># Phase space plot: θ vs ω
+theta_vals = sol.y[0]
+omega_vals = sol.y[1]
+
+plt.figure(figsize=(6, 6))
 plt.plot(theta_vals, omega_vals, lw=0.7)
 plt.title('Phase Space Diagram (θ vs ω)')
 plt.xlabel('θ [rad]')
 plt.ylabel('ω [rad/s]')
 plt.grid(True)
 plt.tight_layout()
-plt.show()</p>
+plt.show()
+</code></pre>
 <h4 id="poincare-section">Poincaré Section</h4>
-<p>A Poincaré section is a tool used to detect chaotic behavior in dynamic systems. By sampling the state of the pendulum at regular intervals equal to the driving period, we can reveal patterns in the long-term behavior.
-```python</p>
-<h1 id="driving-period">Driving period</h1>
-<p>T_drive = 2 * np.pi / omega</p>
-<h1 id="sample-points-every-driving-period">Sample points: every driving period</h1>
-<p>poincare_t = np.arange(0, 50, T_drive)</p>
-<h1 id="interpolate-solution-at-poincare-times">Interpolate solution at poincare times</h1>
-<p>from scipy.interpolate import interp1d
+<p>A Poincaré section is a tool used to detect chaotic behavior in dynamic systems. By sampling the state of the pendulum at regular intervals equal to the driving period, we can reveal patterns in the long-term behavior.</p>
+<pre><code class="language-python"># Driving period
+T_drive = 2 * np.pi / omega
+
+# Sample points: every driving period
+poincare_t = np.arange(0, 50, T_drive)
+
+# Interpolate solution at poincare times
+from scipy.interpolate import interp1d
 interp_theta = interp1d(sol.t, sol.y[0])
 interp_omega = interp1d(sol.t, sol.y[1])
 theta_p = interp_theta(poincare_t)
-omega_p = interp_omega(poincare_t)</p>
-<h1 id="plot-poincare-section">Plot Poincaré section</h1>
-<p>plt.figure(figsize=(6, 6))
+omega_p = interp_omega(poincare_t)
+
+# Plot Poincaré section
+plt.figure(figsize=(6, 6))
 plt.plot(theta_p, omega_p, 'o', markersize=2)
 plt.title("Poincaré Section (Sampled Every Period)")
 plt.xlabel("θ [rad]")
 plt.ylabel("ω [rad/s]")
 plt.grid(True)
 plt.tight_layout()
-plt.show()</p>
+plt.show()
+</code></pre>
 <h2 id="5-deliverables">5. Deliverables</h2>
 <ol>
 <li>
