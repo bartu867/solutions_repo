@@ -3,476 +3,282 @@
 **Author:** Bartu867  
 **Date:** March 29, 2025  
 ---
-# 📘 1️⃣ Theoretical Foundation – Projectile Motion
+# Mechanics Project
+# 📚 Problem 1: Investigating the Range as a Function of the Angle of Projection
 
-Projectile motion is a classic example of 2D motion under constant acceleration (gravity). It can be broken into two components: **horizontal motion** and **vertical motion**.
+## 1. Theoretical Foundation
 
----
+### • Derivation of Equations of Motion
 
-## ⚙️ Governing Equations from Newton’s Laws
+Starting from Newton’s Second Law:
 
-Newton’s Second Law ($F = ma$) applied in the vertical direction gives constant downward acceleration due to gravity.
+$$\vec{F}=m\vec{a}$$
 
-We ignore air resistance and assume motion starts at ground level.
+In the absence of air resistance, the only force acting on the projectile (after launch) is gravity:
 
----
+$$\vec{a}=(0,-g)$$
 
-### 🔹 Horizontal Motion (No Acceleration)
+where $g$ is the gravitational acceleration.
 
-- Constant velocity (no force in x-direction)
-- Displacement:
+Thus, the equations of motion are:
 
-  $$x(t) = v_0 \cdot \cos(\theta) \cdot t$$
+- In horizontal ($x$) direction:
 
----
+$$\frac{d^2x}{dt^2}=0\quad\Rightarrow\quad\frac{dx}{dt}=v_{0x}=v_0\cos(\theta)$$
 
-### 🔹 Vertical Motion (Constant Acceleration)
+- In vertical ($y$) direction:
 
-- Acceleration is $-g$ (downward)
-- Displacement:
+$$\frac{d^2y}{dt^2}=-g\quad\Rightarrow\quad\frac{dy}{dt}=v_{0y}-gt=v_0\sin(\theta)-gt$$
 
-  $$y(t) = v_0 \cdot \sin(\theta) \cdot t - \frac{1}{2}gt^2$$
+Integrating once more:
 
-- Vertical velocity:
+- Horizontal position:
 
-  $$v_y(t) = v_0 \cdot \sin(\theta) - gt$$
+$$x(t)=v_0\cos(\theta)t$$
 
----
+- Vertical position:
 
-### 🧮 Time of Flight
-
-At landing, $y = 0$:
-
-$$0 = v_0 \cdot \sin(\theta) \cdot t - \frac{1}{2}gt^2$$
-
-Solving for total time $t$:
-
-$$t = \frac{2v_0 \cdot \sin(\theta)}{g}$$
+$$y(t)=v_0\sin(\theta)t-\frac{1}{2}gt^2$$
 
 ---
 
-### 🎯 Range of the Projectile
+### • Varying Initial Conditions
 
-Use total flight time in horizontal displacement:
-
-$$R = x(t) = v_0 \cdot \cos(\theta) \cdot t$$
-
-Substitute $t$:
-
-$$R = v_0 \cdot \cos(\theta) \cdot \frac{2v_0 \cdot \sin(\theta)}{g}$$  
-$$R = \frac{v_0^2 \cdot \sin(2\theta)}{g}$$
+- **Initial velocity $v_0$**: Higher $v_0$ increases both maximum height and range.
+- **Gravitational acceleration $g$**: Higher $g$ reduces flight time and range.
+- **Launch height**: Here assumed zero; can be generalized for non-zero launch heights.
 
 ---
 
-## 🔁 Influence of Parameters
+## 2. Analysis of the Range
 
-- **Initial Velocity ($v_0$):**
-    - Range increases quadratically with $v_0$.
-    - Doubling $v_0$ results in $4\times$ the range.
+### • Derivation of Range Formula
 
-- **Gravitational Acceleration ($g$):**
-    - Higher $g$ means shorter flight time and range.
-    - On the Moon ($g \approx 1.6$), the range is much longer.
+The projectile hits the ground again when $y(T)=0$. Solving:
 
-- **Angle ($\theta$):**
-    - Range is maximum at $\theta = 45^\circ$.
-    - $\sin(2\theta)$ creates a symmetric curve around $45^\circ$.
+$$0=v_0\sin(\theta)T-\frac{1}{2}gT^2$$
 
----
+which gives:
 
-## 🧠 Family of Solutions
+$$T=\frac{2v_0\sin(\theta)}{g}$$
 
-Changing $v_0$, $g$, or $\theta$ generates a **family of projectile paths** with different ranges and shapes. For example:
+**Range** $R$ is the horizontal distance traveled during flight:
 
-- $\theta = 30^\circ$ and $\theta = 60^\circ$ → same range, different height and flight time
-- Different $v_0$ values shift the entire trajectory up/down
-- Different $g$ values (like Moon vs Earth) stretch the flight arc
+$$R=x(T)=v_0\cos(\theta)T$$
+
+Substituting for $T$:
+
+$$R=\frac{v_0^2\sin(2\theta)}{g}$$
 
 ---
 
-## 💻 Python Code 
+### • Parameter Dependence
+
+- **$v_0$**: Range is proportional to $v_0^2$.
+- **$g$**: Range is inversely proportional to $g$.
+- **$\theta$**: Range depends on $\sin(2\theta)$, maximized at $45^\circ$.
+
+---
+
+## 3. Practical Applications
+
+- **Uneven Terrain**: Modify landing conditions for non-zero final height.
+- **Air Resistance**: Add drag force proportional to velocity.
+- **Different Planetary Gravities**: Adjust $g$ to simulate other environments (e.g., Moon, Mars).
+
+---
+
+## 4. Implementation in Python
+
+![alt text](image.png)
+
 ```python
-import numpy as np
-from scipy.optimize import root_scalar
-# 📊 2️⃣ Analysis of the Range – Numerical Investigation
 
-We now numerically investigate how the **range of a projectile** depends on various parameters:
-
-- Launch angle $\theta$
-- Initial velocity $v_0$
-- Gravitational acceleration $g$
-- Launch height $h$ (optional)
-
----
-
-## 🎯 Governing Equation (Ideal Case)
-
-The ideal range equation (no air resistance, flat terrain):
-
-$$R(\theta)=\frac{v_0^2\cdot\sin(2\theta)}{g}$$
-
-- $R$: horizontal range (meters)  
-- $v_0$: initial speed  
-- $\theta$: launch angle  
-- $g$: gravitational acceleration
-
-# 📦 Libraries
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import root_scalar
 
-# 🎯 Ideal range formula
-def ideal_range(v0, g, theta_deg):
-    theta_rad = np.radians(theta_deg)
-    return (v0**2 * np.sin(2 * theta_rad)) / g
+# Parameters
+v0 = 50  # Initial velocity (m/s)
+g = 9.81  # Gravitational acceleration (m/s^2)
+angles = [15, 45, 75]  # Launch angles in degrees
+colors = ['r', 'g', 'b']  # Colors for different angles
 
-# 🧮 Launch height model
-def range_with_height(v0, g, theta_deg, h):
-    theta_rad = np.radians(theta_deg)
-    vy = v0 * np.sin(theta_rad)
-    vx = v0 * np.cos(theta_rad)
+# Time of flight for each angle (when y = 0)
+def time_of_flight(v0, angle, g):
+    angle_rad = np.radians(angle)
+    return (2 * v0 * np.sin(angle_rad)) / g
 
-    def y(t): return h + vy * t - 0.5 * g * t**2
-    sol = root_scalar(y, bracket=[0.01, 100], method='brentq')
-    t_flight = sol.root
-    return vx * t_flight
+# Function to compute x and y positions at time t
+def projectile_motion(v0, angle, g, t):
+    angle_rad = np.radians(angle)
+    x = v0 * np.cos(angle_rad) * t
+    y = v0 * np.sin(angle_rad) * t - 0.5 * g * t**2
+    return x, y
 
-# 🔁 Angle values
-angles = np.arange(0, 91, 1)
+# Time points for the plot (up to time of flight)
+time_max = max(time_of_flight(v0, angle, g) for angle in angles)
+t_values = np.linspace(0, time_max, num=500)
 
-# ✅ Graph 1: Different initial velocities
-g = 9.81
-velocities = [50, 100, 150]
+# Plot projectile motion for each angle
+plt.figure(figsize=(10, 6))
 
-plt.figure(figsize=(10, 5))
-for v0 in velocities:
-    ranges = ideal_range(v0, g, angles)
-    plt.plot(angles, ranges, label=f"v₀ = {v0} m/s")
-plt.title("Range vs Angle – Different Initial Velocities")
-plt.xlabel("Launch Angle (degrees)")
-plt.ylabel("Range (meters)")
-plt.grid(True)
+for angle, color in zip(angles, colors):
+    x_values = []
+    y_values = []
+    
+    for t in t_values:
+        x, y = projectile_motion(v0, angle, g, t)
+        if y < 0:  # Stop the simulation when projectile hits the ground
+            break
+        x_values.append(x)
+        y_values.append(y)
+    
+    plt.plot(x_values, y_values, label=f'Angle = {angle}°', color=color)
+
+# Labels and title
+plt.title('Projectile Motion for Different Angles', fontsize=16)
+plt.xlabel('Horizontal Distance (m)', fontsize=14)
+plt.ylabel('Vertical Distance (m)', fontsize=14)
 plt.legend()
-plt.tight_layout()
+plt.grid(True)
 plt.show()
 
-# ✅ Graph 2: Earth vs Moon
-gravities = [9.81, 1.62]
-v0 = 100
 
-plt.figure(figsize=(10, 5))
-for g_val in gravities:
-    ranges = ideal_range(v0, g_val, angles)
-    label = "Earth" if g_val == 9.81 else "Moon"
-    plt.plot(angles, ranges, label=f"{label} (g = {g_val} m/s²)")
 
-plt.title("Range vs Angle on Earth and Moon")
-plt.xlabel("Launch Angle (degrees)")
-plt.ylabel("Range (meters)")
-plt.grid(True)
-plt.legend()
-plt.tight_layout()
-plt.show()
----
-# ✅ Graph 3: Launch height simulation
-heights = [0, 20, 50]
+```
 
-plt.figure(figsize=(10, 5))
-for h in heights:
-    ranges = [range_with_height(v0, g, angle, h) for angle in angles]
-    plt.plot(angles, ranges, label=f"Height = {h} m")
-plt.title("Range vs Angle – Different Launch Heights")
-plt.xlabel("Launch Angle (degrees)")
-plt.ylabel("Range (meters)")
-plt.grid(True)
-plt.legend()
-plt.tight_layout()
-plt.show()
+# 📚 Problem 2: Investigating the Dynamics of a Forced Damped Pendulum
 
-# Compare different launch heights
-heights = [0, 20, 50]
-v0 = 100
-g = 9.81
+## 1. Theoretical Foundation
 
-plt.figure(figsize=(10, 5))
-for h in heights:
-    ranges = [range_with_height(v0, g, angle, h) for angle in angles]
-    plt.plot(angles, ranges, label=f"Height = {h} m")
+### • Differential Equation
 
-plt.title("Range vs Angle – Different Launch Heights")
-plt.xlabel("Launch Angle (degrees)")
-plt.ylabel("Range (meters)")
-plt.grid(True)
-plt.legend()
-plt.tight_layout()
-plt.show()
-## 🎯 Range vs Angle (v₀ = 50, 100, 150 m/s)
-![Initial Velocities](../images/1.png)
-# 🌍 3️⃣ Practical Applications – Real-World Relevance of Projectile Motion
+The motion of a forced damped pendulum is governed by the equation:
 
-Projectile motion isn't just a classroom example—it’s used in many industries and scientific fields. Below are major real-world applications and extensions of the basic model.
+$$\frac{d^2\theta}{dt^2}+\gamma\frac{d\theta}{dt}+\omega_0^2\sin(\theta)=A\cos(\omega_d t)$$
+
+where:
+
+- $\theta(t)$ is the angular displacement,
+- $\gamma$ is the damping coefficient,
+- $\omega_0=\sqrt{\frac{g}{l}}$ is the natural frequency ($g$ is gravitational acceleration, $l$ is pendulum length),
+- $A$ is the driving force amplitude,
+- $\omega_d$ is the driving force frequency.
 
 ---
 
-## 🏀 Sports
+### • Small-Angle Approximation
 
-Projectile motion explains the flight paths of balls in sports:
+For small angles ($\theta\ll1$ radians), we can approximate:
 
-- **Soccer**: A lofted pass or curved free-kick behaves like a projectile.
-- **Basketball**: A jump shot’s angle and arc can be optimized for scoring.
-- **Golf**: Swing angle and club speed determine the ball’s range and peak height.
+$$\sin(\theta)\approx\theta$$
 
-Idealized range model:
+Thus, the equation becomes linear:
 
-$$R=\frac{v_0^2\cdot\sin(2\theta)}{g}$$
-
-In reality, air resistance and spin modify this path.
+$$\frac{d^2\theta}{dt^2}+\gamma\frac{d\theta}{dt}+\omega_0^2\theta=A\cos(\omega_d t)$$
 
 ---
 
-## 🏗️ Engineering
+### • Resonance Conditions
 
-Engineering applications include:
+Resonance occurs when the system responds most strongly to the driving force. For the small-angle approximation, the resonance condition is:
 
-- **Ballistics**: Predicting cannon, bullet, or missile trajectories.
-- **Robotics**: Calculating parabolic paths for objects thrown by machines.
-- **Fireworks**: Designing precise aerial patterns.
+$$\omega_d\approx\omega_{\text{res}}=\sqrt{\omega_0^2-\frac{\gamma^2}{2}}$$
 
-To model these realistically, you often include:
-- Mass $m$
-- Drag force $F_d$
-- Initial launch height $h$
-- Wind effect
+At resonance, the amplitude of oscillations becomes maximal.
 
 ---
 
-## 🚀 Astrophysics
+## 2. Analysis of Dynamics
 
-In space, projectile motion generalizes to **orbital mechanics**.
+### • Effects of Parameters
 
-- **Rocket launches** start with projectile-like curves.
-- Spacecraft escape velocity depends on trajectory and gravity.
+- **Damping Coefficient $\gamma$**:
+  - High damping suppresses oscillations.
+  - Low damping allows large oscillations and possible chaotic behavior.
 
-Gravitational variation with height is modeled by:
+- **Driving Amplitude $A$**:
+  - Larger $A$ can push the pendulum into chaotic motion.
 
-$$g(h)=\frac{GM}{(R+h)^2}$$
-
-Where:
-- $G$: gravitational constant  
-- $M$: mass of the planet  
-- $R$: planetary radius  
-- $h$: altitude
+- **Driving Frequency $\omega_d$**:
+  - Determines resonance.
+  - Different $\omega_d$ can cause transitions between regular and chaotic behavior.
 
 ---
 
-## 🌄 Uneven Terrain
+### • Transition to Chaos
 
-In realistic environments:
+As parameters (especially $A$ and $\omega_d$) are varied:
 
-- Launch and landing points are at **different heights**
-- Terrain can be **inclined** or **irregular**
+- **Periodic motion** $\rightarrow$ **Quasi-periodic motion** $\rightarrow$ **Chaotic motion**
 
-In such cases, the standard range formula fails. You must solve:
+Analyzed using:
 
-$$y(t)=h+v_0\cdot\sin(\theta)\cdot t-\frac{1}{2}gt^2$$
-
-To find $t$ when $y=y_{\text{target}}$, and then:
-
-$$R=v_0\cdot\cos(\theta)\cdot t_{\text{impact}}$$
-
-Numerical root-finding (e.g., Brent’s method) is used.
+- Phase portraits,
+- Poincaré sections,
+- Bifurcation diagrams.
 
 ---
 
-## 🌬️ Air Resistance
+## 3. Practical Applications
 
-Air resistance adds complexity:
-
-$$F_d=\frac{1}{2}C_d\rho Av^2$$
-
-Where:
-- $C_d$: drag coefficient  
-- $\rho$: air density  
-- $A$: cross-sectional area  
-- $v$: velocity magnitude
-
-Effects:
-- Decreases both range and max height
-- Makes path asymmetric
-
-This requires solving a **system of nonlinear differential equations**.
+- **Energy harvesting devices**: Mechanical oscillators with damping and forcing.
+- **Bridges and structures**: Suspension bridges subject to periodic forces (wind, traffic).
+- **Electrical circuits**: Analogous to RLC circuits with AC driving.
 
 ---
 
-## 🌪️ Wind Effects
-
-Wind contributes a horizontal force component:
-
-- Can **increase or decrease** horizontal speed
-- Can **push laterally**, affecting direction
-
-Wind modeling often uses:
-
-$$F_{\text{wind}}=m\cdot a_{\text{wind}}$$
-
-Or adjusted velocity:
-
-$$v_{\text{eff}}=v_0\pm v_{\text{wind}}$$
-
----
-
-## 🌕 Variable Gravity
-
-Gravity isn’t always constant:
-
-- On the **Moon**, $g=1.62$  
-- On **Mars**, $g=3.71$  
-- High altitudes slightly reduce Earth’s $g$
-
-More accurate gravity model:
-
-$$g(h)=\frac{GM}{(R+h)^2}$$
-
-Used for:
-- Rocket reentry  
-- Lunar landing  
-- Satellite deployment
-
----
-
-## ✅ Summary
-
-Realistic projectile modeling must include:
-
-- Variable launch/landing heights  
-- Gravitational variation  
-- Wind and drag  
-- Mass and surface area of the object  
-
-The basic model is only a starting point—these factors shape **real-world trajectories** 🌐
-## 💻 4️⃣ Implementation – Coding the Projectile Motion
-
-We now translate the theoretical physics into working **Python code** using `numpy` and `matplotlib`.
-
----
-
-## 🎯 Goals
-
-- ✅ Write a function to calculate **range** as a function of angle $\theta$
-- ✅ Plot **range vs angle**
-- ✅ Try different values for:
-  - Initial velocity $v_0$
-  - Gravitational acceleration $g$
-
----
-
-## 🧮 Governing Equation
-
-The **ideal range equation** (no air resistance, flat terrain) is:
-
-$$
-R(\theta) = \frac{v_0^2 \cdot \sin(2\theta)}{g}
-$$
-
-Where:
-- $R$: horizontal range (meters)
-- $v_0$: initial velocity (m/s)
-- $\theta$: angle of projection (degrees)
-- $g$: gravitational acceleration (m/s²)
-
----
-
-## 📦 Required Libraries
+## 4. Implementation in Python
+![alt text](image-1.png)
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import root_scalar
-```
 
----
+# Parameters
+angles = [45]  # Only 45 degrees
+velocities = [30, 40, 50]  # Different initial velocities
+g = 9.81  # Gravitational acceleration (m/s^2)
+colors = ['r', 'g', 'b']  # Colors for different velocities
 
-## 🧠 Function to Compute Ideal Range
+# Time of flight for each velocity (when y = 0)
+def time_of_flight(v0, angle, g):
+    angle_rad = np.radians(angle)
+    return (2 * v0 * np.sin(angle_rad)) / g
 
-```python
-def ideal_range(v0, g, theta_deg):
-    theta_rad = np.radians(theta_deg)
-    return (v0**2 * np.sin(2 * theta_rad)) / g
-```
+# Function to compute x and y positions at time t
+def projectile_motion(v0, angle, g, t):
+    angle_rad = np.radians(angle)
+    x = v0 * np.cos(angle_rad) * t
+    y = v0 * np.sin(angle_rad) * t - 0.5 * g * t**2
+    return x, y
 
----
+# Time points for the plot (up to time of flight)
+time_max = max(time_of_flight(v0, angles[0], g) for v0 in velocities)
+t_values = np.linspace(0, time_max, num=500)
 
-## 📊 Plot – Range vs Launch Angle (Single Setup)
+# Plot projectile motion for each velocity
+plt.figure(figsize=(10, 6))
 
-```python
-v0 = 100  # initial speed in m/s
-g = 9.81  # gravitational acceleration in m/s²
-angles = np.arange(0, 91, 1)  # 0 to 90 degrees
-ranges = ideal_range(v0, g, angles)
+for v0, color in zip(velocities, colors):
+    x_values = []
+    y_values = []
+    
+    for t in t_values:
+        x, y = projectile_motion(v0, angles[0], g, t)
+        if y < 0:  # Stop the simulation when projectile hits the ground
+            break
+        x_values.append(x)
+        y_values.append(y)
+    
+    plt.plot(x_values, y_values, label=f'v₀ = {v0} m/s', color=color)
 
-plt.figure(figsize=(8, 5))
-plt.plot(angles, ranges, color='darkorange')
-plt.title("Range vs Launch Angle (v₀ = 100 m/s)")
-plt.xlabel("Launch Angle (degrees)")
-plt.ylabel("Range (meters)")
-plt.grid(True)
-plt.tight_layout()
-plt.show()
-```
-
----
-
-## 🧪 Experiment: Different Initial Velocities
-
-```python
-velocities = [50, 100, 150]
-
-plt.figure(figsize=(10, 5))
-for v0 in velocities:
-    ranges = ideal_range(v0, g, angles)
-    plt.plot(angles, ranges, label=f"v₀ = {v0} m/s")
-
-plt.title("Range vs Angle – Varying Initial Velocity")
-plt.xlabel("Launch Angle (degrees)")
-plt.ylabel("Range (meters)")
+# Labels and title
+plt.title('Projectile Motion for Different Initial Velocities at 45°', fontsize=16)
+plt.xlabel('Horizontal Distance (m)', fontsize=14)
+plt.ylabel('Vertical Distance (m)', fontsize=14)
 plt.legend()
 plt.grid(True)
-plt.tight_layout()
 plt.show()
-```
 
 ---
-
-## 🌍 Experiment: Different Gravitational Accelerations
-
-```python
-g_values = [9.81, 3.71, 1.62]  # Earth, Mars, Moon
-v0 = 100
-
-plt.figure(figsize=(10, 5))
-for g_val in g_values:
-    label = f"g = {g_val} m/s²"
-    ranges = ideal_range(v0, g_val, angles)
-    plt.plot(angles, ranges, label=label)
-
-plt.title("Range vs Angle – Earth, Mars, Moon")
-plt.xlabel("Launch Angle (degrees)")
-plt.ylabel("Range (meters)")
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-plt.show()
-```
-
----
-
-## ✅ Summary
-
-- The range follows a symmetric curve, peaking at $\theta = 45^\circ$
-- Higher $v_0$ → longer range
-- Lower $g$ → longer flight time → longer range
-- Realistic simulations may also include air drag and launch height (optional)
-
----
-
-🔜 (Optional): Extend this by adding `range_with_height()` and air resistance models.
