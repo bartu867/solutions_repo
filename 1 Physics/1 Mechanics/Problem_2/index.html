@@ -273,6 +273,7 @@
 <p>To explore the dynamics of a forced damped pendulum beyond analytical solutions, we use computational simulations.</p>
 <hr/>
 <h3 id="numerical-modeling">🔹 Numerical Modeling</h3>
+<p><img alt="alt text" src="../image-3.png"/></p>
 <pre><code class="language-python">import numpy as np
 
 # Constants
@@ -338,6 +339,7 @@ def pendulum_deriv(t, y):
 <hr/>
 <h4 id="time-evolution-of-the-pendulum">Time Evolution of the Pendulum</h4>
 <p>We simulate and visualize the angular displacement <span class="arithmatex">\( \theta(t) \)</span> over time using the Runge-Kutta method (<code>solve_ivp</code> from <code>scipy.integrate</code>). This helps us understand how the pendulum responds to different damping and driving conditions.</p>
+<p><img alt="alt text" src="../image-4.png"/></p>
 <pre><code class="language-python">import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
@@ -364,6 +366,7 @@ plt.show()
 </code></pre>
 <h4 id="phase-space-diagram">Phase Space Diagram</h4>
 <p>The phase space plot of angular velocity <span class="arithmatex">\( \omega(t) \)</span> versus angular position <span class="arithmatex">\( \theta(t) \)</span> provides insights into the nature of the motion. It helps distinguish between regular, damped, or chaotic behavior.</p>
+<p><img alt="alt text" src="../image-5.png"/></p>
 <pre><code class="language-python"># Phase space plot: θ vs ω
 theta_vals = sol.y[0]
 omega_vals = sol.y[1]
@@ -432,7 +435,8 @@ plt.show()
 <li>Introducing nonlinear damping (e.g., air resistance proportional to <span class="arithmatex">\( \omega^2 \)</span>)</li>
 <li>Using non-periodic or random external forces</li>
 <li>Exploring bifurcation diagrams and Lyapunov exponents for chaos analysis
-This assignment bridges theoretical physics and computational simulation, enhancing understanding of real-world oscillatory systems and nonlinear dynamics through both mathematical modeling and visualization.</li>
+This assignment bridges theoretical physics and computational simulation, enhancing understanding of real-world oscillatory systems and nonlinear dynamics through both mathematical modeling and visualization.
+```</li>
 </ol>
 </div>
 </div><footer>
