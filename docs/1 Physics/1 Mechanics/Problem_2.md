@@ -95,6 +95,8 @@ To explore the dynamics of a forced damped pendulum beyond analytical solutions,
 
 ### 🔹 Numerical Modeling
 
+![alt text](image-3.png)
+
 ```python
 import numpy as np
 
@@ -170,6 +172,9 @@ def pendulum_deriv(t, y):
 
 We simulate and visualize the angular displacement \( \theta(t) \) over time using the Runge-Kutta method (`solve_ivp` from `scipy.integrate`). This helps us understand how the pendulum responds to different damping and driving conditions.
 
+
+![alt text](image-4.png)
+
 ```python
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
@@ -199,6 +204,10 @@ plt.show()
 #### Phase Space Diagram
 
 The phase space plot of angular velocity \( \omega(t) \) versus angular position \( \theta(t) \) provides insights into the nature of the motion. It helps distinguish between regular, damped, or chaotic behavior.
+
+
+![alt text](image-5.png)
+
 
 ```python
 # Phase space plot: θ vs ω
@@ -266,3 +275,4 @@ plt.show()
    - Using non-periodic or random external forces
    - Exploring bifurcation diagrams and Lyapunov exponents for chaos analysis
 This assignment bridges theoretical physics and computational simulation, enhancing understanding of real-world oscillatory systems and nonlinear dynamics through both mathematical modeling and visualization.
+```
