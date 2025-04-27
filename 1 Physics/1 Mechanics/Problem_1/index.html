@@ -358,49 +358,57 @@ plt.show()
 <hr/>
 <h2 id="4-implementation-in-python_1">4. Implementation in Python</h2>
 <p><img alt="alt text" src="../image-1.png"/></p>
-<p>```python
+<pre><code class="language-python">
 import numpy as np
-import matplotlib.pyplot as plt</p>
-<h1 id="parameters">Parameters</h1>
-<p>angles = [45]  # Only 45 degrees
+import matplotlib.pyplot as plt
+
+# Parameters
+angles = [45]  # Only 45 degrees
 velocities = [30, 40, 50]  # Different initial velocities
 g = 9.81  # Gravitational acceleration (m/s^2)
-colors = ['r', 'g', 'b']  # Colors for different velocities</p>
-<h1 id="time-of-flight-for-each-velocity-when-y-0">Time of flight for each velocity (when y = 0)</h1>
-<p>def time_of_flight(v0, angle, g):
+colors = ['r', 'g', 'b']  # Colors for different velocities
+
+# Time of flight for each velocity (when y = 0)
+def time_of_flight(v0, angle, g):
     angle_rad = np.radians(angle)
-    return (2 * v0 * np.sin(angle_rad)) / g</p>
-<h1 id="function-to-compute-x-and-y-positions-at-time-t">Function to compute x and y positions at time t</h1>
-<p>def projectile_motion(v0, angle, g, t):
+    return (2 * v0 * np.sin(angle_rad)) / g
+
+# Function to compute x and y positions at time t
+def projectile_motion(v0, angle, g, t):
     angle_rad = np.radians(angle)
     x = v0 * np.cos(angle_rad) * t
     y = v0 * np.sin(angle_rad) * t - 0.5 * g * t**2
-    return x, y</p>
-<h1 id="time-points-for-the-plot-up-to-time-of-flight">Time points for the plot (up to time of flight)</h1>
-<p>time_max = max(time_of_flight(v0, angles[0], g) for v0 in velocities)
-t_values = np.linspace(0, time_max, num=500)</p>
-<h1 id="plot-projectile-motion-for-each-velocity">Plot projectile motion for each velocity</h1>
-<p>plt.figure(figsize=(10, 6))</p>
-<p>for v0, color in zip(velocities, colors):
-    x_values = []
-    y_values = []</p>
-<pre><code>for t in t_values:
-    x, y = projectile_motion(v0, angles[0], g, t)
-    if y &lt; 0:  # Stop the simulation when projectile hits the ground
-        break
-    x_values.append(x)
-    y_values.append(y)
+    return x, y
 
-plt.plot(x_values, y_values, label=f'v₀ = {v0} m/s', color=color)
-</code></pre>
-<h1 id="labels-and-title">Labels and title</h1>
-<p>plt.title('Projectile Motion for Different Initial Velocities at 45°', fontsize=16)
+# Time points for the plot (up to time of flight)
+time_max = max(time_of_flight(v0, angles[0], g) for v0 in velocities)
+t_values = np.linspace(0, time_max, num=500)
+
+# Plot projectile motion for each velocity
+plt.figure(figsize=(10, 6))
+
+for v0, color in zip(velocities, colors):
+    x_values = []
+    y_values = []
+
+    for t in t_values:
+        x, y = projectile_motion(v0, angles[0], g, t)
+        if y &lt; 0:  # Stop the simulation when projectile hits the ground
+            break
+        x_values.append(x)
+        y_values.append(y)
+
+    plt.plot(x_values, y_values, label=f'v₀ = {v0} m/s', color=color)
+
+# Labels and title
+plt.title('Projectile Motion for Different Initial Velocities at 45°', fontsize=16)
 plt.xlabel('Horizontal Distance (m)', fontsize=14)
 plt.ylabel('Vertical Distance (m)', fontsize=14)
 plt.legend()
 plt.grid(True)
-plt.show()</p>
-<hr/>
+plt.show()
+
+</code></pre>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
