@@ -229,9 +229,11 @@ Analyzed using:
 ---
 
 ## 4. Implementation in Python
+
 ![alt text](image-1.png)
 
 ```python
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -281,4 +283,4 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
----
+```
