@@ -50,38 +50,6 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">🔬 Physics Assignment – KW1</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#small-angle-approximation">Small-Angle Approximation</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#resonance-and-system-energy">Resonance and System Energy</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#2-analysis-of-dynamics">2. Analysis of Dynamics</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#regular-vs-chaotic-motion">Regular vs Chaotic Motion</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#3-practical-applications">3. Practical Applications</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#engineering-applications">🔹 Engineering Applications</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#electrical-systems">🔹 Electrical Systems</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#biomechanics">🔹 Biomechanics</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#4-implementation">4. Implementation</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#numerical-modeling">🔹 Numerical Modeling</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#5-deliverables">5. Deliverables</a>
-</li>
 </ul>
 </li>
 </ul>
@@ -208,73 +176,219 @@
 <strong>Author:</strong> Bartu867<br/>
 <strong>Date:</strong> March 27, 2025  </p>
 <hr/>
+<h1 id="problem-2-investigating-the-dynamics-of-a-forced-damped-pendulum">📚 Problem 2: Investigating the Dynamics of a Forced Damped Pendulum</h1>
 <h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
-<p>The motion of a forced damped pendulum is described by the nonlinear second-order differential equation:</p>
-<div class="arithmatex">\[
-\frac{d^2 \theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
-\]</div>
-<p>Where:
-- <span class="arithmatex">\( \theta(t) \)</span>: Angular displacement as a function of time<br/>
-- <span class="arithmatex">\( b \)</span>: Damping coefficient<br/>
-- <span class="arithmatex">\( g \)</span>: Gravitational acceleration<br/>
-- <span class="arithmatex">\( L \)</span>: Length of the pendulum<br/>
-- <span class="arithmatex">\( A \)</span>: Amplitude of the driving force<br/>
-- <span class="arithmatex">\( \omega \)</span>: Angular frequency of the external periodic force</p>
+<h3 id="differential-equation">• Differential Equation</h3>
+<p>The motion of a forced damped pendulum is governed by the equation:</p>
+<div class="arithmatex">\[\frac{d^2\theta}{dt^2}+\gamma\frac{d\theta}{dt}+\omega_0^2\sin(\theta)=A\cos(\omega_d t)\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(\theta(t)\)</span> is the angular displacement,</li>
+<li><span class="arithmatex">\(\gamma\)</span> is the damping coefficient,</li>
+<li><span class="arithmatex">\(\omega_0=\sqrt{\frac{g}{l}}\)</span> is the natural frequency (<span class="arithmatex">\(g\)</span> is gravitational acceleration, <span class="arithmatex">\(l\)</span> is pendulum length),</li>
+<li><span class="arithmatex">\(A\)</span> is the driving force amplitude,</li>
+<li><span class="arithmatex">\(\omega_d\)</span> is the driving force frequency.</li>
+</ul>
 <hr/>
-<h3 id="small-angle-approximation">Small-Angle Approximation</h3>
-<p>When the angular displacement is small, we can use the approximation <span class="arithmatex">\( \sin(\theta) \approx \theta \)</span>. This simplifies the equation to:</p>
-<div class="arithmatex">\[
-\frac{d^2 \theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \theta = A \cos(\omega t)
-\]</div>
-<p>This form is linear and easier to analyze using analytical or numerical methods.</p>
+<h3 id="small-angle-approximation">• Small-Angle Approximation</h3>
+<p>For small angles (<span class="arithmatex">\(\theta\ll1\)</span> radians), we can approximate:</p>
+<div class="arithmatex">\[\sin(\theta)\approx\theta\]</div>
+<p>Thus, the equation becomes linear:</p>
+<div class="arithmatex">\[\frac{d^2\theta}{dt^2}+\gamma\frac{d\theta}{dt}+\omega_0^2\theta=A\cos(\omega_d t)\]</div>
 <hr/>
-<h3 id="resonance-and-system-energy">Resonance and System Energy</h3>
-<p>Resonance occurs when the driving frequency <span class="arithmatex">\( \omega \)</span> is close to the system’s natural frequency:</p>
-<div class="arithmatex">\[
-\omega_0 = \sqrt{\frac{g}{L}}
-\]</div>
-<p>At resonance, the energy input from the external force matches the natural oscillation frequency, potentially leading to large amplitude oscillations. Damping reduces these amplitudes by dissipating energy.</p>
+<h3 id="resonance-conditions">• Resonance Conditions</h3>
+<p>Resonance occurs when the system responds most strongly to the driving force. For the small-angle approximation, the resonance condition is:</p>
+<div class="arithmatex">\[\omega_d\approx\omega_{\text{res}}=\sqrt{\omega_0^2-\frac{\gamma^2}{2}}\]</div>
+<p>At resonance, the amplitude of oscillations becomes maximal.</p>
+<hr/>
 <h2 id="2-analysis-of-dynamics">2. Analysis of Dynamics</h2>
-<p>The dynamics of a forced damped pendulum are significantly affected by three key parameters:</p>
+<h3 id="effects-of-parameters">• Effects of Parameters</h3>
 <ul>
-<li><strong>Damping coefficient (b):</strong> Controls how quickly the motion dies out. Higher damping leads to faster energy loss and smaller oscillations.</li>
-<li><strong>Driving amplitude (A):</strong> The strength of the external periodic force. Increasing it can lead to more energetic motion and potentially chaotic behavior.</li>
-<li><strong>Driving frequency (ω):</strong> Determines how often the external force acts. When it matches the natural frequency <span class="arithmatex">\( \omega_0 \)</span>, resonance may occur.</li>
+<li><strong>Damping Coefficient <span class="arithmatex">\(\gamma\)</span></strong>:</li>
+<li>High damping suppresses oscillations.</li>
+<li>
+<p>Low damping allows large oscillations and possible chaotic behavior.</p>
+</li>
+<li>
+<p><strong>Driving Amplitude <span class="arithmatex">\(A\)</span></strong>:</p>
+</li>
+<li>
+<p>Larger <span class="arithmatex">\(A\)</span> can push the pendulum into chaotic motion.</p>
+</li>
+<li>
+<p><strong>Driving Frequency <span class="arithmatex">\(\omega_d\)</span></strong>:</p>
+</li>
+<li>Determines resonance.</li>
+<li>Different <span class="arithmatex">\(\omega_d\)</span> can cause transitions between regular and chaotic behavior.</li>
 </ul>
 <hr/>
-<h3 id="regular-vs-chaotic-motion">Regular vs Chaotic Motion</h3>
-<p>By varying the above parameters, the system can display:</p>
+<h3 id="transition-to-chaos">• Transition to Chaos</h3>
+<p>As parameters (especially <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(\omega_d\)</span>) are varied:</p>
 <ul>
-<li><strong>Regular (Periodic) Motion:</strong> When parameters are moderate, the pendulum swings in a predictable, repeating manner.</li>
-<li><strong>Quasiperiodic Motion:</strong> The motion consists of multiple frequencies that never quite repeat.</li>
-<li><strong>Chaotic Motion:</strong> When certain thresholds are crossed, small changes in initial conditions can lead to drastically different outcomes. This is a hallmark of deterministic chaos.</li>
+<li><strong>Periodic motion</strong> <span class="arithmatex">\(\rightarrow\)</span> <strong>Quasi-periodic motion</strong> <span class="arithmatex">\(\rightarrow\)</span> <strong>Chaotic motion</strong></li>
 </ul>
-<p>The transition from regular to chaotic motion is particularly interesting because it illustrates how nonlinearity and external forcing can result in unpredictable behavior in otherwise deterministic systems.</p>
+<p>Analyzed using:</p>
+<ul>
+<li>Phase portraits,</li>
+<li>Poincaré sections,</li>
+<li>Bifurcation diagrams.</li>
+</ul>
+<hr/>
 <h2 id="3-practical-applications">3. Practical Applications</h2>
-<p>The forced damped pendulum serves as a model for various real-world systems that involve oscillations, damping, and external driving forces. These systems span across different fields:</p>
-<hr/>
-<h3 id="engineering-applications">🔹 Engineering Applications</h3>
 <ul>
-<li><strong>Suspension bridges:</strong> Wind and traffic can act as periodic forces, while damping comes from internal friction and structural design.</li>
-<li><strong>Energy harvesting devices:</strong> Oscillating systems can convert kinetic energy into electrical energy, especially when tuned near resonance.</li>
+<li><strong>Energy harvesting devices</strong>: Mechanical oscillators with damping and forcing.</li>
+<li><strong>Bridges and structures</strong>: Suspension bridges subject to periodic forces (wind, traffic).</li>
+<li><strong>Electrical circuits</strong>: Analogous to RLC circuits with AC driving.</li>
 </ul>
 <hr/>
-<h3 id="electrical-systems">🔹 Electrical Systems</h3>
-<ul>
-<li><strong>Driven RLC Circuits:</strong> The voltage in an RLC (Resistor–Inductor–Capacitor) circuit under an alternating current behaves similarly to a forced damped pendulum. The current corresponds to the angular velocity, and the circuit elements represent damping, mass, and restoring force.</li>
-</ul>
-<hr/>
-<h3 id="biomechanics">🔹 Biomechanics</h3>
-<ul>
-<li><strong>Human gait dynamics:</strong> The swinging motion of limbs can be modeled as a damped driven oscillator, especially when considering walking or running with external rhythmic inputs (e.g., treadmill, exoskeleton support).</li>
-</ul>
-<p>These analogies help in designing control systems, optimizing performance, and understanding failure mechanisms under resonance or chaotic conditions.</p>
-<h2 id="4-implementation">4. Implementation</h2>
-<p>To explore the dynamics of a forced damped pendulum beyond analytical solutions, we use computational simulations.</p>
-<hr/>
-<h3 id="numerical-modeling">🔹 Numerical Modeling</h3>
-<p><img alt="alt text" src="../image-3.png"/></p>
-<pre><code class="language-python">import numpy as np
+<h2 id="4-implementation-in-python">4. Implementation in Python</h2>
+<p><img alt="alt text" src="../image-1.png"/></p>
+<pre><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+angles = [45]  # Only 45 degrees
+velocities = [30, 40, 50]  # Different initial velocities
+g = 9.81  # Gravitational acceleration (m/s^2)
+colors = ['r', 'g', 'b']  # Colors for different velocities
+
+# Time of flight for each velocity (when y = 0)
+def time_of_flight(v0, angle, g):
+    angle_rad = np.radians(angle)
+    return (2 * v0 * np.sin(angle_rad)) / g
+
+# Function to compute x and y positions at time t
+def projectile_motion(v0, angle, g, t):
+    angle_rad = np.radians(angle)
+    x = v0 * np.cos(angle_rad) * t
+    y = v0 * np.sin(angle_rad) * t - 0.5 * g * t**2
+    return x, y
+
+# Time points for the plot (up to time of flight)
+time_max = max(time_of_flight(v0, angles[0], g) for v0 in velocities)
+t_values = np.linspace(0, time_max, num=500)
+
+# Plot projectile motion for each velocity
+plt.figure(figsize=(10, 6))
+
+for v0, color in zip(velocities, colors):
+    x_values = []
+    y_values = []
+
+    for t in t_values:
+        x, y = projectile_motion(v0, angles[0], g, t)
+        if y &lt; 0:  # Stop the simulation when projectile hits the ground
+            break
+        x_values.append(x)
+        y_values.append(y)
+
+    plt.plot(x_values, y_values, label=f'v₀ = {v0} m/s', color=color)
+
+# Labels and title
+plt.title('Projectile Motion for Different Initial Velocities at 45°', fontsize=16)
+plt.xlabel('Horizontal Distance (m)', fontsize=14)
+plt.ylabel('Vertical Distance (m)', fontsize=14)
+plt.legend()
+plt.grid(True)
+plt.show()
+
+## 1. Theoretical Foundation
+
+The motion of a forced damped pendulum is described by the nonlinear second-order differential equation:
+
+$$
+\frac{d^2 \theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
+$$
+
+Where:
+- \( \theta(t) \): Angular displacement as a function of time  
+- \( b \): Damping coefficient  
+- \( g \): Gravitational acceleration  
+- \( L \): Length of the pendulum  
+- \( A \): Amplitude of the driving force  
+- \( \omega \): Angular frequency of the external periodic force
+
+---
+
+### Small-Angle Approximation
+
+When the angular displacement is small, we can use the approximation \( \sin(\theta) \approx \theta \). This simplifies the equation to:
+
+$$
+\frac{d^2 \theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \theta = A \cos(\omega t)
+$$
+
+This form is linear and easier to analyze using analytical or numerical methods.
+
+---
+
+### Resonance and System Energy
+
+Resonance occurs when the driving frequency \( \omega \) is close to the system’s natural frequency:
+
+$$
+\omega_0 = \sqrt{\frac{g}{L}}
+$$
+
+At resonance, the energy input from the external force matches the natural oscillation frequency, potentially leading to large amplitude oscillations. Damping reduces these amplitudes by dissipating energy.
+
+## 2. Analysis of Dynamics
+
+The dynamics of a forced damped pendulum are significantly affected by three key parameters:
+
+- **Damping coefficient (b):** Controls how quickly the motion dies out. Higher damping leads to faster energy loss and smaller oscillations.
+- **Driving amplitude (A):** The strength of the external periodic force. Increasing it can lead to more energetic motion and potentially chaotic behavior.
+- **Driving frequency (ω):** Determines how often the external force acts. When it matches the natural frequency \( \omega_0 \), resonance may occur.
+
+---
+
+### Regular vs Chaotic Motion
+
+By varying the above parameters, the system can display:
+
+- **Regular (Periodic) Motion:** When parameters are moderate, the pendulum swings in a predictable, repeating manner.
+- **Quasiperiodic Motion:** The motion consists of multiple frequencies that never quite repeat.
+- **Chaotic Motion:** When certain thresholds are crossed, small changes in initial conditions can lead to drastically different outcomes. This is a hallmark of deterministic chaos.
+
+The transition from regular to chaotic motion is particularly interesting because it illustrates how nonlinearity and external forcing can result in unpredictable behavior in otherwise deterministic systems.
+
+## 3. Practical Applications
+
+The forced damped pendulum serves as a model for various real-world systems that involve oscillations, damping, and external driving forces. These systems span across different fields:
+
+---
+
+### 🔹 Engineering Applications
+- **Suspension bridges:** Wind and traffic can act as periodic forces, while damping comes from internal friction and structural design.
+- **Energy harvesting devices:** Oscillating systems can convert kinetic energy into electrical energy, especially when tuned near resonance.
+
+---
+
+### 🔹 Electrical Systems
+- **Driven RLC Circuits:** The voltage in an RLC (Resistor–Inductor–Capacitor) circuit under an alternating current behaves similarly to a forced damped pendulum. The current corresponds to the angular velocity, and the circuit elements represent damping, mass, and restoring force.
+
+---
+
+### 🔹 Biomechanics
+- **Human gait dynamics:** The swinging motion of limbs can be modeled as a damped driven oscillator, especially when considering walking or running with external rhythmic inputs (e.g., treadmill, exoskeleton support).
+
+These analogies help in designing control systems, optimizing performance, and understanding failure mechanisms under resonance or chaotic conditions.
+
+## 4. Implementation
+
+To explore the dynamics of a forced damped pendulum beyond analytical solutions, we use computational simulations.
+
+---
+
+### 🔹 Numerical Modeling
+
+
+![alt text](image-3.png)
+
+
+```python
+import numpy as np
 
 # Constants
 g = 9.81
