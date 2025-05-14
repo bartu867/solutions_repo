@@ -102,6 +102,8 @@ velocities = [30, 40, 50]  # Different initial velocities
 g = 9.81  # Gravitational acceleration (m/s^2)
 colors = ['r', 'g', 'b']  # Colors for different velocities
 
+```
+
 # Time of flight for each velocity (when y = 0)
 def time_of_flight(v0, angle, g):
     angle_rad = np.radians(angle)
@@ -134,100 +136,6 @@ for v0, color in zip(velocities, colors):
     
     plt.plot(x_values, y_values, label=f'v₀ = {v0} m/s', color=color)
 
-# Labels and title
-plt.title('Projectile Motion for Different Initial Velocities at 45°', fontsize=16)
-plt.xlabel('Horizontal Distance (m)', fontsize=14)
-plt.ylabel('Vertical Distance (m)', fontsize=14)
-plt.legend()
-plt.grid(True)
-plt.show()
-
-## 1. Theoretical Foundation
-
-The motion of a forced damped pendulum is described by the nonlinear second-order differential equation:
-
-$$
-\frac{d^2 \theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \sin(\theta) = A \cos(\omega t)
-$$
-
-Where:
-- \( \theta(t) \): Angular displacement as a function of time  
-- \( b \): Damping coefficient  
-- \( g \): Gravitational acceleration  
-- \( L \): Length of the pendulum  
-- \( A \): Amplitude of the driving force  
-- \( \omega \): Angular frequency of the external periodic force
-
----
-
-### Small-Angle Approximation
-
-When the angular displacement is small, we can use the approximation \( \sin(\theta) \approx \theta \). This simplifies the equation to:
-
-$$
-\frac{d^2 \theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \theta = A \cos(\omega t)
-$$
-
-This form is linear and easier to analyze using analytical or numerical methods.
-
----
-
-### Resonance and System Energy
-
-Resonance occurs when the driving frequency \( \omega \) is close to the system’s natural frequency:
-
-$$
-\omega_0 = \sqrt{\frac{g}{L}}
-$$
-
-At resonance, the energy input from the external force matches the natural oscillation frequency, potentially leading to large amplitude oscillations. Damping reduces these amplitudes by dissipating energy.
-
-## 2. Analysis of Dynamics
-
-The dynamics of a forced damped pendulum are significantly affected by three key parameters:
-
-- **Damping coefficient (b):** Controls how quickly the motion dies out. Higher damping leads to faster energy loss and smaller oscillations.
-- **Driving amplitude (A):** The strength of the external periodic force. Increasing it can lead to more energetic motion and potentially chaotic behavior.
-- **Driving frequency (ω):** Determines how often the external force acts. When it matches the natural frequency \( \omega_0 \), resonance may occur.
-
----
-
-### Regular vs Chaotic Motion
-
-By varying the above parameters, the system can display:
-
-- **Regular (Periodic) Motion:** When parameters are moderate, the pendulum swings in a predictable, repeating manner.
-- **Quasiperiodic Motion:** The motion consists of multiple frequencies that never quite repeat.
-- **Chaotic Motion:** When certain thresholds are crossed, small changes in initial conditions can lead to drastically different outcomes. This is a hallmark of deterministic chaos.
-
-The transition from regular to chaotic motion is particularly interesting because it illustrates how nonlinearity and external forcing can result in unpredictable behavior in otherwise deterministic systems.
-
-## 3. Practical Applications
-
-The forced damped pendulum serves as a model for various real-world systems that involve oscillations, damping, and external driving forces. These systems span across different fields:
-
----
-
-### 🔹 Engineering Applications
-- **Suspension bridges:** Wind and traffic can act as periodic forces, while damping comes from internal friction and structural design.
-- **Energy harvesting devices:** Oscillating systems can convert kinetic energy into electrical energy, especially when tuned near resonance.
-
----
-
-### 🔹 Electrical Systems
-- **Driven RLC Circuits:** The voltage in an RLC (Resistor–Inductor–Capacitor) circuit under an alternating current behaves similarly to a forced damped pendulum. The current corresponds to the angular velocity, and the circuit elements represent damping, mass, and restoring force.
-
----
-
-### 🔹 Biomechanics
-- **Human gait dynamics:** The swinging motion of limbs can be modeled as a damped driven oscillator, especially when considering walking or running with external rhythmic inputs (e.g., treadmill, exoskeleton support).
-
-These analogies help in designing control systems, optimizing performance, and understanding failure mechanisms under resonance or chaotic conditions.
-
-## 4. Implementation
-
-To explore the dynamics of a forced damped pendulum beyond analytical solutions, we use computational simulations.
-
 ---
 
 ### 🔹 Numerical Modeling
@@ -256,6 +164,8 @@ def pendulum_deriv(t, y):
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
+```
+
 # Time settings
 t_span = (0, 50)
 t_eval = np.linspace(*t_span, 1000)
@@ -265,6 +175,8 @@ y0 = [0.2, 0.0]
 
 # Solve using Runge-Kutta
 sol = solve_ivp(pendulum_deriv, t_span, y0, t_eval=t_eval, method='RK45')
+
+```
 
 # Plot θ vs time
 plt.figure(figsize=(10, 4))
@@ -318,6 +230,8 @@ We simulate and visualize the angular displacement \( \theta(t) \) over time usi
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
+```
+
 # Time settings
 t_span = (0, 50)
 t_eval = np.linspace(*t_span, 1000)
@@ -327,6 +241,8 @@ y0 = [0.2, 0.0]
 
 # Solve using Runge-Kutta
 sol = solve_ivp(pendulum_deriv, t_span, y0, t_eval=t_eval, method='RK45')
+
+```
 
 # Plot θ vs time
 plt.figure(figsize=(10, 4))
@@ -338,6 +254,7 @@ plt.grid(True)
 plt.legend()
 plt.tight_layout()
 plt.show()
+
 ```
 
 #### Phase Space Diagram
@@ -361,6 +278,7 @@ plt.ylabel('ω [rad/s]')
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+
 ```
 
 #### Poincaré Section
@@ -381,6 +299,8 @@ interp_theta = interp1d(sol.t, sol.y[0])
 interp_omega = interp1d(sol.t, sol.y[1])
 theta_p = interp_theta(poincare_t)
 omega_p = interp_omega(poincare_t)
+
+```
 
 # Plot Poincaré section
 plt.figure(figsize=(6, 6))
