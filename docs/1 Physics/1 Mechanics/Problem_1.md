@@ -97,11 +97,15 @@ $$R=\frac{v_0^2\sin(2\theta)}{g}$$
 import numpy as np
 import matplotlib.pyplot as plt
 
+```
+
 # Parameters
 v0 = 50  # Initial velocity (m/s)
 g = 9.81  # Gravitational acceleration (m/s^2)
 angles = [15, 45, 75]  # Launch angles in degrees
 colors = ['r', 'g', 'b']  # Colors for different angles
+
+```
 
 # Time of flight for each angle (when y = 0)
 def time_of_flight(v0, angle, g):
@@ -114,6 +118,8 @@ def projectile_motion(v0, angle, g, t):
     x = v0 * np.cos(angle_rad) * t
     y = v0 * np.sin(angle_rad) * t - 0.5 * g * t**2
     return x, y
+
+```
 
 # Time points for the plot (up to time of flight)
 time_max = max(time_of_flight(v0, angle, g) for angle in angles)
