@@ -172,6 +172,261 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="wave-interference-patterns-on-a-water-surface"><strong>Wave Interference Patterns on a Water Surface</strong></h1>
+<h2 id="1-selecting-a-regular-polygon"><strong>1. Selecting a Regular Polygon</strong></h2>
+<h3 id="introduction"><strong>Introduction</strong></h3>
+<p>In wave physics, interference occurs when two or more waves overlap, resulting in regions of constructive and destructive interference. To systematically analyze these patterns, we consider multiple point wave sources positioned at the vertices of a <strong>regular polygon</strong>. This setup allows us to explore how symmetric arrangements of sources influence the resulting wave field.</p>
+<h3 id="mathematical-definition-of-a-regular-polygon"><strong>Mathematical Definition of a Regular Polygon</strong></h3>
+<p>A <strong>regular polygon</strong> with <span class="arithmatex">\(N\)</span> sides is a closed geometric figure where all sides are of equal length and all internal angles are equal. The vertices of such a polygon, when inscribed in a circle of radius <span class="arithmatex">\(R\)</span>, can be determined using trigonometric functions.</p>
+<p>For a polygon centered at the origin, the coordinates of the <span class="arithmatex">\(i\)</span>-th vertex are given by:</p>
+<div class="arithmatex">\[x_i=R\cos\left(\frac{2\pi i}{N}\right),\quad y_i=R\sin\left(\frac{2\pi i}{N}\right),\quad i=0,1,2,\dots,N-1\]</div>
+<p>where:
+- <span class="arithmatex">\(R\)</span> is the circumradius of the polygon,</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(N\)</span> is the number of sides (hence, the number of sources),</p>
+</li>
+<li>
+<p><span class="arithmatex">\(i\)</span> indexes the vertices counterclockwise starting from an initial reference point.</p>
+</li>
+</ul>
+<h3 id="choosing-the-regular-polygon"><strong>Choosing the Regular Polygon</strong></h3>
+<p>The choice of <span class="arithmatex">\(N\)</span> influences the symmetry of the interference pattern. Common selections include:</p>
+<ul>
+<li>
+<p><strong>Equilateral Triangle (<span class="arithmatex">\(N=3\)</span>)</strong>: Yields a threefold symmetric interference pattern.</p>
+</li>
+<li>
+<p><strong>Square (<span class="arithmatex">\(N=4\)</span>)</strong>: Produces a fourfold symmetric pattern with central and diagonal wave reinforcements.</p>
+</li>
+<li>
+<p><strong>Pentagon (<span class="arithmatex">\(N=5\)</span>)</strong>: Generates more complex wave interactions with fivefold rotational symmetry.</p>
+</li>
+<li>
+<p><strong>Hexagon (<span class="arithmatex">\(N=6\)</span>)</strong>: Approximates circular symmetry while retaining noticeable interference fringes.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="2-positioning-the-sources"><strong>2. Positioning the Sources</strong></h2>
+<h3 id="determining-the-coordinates-of-the-polygonal-vertices"><strong>Determining the Coordinates of the Polygonal Vertices</strong></h3>
+<p>To systematically analyze interference, we must precisely position the wave sources at the vertices of a chosen regular polygon. Given a polygon inscribed within a circle of radius <span class="arithmatex">\(R\)</span>, the coordinates of its vertices are:</p>
+<div class="arithmatex">\[x_i=R\cos\left(\frac{2\pi i}{N}\right),\quad y_i=R\sin\left(\frac{2\pi i}{N}\right),\quad i=0,1,2,\dots,N-1\]</div>
+<h3 id="assigning-each-vertex-as-a-wave-source"><strong>Assigning Each Vertex as a Wave Source</strong></h3>
+<p>Each vertex serves as a point source emitting circular waves with identical amplitude and frequency. The total wave field results from the superposition of these waves.</p>
+<p>Each wave propagates outward from its source with a displacement function:</p>
+<div class="arithmatex">\[\eta_i(x,y,t)=\frac{A}{r_i}\cos\left(kr_i-\omega t+\phi_i\right)\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(r_i=\sqrt{(x-x_i)^2+(y-y_i)^2}\)</span> is the radial distance to the observation point.</li>
+</ul>
+<hr/>
+<h2 id="3-defining-the-wave-equations"><strong>3. Defining the Wave Equations</strong></h2>
+<h3 id="mathematical-representation-of-wave-motion"><strong>Mathematical Representation of Wave Motion</strong></h3>
+<p>Each wave emitted from a point source follows the equation:</p>
+<div class="arithmatex">\[\eta_i(x,y,t)=\frac{A}{r_i}\cos\left(kr_i-\omega t+\phi_i\right)\]</div>
+<p>where:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(A\)</span> is the amplitude,</p>
+</li>
+<li>
+<p><span class="arithmatex">\(k=\frac{2\pi}{\lambda}\)</span> is the wave number,</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\omega=2\pi f\)</span> is the angular frequency,</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\phi_i\)</span> is the phase,</p>
+</li>
+<li>
+<p><span class="arithmatex">\(r_i\)</span> is the radial distance from the <span class="arithmatex">\(i\)</span>-th source.</p>
+</li>
+</ul>
+<h3 id="uniformity-assumptions"><strong>Uniformity Assumptions</strong></h3>
+<p>To maintain coherence in interference analysis, we assume:</p>
+<ul>
+<li>
+<p>All waves have <strong>the same amplitude</strong>, i.e., <span class="arithmatex">\(A\)</span> is constant.</p>
+</li>
+<li>
+<p>All waves have <strong>the same wavelength</strong> <span class="arithmatex">\(\lambda\)</span> and frequency <span class="arithmatex">\(f\)</span>.</p>
+</li>
+<li>
+<p>Initial phase differences between sources remain fixed.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="4-applying-the-superposition-principle"><strong>4. Applying the Superposition Principle</strong></h2>
+<h3 id="summation-of-wave-displacements"><strong>Summation of Wave Displacements</strong></h3>
+<p>According to the principle of superposition, the resultant displacement at any point on the water surface is the sum of individual wave contributions:</p>
+<div class="arithmatex">\[\eta_{\text{sum}}(x,y,t)=\sum_{i=1}^{N}\eta_i(x,y,t)\]</div>
+<p>This summation captures constructive and destructive interference effects.</p>
+<h3 id="constructive-and-destructive-interference-conditions"><strong>Constructive and Destructive Interference Conditions</strong></h3>
+<ul>
+<li><strong>Constructive interference:</strong> Occurs when phase differences satisfy:</li>
+</ul>
+<div class="arithmatex">\[kr_i-\omega t+\phi_i=2m\pi,\quad m\in\mathbb{Z}\]</div>
+<ul>
+<li><strong>Destructive interference:</strong> Occurs when phase differences satisfy:</li>
+</ul>
+<div class="arithmatex">\[kr_i-\omega t+\phi_i=(2m+1)\pi,\quad m\in\mathbb{Z}\]</div>
+<hr/>
+<h2 id="5-analyzing-the-interference-patterns"><strong>5. Analyzing the Interference Patterns</strong></h2>
+<h3 id="identifying-interference-zones"><strong>Identifying Interference Zones</strong></h3>
+<p>By computing <span class="arithmatex">\(\eta_{\text{sum}}(x,y,t)\)</span>, we can classify different regions:
+- <strong>High amplitude zones:</strong> Result from constructive interference.
+- <strong>Low amplitude zones:</strong> Result from destructive interference.</p>
+<h3 id="temporal-evolution-of-the-pattern"><strong>Temporal Evolution of the Pattern</strong></h3>
+<p>As time progresses, the interference pattern evolves dynamically, influenced by wave frequency and phase differences.</p>
+<hr/>
+<h2 id="6-visualization-and-simulation"><strong>6. Visualization and Simulation</strong></h2>
+<h3 id="graphical-representations"><strong>Graphical Representations</strong></h3>
+<p>Using numerical simulations, we generate:
+- <strong>Static interference maps</strong> for different polygons.
+- <strong>Time-evolving wave fields</strong> to observe changing interference dynamics.</p>
+<h3 id="python-implementation"><strong>Python Implementation</strong></h3>
+<p>A Python script implementing the above equations will:
+1. Define wave parameters.
+2. Compute the interference pattern on a 2D grid.
+3. Visualize results using heatmaps and contour plots.</p>
+<p>The next step is to implement and analyze these interference patterns computationally.</p>
+<h1 id="pythonmodels">Python/Models</h1>
+<p><img alt="alt text" src="image-5.png"/></p>
+<p><img alt="alt text" src="image-6.png"/></p>
+<p><img alt="alt text" src="image-7.png"/></p>
+<p><img alt="alt text" src="interference_5_sources-1-1.gif"/></p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+</code></pre>
+<h1 id="define-the-grid">Define the grid</h1>
+<p>x = np.linspace(-10, 10, 500)
+y = np.linspace(-10, 10, 500)
+X, Y = np.meshgrid(x, y)</p>
+<h1 id="define-wave-parameters">Define wave parameters</h1>
+<p>wavelength = 2  # Wavelength
+k = 2 * np.pi / wavelength  # Wave number
+omega = 2 * np.pi / 5       # Angular frequency
+t = 0  # Static time for snapshot (can be animated)</p>
+<h1 id="function-to-create-a-wave-from-a-single-source">Function to create a wave from a single source</h1>
+<p>def single_wave(X, Y, source):
+    r = np.sqrt((X - source[0])<strong>2 + (Y - source[1])</strong>2)
+    return np.sin(k * r - omega * t)</p>
+<h1 id="function-to-sum-multiple-waves-from-different-sources">Function to sum multiple waves from different sources</h1>
+<p>def multiple_waves(X, Y, sources):
+    Z = np.zeros_like(X)
+    for source in sources:
+        Z += single_wave(X, Y, source)
+    return Z</p>
+<pre><code># Sources definitions
+
+sources_1 = [(0, 0)]
+
+distance = 5
+sources_4 = [(-distance, -distance), (-distance, distance), (distance, -distance), (distance, distance)]
+
+radius = 5
+angles = np.linspace(0, 2 * np.pi, 6)[:-1]
+sources_5 = [(radius * np.cos(a), radius * np.sin(a)) for a in angles]
+
+</code></pre>
+<h1 id="plotting-function">Plotting Function</h1>
+<p>def plot_wave(Z, title):
+    fig, axs = plt.subplots(1, 2, figsize=(18, 8))  # BIGGER SIZE</p>
+<pre><code># Heatmap
+im = axs[0].imshow(Z, extent=[-10, 10, -10, 10], origin='lower', cmap='viridis')
+axs[0].set_title(f"{title} - Heatmap", fontsize=18)
+axs[0].set_xlabel('X axis', fontsize=14)
+axs[0].set_ylabel('Y axis', fontsize=14)
+plt.colorbar(im, ax=axs[0])
+
+# 3D Surface
+ax = fig.add_subplot(1, 2, 2, projection='3d')
+ax.plot_surface(X, Y, Z, cmap='viridis', edgecolor='none')
+ax.set_title(f"{title} - 3D Surface", fontsize=18)
+ax.set_xlabel('X axis', fontsize=14)
+ax.set_ylabel('Y axis', fontsize=14)
+ax.set_zlabel('Amplitude', fontsize=14)
+
+plt.tight_layout()
+plt.show()
+</code></pre>
+<pre><code>
+# Calculate and plot all
+
+
+Z1 = multiple_waves(X, Y, sources_1)
+Z4 = multiple_waves(X, Y, sources_4)
+Z5 = multiple_waves(X, Y, sources_5)
+
+plot_wave(Z1, "Single Source")
+plot_wave(Z4, "Four Sources (Square)")
+plot_wave(Z5, "Five Sources (Pentagon)")
+
+</code></pre>
+<h3 id="gif-code">GIF Code</h3>
+<p><img alt="alt text" src="interference_5_sources-1.gif"/></p>
+<pre><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+import imageio
+
+# Define the grid
+x = np.linspace(-10, 10, 500)
+y = np.linspace(-10, 10, 500)
+X, Y = np.meshgrid(x, y)
+
+</code></pre>
+<h1 id="define-wave-parameters_1">Define wave parameters</h1>
+<p>wavelength = 2  # Wavelength
+k = 2 * np.pi / wavelength  # Wave number
+omega = 2 * np.pi / 5       # Angular frequency</p>
+<h1 id="function-to-create-a-wave-from-a-single-source_1">Function to create a wave from a single source</h1>
+<p>def single_wave(X, Y, source, t):
+    r = np.sqrt((X - source[0])<strong>2 + (Y - source[1])</strong>2)
+    return np.sin(k * r - omega * t)</p>
+<h1 id="function-to-sum-multiple-waves-from-different-sources_1">Function to sum multiple waves from different sources</h1>
+<p>def multiple_waves(X, Y, sources, t):
+    Z = np.zeros_like(X)
+    for source in sources:
+        Z += single_wave(X, Y, source, t)
+    return Z</p>
+<h1 id="sources-definitions-for-5-sources-in-a-pentagon">Sources definitions for 5 sources (in a pentagon)</h1>
+<p>radius = 5
+angles = np.linspace(0, 2 * np.pi, 6)[:-1]
+sources_5 = [(radius * np.cos(a), radius * np.sin(a)) for a in angles]</p>
+<h1 id="create-gif-frames">Create GIF frames</h1>
+<p>num_frames = 100
+gif_frames = []</p>
+<h1 id="create-the-gif-frames-for-time-from-0-to-2pi">Create the GIF frames for time from 0 to 2*pi</h1>
+<p>for i in range(num_frames):
+    t = i * 2 * np.pi / num_frames  # Varying time
+    Z = multiple_waves(X, Y, sources_5, t)</p>
+<pre><code># Plotting the frame
+fig, ax = plt.subplots(figsize=(8, 6))
+im = ax.imshow(Z, extent=[-10, 10, -10, 10], origin='lower', cmap='viridis', animated=True)
+ax.set_title(f"Interference of 5 Sources - Time = {t:.2f}", fontsize=16)
+ax.set_xlabel('X axis', fontsize=14)
+ax.set_ylabel('Y axis', fontsize=14)
+plt.colorbar(im, ax=ax)
+
+# Ensure proper rendering
+plt.tight_layout()
+
+# Draw the figure to make sure it's rendered correctly before saving
+fig.canvas.draw()
+
+# Convert to image and append to GIF frames
+gif_frames.append(np.array(fig.canvas.renderer.buffer_rgba()))
+
+# Close the plot to avoid memory issues in the loop
+plt.close(fig)
+</code></pre>
+<h1 id="create-and-save-the-gif">Create and save the GIF</h1>
+<p>imageio.mimsave('interference_5_sources.gif', gif_frames, duration=0.1)</p>
+<p>print("GIF saved as 'interference_5_sources.gif'")
+```</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
