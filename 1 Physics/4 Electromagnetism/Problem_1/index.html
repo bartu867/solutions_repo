@@ -224,11 +224,10 @@ from mpl_toolkits.mplot3d import Axes3D
 <h1 id="lorentz-force">Lorentz force</h1>
 <p>def lorentz_force(q, v, E, B):
     return q * (E + np.cross(v, B))</p>
-<pre><code># 4th-order Runge-Kutta
-def rk4_step(pos, vel, dt, q, m, E, B):
+<h1 id="4th-order-runge-kutta">4th-order Runge-Kutta</h1>
+<p>def rk4_step(pos, vel, dt, q, m, E, B):
     def acceleration(v):
-        return lorentz_force(q, v, E, B) / m
-</code></pre>
+        return lorentz_force(q, v, E, B) / m</p>
 <pre><code>k1v = dt * acceleration(vel)
 k1x = dt * vel
 
@@ -246,19 +245,17 @@ new_pos = pos + (k1x + 2*k2x + 2*k3x + k4x) / 6
 
 return new_pos, new_vel
 </code></pre>
-<pre><code>
-# Simulation function
-def simulate_motion(E, B, q, m, v0, r0, dt=1e-6, steps=5000):
+<h1 id="simulation-function">Simulation function</h1>
+<p>def simulate_motion(E, B, q, m, v0, r0, dt=1e-6, steps=5000):
     positions = [r0]
     velocities = [v0]
-    pos, vel = r0, v0
+    pos, vel = r0, v0</p>
+<pre><code>for _ in range(steps):
+    pos, vel = rk4_step(pos, vel, dt, q, m, E, B)
+    positions.append(pos)
+    velocities.append(vel)
 
-    for _ in range(steps):
-        pos, vel = rk4_step(pos, vel, dt, q, m, E, B)
-        positions.append(pos)
-        velocities.append(vel)
-
-    return np.array(positions), np.array(velocities)
+return np.array(positions), np.array(velocities)
 </code></pre>
 <h1 id="3d-plotting">3D Plotting</h1>
 <p>def plot_trajectory(positions, title="Trajectory"):
@@ -271,43 +268,36 @@ def simulate_motion(E, B, q, m, v0, r0, dt=1e-6, steps=5000):
     ax.set_zlabel('z (m)')
     plt.tight_layout()
     plt.show()</p>
-<pre><code># Simulation Setup
-
-q = 1.0         # Charge in Coulombs
+<h1 id="simulation-setup">Simulation Setup</h1>
+<p>q = 1.0         # Charge in Coulombs
 m = 1.001       # Mass in kg (1 gram)
 v0 = np.array([1e5, 0.0, 0.0])  # Initial velocity in m/s
 r0 = np.array([0.0, 0.0, 0.0])  # Initial position
 dt = 1e-6       # Time step (s)
-steps = 5000    # Number of steps
-</code></pre>
+steps = 5000    # Number of steps</p>
 <h1 id="scenario-1-circular-motion-b-only">Scenario 1: Circular motion (B only)</h1>
 <p>E1 = np.array([0.0, 0.0, 0.0])       # No electric field
 B1 = np.array([0.0, 0.0, 10.0])      # 10 Tesla magnetic field
 pos1, _ = simulate_motion(E1, B1, q, m, v0, r0, dt, steps)
 plot_trajectory(pos1, title="Circular Motion in B Field")</p>
-<pre><code>
-# Scenario 2: Helical motion (E and B parallel)
-
-E2 = np.array([0.0, 0.0, 1e5])       # Electric field along z
+<h1 id="scenario-2-helical-motion-e-and-b-parallel">Scenario 2: Helical motion (E and B parallel)</h1>
+<p>E2 = np.array([0.0, 0.0, 1e5])       # Electric field along z
 B2 = np.array([0.0, 0.0, 10.0])      # Magnetic field along z
 pos2, _ = simulate_motion(E2, B2, q, m, v0, r0, dt, steps)
-plot_trajectory(pos2, title="Helical Motion in E || B")
-
-</code></pre>
+plot_trajectory(pos2, title="Helical Motion in E || B")</p>
 <h1 id="scenario-3-drift-e-b">Scenario 3: Drift (E ⊥ B)</h1>
 <p>E3 = np.array([0.0, 1e5, 0.0])       # Electric field along y
 B3 = np.array([0.0, 0.0, 10.0])      # Magnetic field along z
 pos3, _ = simulate_motion(E3, B3, q, m, v0, r0, dt, steps)
 plot_trajectory(pos3, title="Drift Motion in E ⊥ B")</p>
-<pre><code>---
-
-## 5. Results and Visualizations
-
-### Case 1: Circular Motion
-- $\vec{E} = 0$  
-- $\vec{B} = [0, 0, B]$  
-- Initial velocity perpendicular to $\vec{B}$  
-</code></pre>
+<hr/>
+<h2 id="5-results-and-visualizations">5. Results and Visualizations</h2>
+<h3 id="case-1-circular-motion">Case 1: Circular Motion</h3>
+<ul>
+<li><span class="arithmatex">\(\vec{E} = 0\)</span> </li>
+<li><span class="arithmatex">\(\vec{B} = [0, 0, B]\)</span> </li>
+<li>Initial velocity perpendicular to <span class="arithmatex">\(\vec{B}\)</span> </li>
+</ul>
 <p><strong>Expected motion:</strong> circular  </p>
 <p>From theory:</p>
 <div class="arithmatex">\[
@@ -321,8 +311,8 @@ r_L = \frac{mv}{|q||B|} \quad \text{(Larmor radius)}
 <li><span class="arithmatex">\(\vec{B} = [0, 0, B]\)</span> </li>
 </ul>
 <p><strong>Expected motion:</strong> helix, as velocity has components both parallel and perpendicular to <span class="arithmatex">\(\vec{B}\)</span>.  </p>
-<p><strong>Plot:</strong> [3D helical path]</p>
-<hr/>
+<p><strong>Plot:</strong> </p>
+<p><img alt="alt text" src="../image-2.png"/></p>
 <h3 id="case-3-crossed-fields-drift">Case 3: Crossed Fields (Drift)</h3>
 <ul>
 <li><span class="arithmatex">\(\vec{E} = [0, E, 0]\)</span> </li>
@@ -437,7 +427,7 @@ plt.show()
 <p>Helps visualize how different field setups affect particle motion — such as circular, helical, or drifting paths.</p>
 <hr/>
 <h2 id="link-to-the-interactive-simulation">Link to the interactive simulation:</h2>
-<p><a href="https://colab.research.google.com/drive/17Ii1vDdz-1lLsmpS8hFB4P0gQn_fb6nJ#scrollTo=kaCkWEGUDROL&amp;line=78&amp;uniqifier=1">Link</a></p>
+<p>https://colab.research.google.com/#scrollTo=iYl2lqM_x6wC&amp;uniqifier=4</p>
 <h2 id="6-real-world-relevance">6. Real-World Relevance</h2>
 <ul>
 <li>Cyclotrons exploit circular motion in magnetic fields.  </li>
