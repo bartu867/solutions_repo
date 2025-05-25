@@ -216,7 +216,6 @@ G1.add_edge('B', 'C', resistance=10)
 result1 = "Equivalent Resistance: 5Ω + 10Ω = 15Ω"
 draw_circuit_with_result(G1, "Example 1: Simple Series", result1)
 
-```
 G2 = nx.MultiGraph()
 G2.add_edge('A', 'B', resistance=10)
 G2.add_edge('A', 'B', resistance=20)

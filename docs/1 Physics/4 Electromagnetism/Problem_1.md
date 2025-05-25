@@ -74,12 +74,12 @@ from mpl_toolkits.mplot3d import Axes3D
 # Lorentz force
 def lorentz_force(q, v, E, B):
     return q * (E + np.cross(v, B))
-```
+
 # 4th-order Runge-Kutta
 def rk4_step(pos, vel, dt, q, m, E, B):
     def acceleration(v):
         return lorentz_force(q, v, E, B) / m
-```
+
     k1v = dt * acceleration(vel)
     k1x = dt * vel
 
@@ -96,7 +96,6 @@ def rk4_step(pos, vel, dt, q, m, E, B):
     new_pos = pos + (k1x + 2*k2x + 2*k3x + k4x) / 6
 
     return new_pos, new_vel
-```
 
 # Simulation function
 def simulate_motion(E, B, q, m, v0, r0, dt=1e-6, steps=5000):
@@ -110,7 +109,7 @@ def simulate_motion(E, B, q, m, v0, r0, dt=1e-6, steps=5000):
         velocities.append(vel)
 
     return np.array(positions), np.array(velocities)
-```
+
 # 3D Plotting
 def plot_trajectory(positions, title="Trajectory"):
     fig = plt.figure(figsize=(8, 6))
@@ -122,7 +121,7 @@ def plot_trajectory(positions, title="Trajectory"):
     ax.set_zlabel('z (m)')
     plt.tight_layout()
     plt.show()
-```
+
 # Simulation Setup
 
 q = 1.0         # Charge in Coulombs
@@ -131,7 +130,7 @@ v0 = np.array([1e5, 0.0, 0.0])  # Initial velocity in m/s
 r0 = np.array([0.0, 0.0, 0.0])  # Initial position
 dt = 1e-6       # Time step (s)
 steps = 5000    # Number of steps
-```
+
 # Scenario 1: Circular motion (B only)
 
 E1 = np.array([0.0, 0.0, 0.0])       # No electric field
@@ -139,7 +138,6 @@ B1 = np.array([0.0, 0.0, 10.0])      # 10 Tesla magnetic field
 pos1, _ = simulate_motion(E1, B1, q, m, v0, r0, dt, steps)
 plot_trajectory(pos1, title="Circular Motion in B Field")
 
-```
 
 # Scenario 2: Helical motion (E and B parallel)
 
@@ -148,14 +146,13 @@ B2 = np.array([0.0, 0.0, 10.0])      # Magnetic field along z
 pos2, _ = simulate_motion(E2, B2, q, m, v0, r0, dt, steps)
 plot_trajectory(pos2, title="Helical Motion in E || B")
 
-```
 # Scenario 3: Drift (E ⊥ B)
 
 E3 = np.array([0.0, 1e5, 0.0])       # Electric field along y
 B3 = np.array([0.0, 0.0, 10.0])      # Magnetic field along z
 pos3, _ = simulate_motion(E3, B3, q, m, v0, r0, dt, steps)
 plot_trajectory(pos3, title="Drift Motion in E ⊥ B")
-```
+
 ---
 
 ## 5. Results and Visualizations
@@ -164,7 +161,7 @@ plot_trajectory(pos3, title="Drift Motion in E ⊥ B")
 - $\vec{E} = 0$  
 - $\vec{B} = [0, 0, B]$  
 - Initial velocity perpendicular to $\vec{B}$  
-```
+
 **Expected motion:** circular  
 
 From theory:
@@ -183,9 +180,9 @@ $$
 
 **Expected motion:** helix, as velocity has components both parallel and perpendicular to $\vec{B}$.  
 
-**Plot:** [3D helical path]
+**Plot:** 
 
----
+![alt text](image-2.png)
 
 ### Case 3: Crossed Fields (Drift)
 - $\vec{E} = [0, E, 0]$  
@@ -317,7 +314,7 @@ Helps visualize how different field setups affect particle motion — such as ci
 ## Link to the interactive simulation:
 
 
-[Link](https://colab.research.google.com/drive/17Ii1vDdz-1lLsmpS8hFB4P0gQn_fb6nJ#scrollTo=kaCkWEGUDROL&line=78&uniqifier=1)
+https://colab.research.google.com/#scrollTo=iYl2lqM_x6wC&uniqifier=4
 
 
 ## 6. Real-World Relevance

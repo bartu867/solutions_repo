@@ -130,22 +130,14 @@ A Python script implementing the above equations will:
 The next step is to implement and analyze these interference patterns computationally.
 
 # Python/Models
-![alt text](image-5.png)
-
-![alt text](image-6.png)
-
-
-![alt text](image-7.png)
-
-
-![alt text](interference_5_sources-1-1.gif)
+![alt text](image.png)
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-```
+
 # Define the grid
 x = np.linspace(-10, 10, 500)
 y = np.linspace(-10, 10, 500)
@@ -169,7 +161,7 @@ def multiple_waves(X, Y, sources):
         Z += single_wave(X, Y, source)
     return Z
 
-```
+
 # Sources definitions
 
 sources_1 = [(0, 0)]
@@ -181,7 +173,7 @@ radius = 5
 angles = np.linspace(0, 2 * np.pi, 6)[:-1]
 sources_5 = [(radius * np.cos(a), radius * np.sin(a)) for a in angles]
 
-```
+
 # Plotting Function
 
 def plot_wave(Z, title):
@@ -204,7 +196,7 @@ def plot_wave(Z, title):
 
     plt.tight_layout()
     plt.show()
-```
+
 
 # Calculate and plot all
 
