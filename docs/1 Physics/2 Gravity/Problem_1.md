@@ -335,11 +335,7 @@ Next step? Implement this with **code and graphs** using real planetary datasets
 
 # Python/plot
 
-![alt text](image-5.png)
-
-
-![alt text](image-6.png)
-
+![alt text](image-1.png)
 
 
 ```python
@@ -350,7 +346,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.constants import G
 from math import pi
-```
+
 # --- Adjustable Parameters ---
 M_central = 5.972e24     # Central mass (e.g., Earth) in kg
 m_orbiting = 1000        # Orbiting body mass in kg (not used in Kepler's law)
@@ -383,7 +379,7 @@ plt.ylabel('y (m)')
 plt.axis('equal')
 plt.grid(True)
 plt.legend()
-```
+
 # Kepler’s Law Plot
 plt.subplot(1, 2, 2)
 plt.plot(r_cubed, T_squared, 'bo-')
@@ -394,5 +390,4 @@ plt.grid(True)
 
 plt.tight_layout()
 plt.show()
-
 ```

@@ -62,12 +62,7 @@ We simulate particle trajectories using the 4th-order Runge-Kutta method for acc
 
 See the attached Python script for full implementation: RK4 integration, Lorentz force application, and 3D visualization.
 
-![alt text](image-3.png)
-
-![alt text](image-4.png)
-
-![alt text](image-5.png)
-
+![alt text](image-1.png)
 
 ```python
 # Lorentz Force Simulation for a Macroscopic Body (1g, 1C)
@@ -208,7 +203,7 @@ $$
 
 ---
 ## İnteractive simulation with sliders 
-
+![alt text](image.png)
 ```python
 import numpy as np
 import matplotlib.pyplot as plt

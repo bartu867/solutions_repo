@@ -353,7 +353,7 @@ The result will give the orbital velocity of Jupiter in meters per second.
 
 ## Python Code Implementation
 
-
+![alt text](image-2.png)
 
 ```python
 import math
@@ -421,7 +421,7 @@ In this section, we create visualizations to compare the cosmic velocities for E
 We will plot the **first**, **second**, and **third cosmic velocities** for each planet using bar charts for easy comparison.
 
 
-![alt text](image-12.png)
+
 ---
 ```python
 

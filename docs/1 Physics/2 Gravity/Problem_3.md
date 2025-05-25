@@ -216,7 +216,7 @@ $$
 
 The following Python code can be used to solve these equations using the Runge-Kutta method:
 
-![alt text](image-22.png)
+![alt text](image-3.png)
 
 ```python
 import numpy as np
@@ -321,9 +321,7 @@ In addition to the plots above, other analyses could include:
 ### Conclusion
 These visualizations help to better understand the motion of the payload under the influence of gravity. By examining the time evolution of position and velocity, phase space diagrams, and orbit visualizations, we can gain insights into the nature of the trajectory, whether elliptical, hyperbolic, or parabolic.
 
-![alt text](image-23.png)
-![alt text](image-24.png)
-![alt text](image-25.png)
+![alt text](image-4.png)
 
 ```python
 import numpy as np

@@ -223,8 +223,7 @@ plot_wave(Z5, "Five Sources (Pentagon)")
 ### GIF Code 
 
 
-
-![alt text](interference_5_sources-1.gif)
+![alt text](interference_5_sources.gif)
 
 
 ```python

@@ -92,6 +92,10 @@ function compute_equivalent_resistance(graph, start, end):
 ---
 ## Python Implementation (Using `networkx`)
 
+Equivalent Resistance (series): 15
+
+Equivalent Resistance (parallel): 6.666666666666666
+
 ```python
 import networkx as nx
 
