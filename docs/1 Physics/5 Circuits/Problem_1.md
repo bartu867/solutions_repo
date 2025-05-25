@@ -234,13 +234,7 @@ result3 = "Equivalent Resistance: Simplifies to ≈ 5.09Ω (via step-by-step red
 draw_circuit_with_result(G3, "Example 3: Nested Circuit", result3)
 
 ```
-![alt text](image.png)
-
-![alt text](image-1.png)
-
 ![alt text](image-2.png)
-
-![alt text](image-3.png)
 
 ---
 
@@ -324,7 +318,7 @@ G_nested.add_edge('B', 'D', resistance=4)
 G_nested.add_edge('D', 'E', resistance=1)
 pos_nested = nx.spring_layout(G_nested, seed=42)
 
-```
+
 # Simplifying step by step
 draw_step(G_nested, "Step 0: Original Nested Circuit", pos_nested)
 series_steps = series_reduce_steps(G_nested, 'A', 'E', pos_nested)
@@ -336,14 +330,7 @@ for i, step in enumerate(parallel_steps):
     draw_step(step, f"Step {len(series_steps)+i+1}: After Parallel Reduction", pos_nested)
 
 ```
-
-![alt text](image-4.png)
-
-![alt text](image-5.png)
-
-![alt text](image-6.png)
-
-![alt text](image-7.png)
+![alt text](image.png)
 
 ### Final Equivalent Resistance:
 
