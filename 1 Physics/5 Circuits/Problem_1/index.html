@@ -249,6 +249,8 @@
 </code></pre>
 <hr/>
 <h2 id="python-implementation-using-networkx">Python Implementation (Using <code>networkx</code>)</h2>
+<p>Equivalent Resistance (series): 15</p>
+<p>Equivalent Resistance (parallel): 6.666666666666666</p>
 <pre><code class="language-python">import networkx as nx
 
 def series_reduce(G, start, end):
@@ -371,13 +373,7 @@ G3.add_edge('B', 'D', resistance=4)
 G3.add_edge('D', 'E', resistance=1)
 result3 = "Equivalent Resistance: Simplifies to ≈ 5.09Ω (via step-by-step reduction)"
 draw_circuit_with_result(G3, "Example 3: Nested Circuit", result3)</p>
-<pre><code>![alt text](image.png)
-
-![alt text](image-1.png)
-
-![alt text](image-2.png)
-
-![alt text](image-3.png)
+<pre><code>![alt text](image-2.png)
 
 ---
 
@@ -458,28 +454,21 @@ G_nested.add_edge('B', 'D', resistance=4)
 G_nested.add_edge('D', 'E', resistance=1)
 pos_nested = nx.spring_layout(G_nested, seed=42)
 
-</code></pre>
-<h1 id="simplifying-step-by-step">Simplifying step by step</h1>
-<p>draw_step(G_nested, "Step 0: Original Nested Circuit", pos_nested)
+
+# Simplifying step by step
+draw_step(G_nested, "Step 0: Original Nested Circuit", pos_nested)
 series_steps = series_reduce_steps(G_nested, 'A', 'E', pos_nested)
 for i, step in enumerate(series_steps):
-    draw_step(step, f"Step {i+1}: After Series Reduction", pos_nested)</p>
-<p>parallel_steps = parallel_reduce_steps(G_nested, pos_nested)
+    draw_step(step, f"Step {i+1}: After Series Reduction", pos_nested)
+
+parallel_steps = parallel_reduce_steps(G_nested, pos_nested)
 for i, step in enumerate(parallel_steps):
-    draw_step(step, f"Step {len(series_steps)+i+1}: After Parallel Reduction", pos_nested)</p>
-<pre><code>
-![alt text](image-4.png)
-
-![alt text](image-5.png)
-
-![alt text](image-6.png)
-
-![alt text](image-7.png)
-
-### Final Equivalent Resistance:
+    draw_step(step, f"Step {len(series_steps)+i+1}: After Parallel Reduction", pos_nested)
 
 </code></pre>
-<hr/>
+<p><img alt="alt text" src="../image.png"/></p>
+<h3 id="final-equivalent-resistance">Final Equivalent Resistance:</h3>
+<h2 id="_1">```</h2>
 <h2 id="what-does-this-code-do">🔍 What Does This Code Do?</h2>
 <p>This Python code performs <strong>step-by-step simplification</strong> of a resistor network (Example 3: Nested Circuit) using graph theory and visualizes each reduction stage.</p>
 <h3 id="input">✅ Input:</h3>

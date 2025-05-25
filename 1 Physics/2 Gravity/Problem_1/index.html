@@ -465,8 +465,7 @@ T^2 \approx 5.57 \times 10^{12} \Rightarrow T \approx 2.36 \times 10^6 \, \text{
 <p>Next step? Implement this with <strong>code and graphs</strong> using real planetary datasets. Just say the word! 🚀</p>
 <hr/>
 <h1 id="pythonplot">Python/plot</h1>
-<p><img alt="alt text" src="image-5.png"/></p>
-<p><img alt="alt text" src="image-6.png"/></p>
+<p><img alt="alt text" src="../image-1.png"/></p>
 <pre><code class="language-python">
 # Orbital simulation and Kepler's Third Law verification
 
@@ -474,22 +473,27 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.constants import G
 from math import pi
-</code></pre>
-<h1 id="-adjustable-parameters-">--- Adjustable Parameters ---</h1>
-<p>M_central = 5.972e24     # Central mass (e.g., Earth) in kg
+
+# --- Adjustable Parameters ---
+M_central = 5.972e24     # Central mass (e.g., Earth) in kg
 m_orbiting = 1000        # Orbiting body mass in kg (not used in Kepler's law)
-radii = np.linspace(1e7, 5e7, 10)  # Orbital radii in meters</p>
-<h1 id="-calculate-orbital-period-for-each-radius-">--- Calculate orbital period for each radius ---</h1>
-<p>def orbital_period(radius, M):
-    return 2 * pi * np.sqrt(radius**3 / (G * M))</p>
-<p>periods = np.array([orbital_period(r, M_central) for r in radii])</p>
-<h1 id="-keplers-third-law-check-t2-r3-">--- Kepler's Third Law Check: T² ∝ r³ ---</h1>
-<p>T_squared = periods<strong>2
-r_cubed = radii</strong>3</p>
-<h1 id="-plotting-">--- Plotting ---</h1>
-<p>plt.figure(figsize=(12, 5))</p>
-<h1 id="orbital-path-example">Orbital path example</h1>
-<p>plt.subplot(1, 2, 1)
+radii = np.linspace(1e7, 5e7, 10)  # Orbital radii in meters
+
+# --- Calculate orbital period for each radius ---
+def orbital_period(radius, M):
+    return 2 * pi * np.sqrt(radius**3 / (G * M))
+
+periods = np.array([orbital_period(r, M_central) for r in radii])
+
+# --- Kepler's Third Law Check: T² ∝ r³ ---
+T_squared = periods**2
+r_cubed = radii**3
+
+# --- Plotting ---
+plt.figure(figsize=(12, 5))
+
+# Orbital path example
+plt.subplot(1, 2, 1)
 theta = np.linspace(0, 2*pi, 100)
 r_example = 3e7
 x = r_example * np.cos(theta)
@@ -501,8 +505,9 @@ plt.xlabel('x (m)')
 plt.ylabel('y (m)')
 plt.axis('equal')
 plt.grid(True)
-plt.legend()</p>
-<pre><code># Kepler’s Law Plot
+plt.legend()
+
+# Kepler’s Law Plot
 plt.subplot(1, 2, 2)
 plt.plot(r_cubed, T_squared, 'bo-')
 plt.title("Kepler's Third Law Verification")
@@ -512,7 +517,6 @@ plt.grid(True)
 
 plt.tight_layout()
 plt.show()
-
 </code></pre>
 </div>
 </div><footer>
