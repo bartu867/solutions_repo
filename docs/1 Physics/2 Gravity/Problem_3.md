@@ -212,85 +212,7 @@ The trajectory depends on the magnitude and direction of the initial velocity an
 $$
 r_0 = R_E + h
 $$
-### Python Implementation
 
-The following Python code can be used to solve these equations using the Runge-Kutta method:
-
-![alt text](image-3.png)
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-```
-# Constants
-G = 6.67430e-11  # gravitational constant (m^3 kg^-1 s^-2)
-M_E = 5.972e24   # Earth's mass (kg)
-R_E = 6371000    # Earth's radius (m)
-```
-# Initial conditions
-r0 = np.array([R_E + 100000, 0, 0])  # 100 km above Earth's surface
-v0 = np.array([0, 7800, 0])          # orbital velocity in m/s
-```
-# Time parameters
-t_max = 5000  # total simulation time in seconds
-dt = 1        # time step in seconds
-```
-# Runge-Kutta integrator
-def runge_kutta_step(r, v, dt):
-    r_mag = np.linalg.norm(r)
-    if r_mag < R_E:
-        raise ValueError("Object has collided with Earth!")
-    
-    a = -G * M_E * r / r_mag**3
-    k1v, k1r = dt * a, dt * v
-    r2, v2 = r + 0.5 * k1r, v + 0.5 * k1v
-
-    a2 = -G * M_E * r2 / np.linalg.norm(r2)**3
-    k2v, k2r = dt * a2, dt * v2
-    r3, v3 = r + 0.5 * k2r, v + 0.5 * k2v
-
-    a3 = -G * M_E * r3 / np.linalg.norm(r3)**3
-    k3v, k3r = dt * a3, dt * v3
-    r4, v4 = r + k3r, v + k3v
-
-    a4 = -G * M_E * r4 / np.linalg.norm(r4)**3
-    k4v, k4r = dt * a4, dt * v4
-
-    v_next = v + (k1v + 2 * k2v + 2 * k3v + k4v) / 6
-    r_next = r + (k1r + 2 * k2r + 2 * k3r + k4r) / 6
-    return r_next, v_next
-```
-# Simulation loop
-r, v = r0, v0
-positions = []
-
-for t in np.arange(0, t_max, dt):
-    positions.append(r)
-    try:
-        r, v = runge_kutta_step(r, v, dt)
-    except ValueError as e:
-        print(e)
-        break
-positions = np.array(positions)
-
-# Plotting
-fig, ax = plt.subplots(figsize=(8, 8))
-ax.plot(positions[:, 0], positions[:, 1], label="Trajectory", color='blue')
-
-# Draw Earth as a red circle
-earth = plt.Circle((0, 0), R_E, color='red', label='Earth', alpha=0.6)
-ax.add_patch(earth)
-
-ax.set_title('Trajectory of the Payload')
-ax.set_xlabel('X position (m)')
-ax.set_ylabel('Y position (m)')
-ax.set_aspect('equal')
-ax.legend()
-ax.grid(True)
-plt.show()
-```
----
-```
 ### Generate Plots for Various Payload Trajectories
 
 To visualize the payload's motion, we generate several plots that help analyze the behavior of the trajectory. The primary visualizations include:
@@ -327,7 +249,7 @@ These visualizations help to better understand the motion of the payload under t
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
-```
+
 # Constants
 G = 6.67430e-11  # Gravitational constant (m^3 kg^-1 s^-2)
 M = 5.972e24     # Mass of Earth (kg)
@@ -384,7 +306,7 @@ plt.show()
 ```
 
 ## Real-World Applications
-```
+
 ### Relevance to Space Missions and Satellite Deployment
 
 The study of payload trajectories is essential for various space missions, particularly those involving satellite deployment, payload release, or reentry. The trajectory analysis helps in determining:
