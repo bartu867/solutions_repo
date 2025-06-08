@@ -229,8 +229,6 @@ x = np.linspace(-10, 10, 500)
 y = np.linspace(-10, 10, 500)
 X, Y = np.meshgrid(x, y)
 
-```
-
 # Define wave parameters
 wavelength = 2  # Wavelength
 k = 2 * np.pi / wavelength  # Wave number

@@ -3,511 +3,328 @@
 **Author:** Bartu867  
 **Date:** March 27, 2025  
 
----
 # Problem 2
 
-## Forced Damped Pendulum: Dynamics and Analysis
+# 📚 Theoretical Foundation of the Forced Damped Pendulum
 
-## 1. Theoretical Framework
+## 1️⃣ Formulating the Differential Equation for the Forced Damped Pendulum ⚖️
 
-The forced damped pendulum is modeled by a second-order nonlinear ordinary differential equation (ODE) describing angular displacement under damping and periodic external forcing.
+The motion of a forced damped pendulum can be described using Newton's Second Law:
 
-### 1.1 Governing Equation
+$$mL\frac{d^2\theta}{dt^2}+b\frac{d\theta}{dt}+mg\sin\theta=F_0\cos(\omega t)$$
 
-The equation of motion is:
+where:
+- $m$ is the mass of the pendulum,
+- $L$ is the length of the pendulum,
+- $b$ is the damping coefficient,
+- $g$ is the acceleration due to gravity,
+- $F_0$ is the amplitude of the external driving force,
+- $\omega$ is the driving frequency,
+- $\theta$ is the angular displacement.
 
-$$d^2\theta/dt^2+b\,d\theta/dt+(g/L)\sin\theta=A\cos(\omega t)$$
+Dividing through by $mL$:
 
-- **Variables**:
-  - $\theta(t)$: Angular displacement (radians)
-  - $b$: Damping coefficient (s$^{-1}$)
-  - $g$: Gravitational acceleration (m/s$^2$)
-  - $L$: Pendulum length (m)
-  - $A$: Driving amplitude (s$^{-2}$)
-  - $\omega$: Driving frequency (rad/s)
+$$\frac{d^2\theta}{dt^2}+\frac{b}{mL}\frac{d\theta}{dt}+\frac{g}{L}\sin\theta=\frac{F_0}{mL}\cos(\omega t)$$
 
-### 1.2 Small-Angle Approximation
+To make the equation more manageable, we define dimensionless parameters:
+- $\gamma=\frac{b}{mL}$ (damping ratio, representing the effect of friction),
+- $\omega_0^2=\frac{g}{L}$ (square of the natural frequency, characterizing the system's oscillation rate),
+- $f=\frac{F_0}{mL}$ (scaled external force).
 
-For small angles ($\theta\ll 1$), the nonlinear term simplifies:
+This leads to the simplified equation:
 
-$$\sin\theta\approx\theta$$
+$$\ddot{\theta}+\gamma\dot{\theta}+\omega_0^2\sin\theta=f\cos(\omega t)$$
 
-This yields a linear ODE:
+![alt text](image-15.png)
 
-$$d^2\theta/dt^2+b\,d\theta/dt+(g/L)\theta=A\cos(\omega t)$$
+## 2️⃣ Approximate Solutions for Small-Angle Oscillations 🔬
 
-### 1.3 Solution to Linearized Equation
+For small angles ($\theta\approx\sin\theta$), we can linearize the equation:
 
-The solution combines homogeneous and particular components:
+$$\ddot{\theta}+\gamma\dot{\theta}+\omega_0^2\theta=f\cos(\omega t)$$
 
-- **Homogeneous Solution**:
-  The characteristic equation is:
+This equation describes a **damped, driven harmonic oscillator**. Using the method of undetermined coefficients, we assume the steady-state solution is of the form:
 
-  $$r^2+br+(g/L)=0$$
+$$\theta(t)=A\cos(\omega t-\delta)$$
 
-  Roots are:
+where:
 
-  $$r_{1,2}=(-b\pm\sqrt{b^2-4(g/L)})/2$$
+- **Amplitude** $A$ determines the system's response to the driving force:
+  
+  $$A=\frac{f}{\sqrt{(\omega_0^2-\omega^2)^2+\gamma^2\omega^2}}$$
 
-  The homogeneous solution is:
+- **Phase shift** $\delta$ accounts for the lag due to damping:
+  
+  $$\tan\delta=\frac{\gamma\omega}{\omega_0^2-\omega^2}$$
 
-$$\theta_h(t)=C_1e^{r_1t}+C_2e^{r_2t}$$
+This means the oscillations **lag behind the external force**, with the delay increasing as damping grows.
 
-  - For underdamped systems ($b^2<4(g/L)$):
+## 3️⃣ Analysis of Resonance Conditions and Energy Impact 🎵⚡
 
-$$\theta_h(t)=e^{-(b/2)t}(C_1\cos(\omega_dt)+C_2\sin(\omega_dt))$$
+### 🌟 Resonance: When the System Responds Most Strongly
 
-  - Where damped frequency is:
+Resonance occurs when the driving frequency matches the system's natural frequency:
 
-$$\omega_d=\sqrt{(g/L)-(b^2/4)}$$
+$$\omega\approx\omega_0$$
 
-- **Particular Solution**:
-  Assume a steady-state form:
+At this point, the denominator of $A$ approaches zero, leading to a **large increase in oscillation amplitude**. In real-world systems, damping prevents infinite amplitude but still allows significant oscillations.
 
-$$\theta_p(t)=B\cos(\omega t-\delta)$$
+### 🔋 Energy Considerations
+The total mechanical energy of the pendulum consists of kinetic and potential energy:
 
-  The amplitude $B$ is:
+$$E=T+U=\frac{1}{2}mL^2\dot{\theta}^2+mgL(1-\cos\theta)$$
 
-$$B=A/\sqrt{((g/L)-\omega^2)^2+(b\omega)^2}$$
+For small oscillations, this simplifies to:
 
-  The phase shift $\delta$ is:
+$$E\approx\frac{1}{2}mL^2\dot{\theta}^2+\frac{1}{2}mgL\theta^2$$
 
-$$\tan\delta=(b\omega)/((g/L)-\omega^2)$$
+Under steady-state forced oscillations, energy input from the external force **balances** the dissipation due to damping. This results in a periodic exchange of energy within the system.
 
-#### 1.3.1 Pendulum Motion Visualization
-
-The time evolution of $\theta(t)$ illustrates the combined effects of damping and external forcing, as described by the nonlinear ODE:
-
-$$d^2\theta/dt^2+b\,d\theta/dt+(g/L)\sin\theta=A\cos(\omega t)$$
-
-The following Python code solves this ODE numerically using parameters $g=9.81$ m/s$^2$, $L=1$ m, $b=0.2$ s$^{-1}$, $A=0.5$ s$^{-2}$, and $\omega=0.8\sqrt{g/L}$, plotting $\theta(t)$ over time.
-
-![alt text](image-12.png)
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.integrate import odeint
-
-```
-
-### Additional Visualization: Simple Pendulum Motion (Undamped, No Forcing)
-
-To further illustrate the basic pendulum dynamics without damping ($b=0$) and without external forcing ($A=0$), we plot $\theta(t)$ over time for small initial displacement.  
-This captures the pure periodic motion expected from an ideal pendulum.
-
-![alt text](image-11.png)
 ---
+## 📌 Summary 📝
+- The forced damped pendulum obeys a nonlinear differential equation, which simplifies under small-angle assumptions.
+- Its behavior is characterized by damping, external driving forces, and resonance effects.
+- Resonance occurs when the driving frequency approaches the natural frequency, leading to large oscillations.
+- The system's energy oscillates due to an external force counteracting damping losses.
 
+These principles are crucial in engineering, physics, and even biological systems (e.g., heart rhythms, bridges swaying). Understanding them helps in designing **stable** and **efficient** mechanical systems! 🚀
+
+# 🔍 Analysis of Dynamics
+
+## ⚖️ 2.1 Influence of Damping Coefficient
+
+The equation of motion for a damped driven system is given by:
+
+$$m\ddot{x} + b\dot{x} + kx = F_0\cos(\omega t)$$
+
+where:
+- $m$ is the mass of the system, determining inertia.
+- $b$ is the damping coefficient, controlling resistance to motion.
+- $k$ is the spring constant, representing restoring force.
+- $F_0$ is the external driving amplitude.
+- $\omega$ is the driving frequency.
+
+### 🔬 Types of Damping
+- **Underdamping** ($b^2<4mk$): System oscillates with decreasing amplitude over time.
+- **Critical damping** ($b^2=4mk$): System returns to equilibrium as fast as possible without oscillating.
+- **Overdamping** ($b^2>4mk$): System slowly returns to equilibrium without oscillation.
+
+The **quality factor** $Q$ measures how underdamped a system is:
+
+$$Q=\frac{m\omega_0}{b}$$
+
+where $\omega_0=\sqrt{k/m}$ is the natural frequency. High $Q$ means low damping and more oscillations.
+
+## 📈 2.2 Influence of Driving Amplitude
+
+When the system is driven externally, the steady-state amplitude follows:
+
+$$A=\frac{F_0/m}{\sqrt{(\omega_0^2-\omega^2)^2+(b\omega/m)^2}}$$
+
+- **Small $F_0$:** Response is proportional to the force (linear behavior).
+- **At resonance ($\omega=\omega_0$):** Amplitude reaches a peak.
+- **High $F_0$:** Nonlinear effects and potential chaotic motion emerge.
+
+## 🎶 2.3 Influence of Driving Frequency
+
+The system's response changes with frequency $\omega$:
+- **Low-frequency regime** ($\omega\ll\omega_0$): The system follows the driving force smoothly.
+- **Near resonance** ($\omega\approx\omega_0$): Maximum amplitude occurs due to resonance.
+- **High-frequency regime** ($\omega\gg\omega_0$): The system cannot keep up with the driving force, resulting in reduced response.
+
+The phase lag $\phi$ between the driving force and displacement is:
+
+$$\tan\phi=\frac{b\omega}{m(\omega_0^2-\omega^2)}$$
+
+## 🔀 2.4 Transition Between Regular and Chaotic Motion
+
+For nonlinear driven systems, such as the Duffing oscillator:
+
+$$m\ddot{x} + b\dot{x} + kx + \alpha x^3 = F_0\cos(\omega t)$$
+
+where $\alpha$ introduces nonlinearity. The system can exhibit:
+- **Periodic motion**: Regular oscillations with predictable behavior.
+- **Quasiperiodic motion**: Oscillations with multiple incommensurate frequencies.
+- **Chaotic motion**: Unpredictable behavior with extreme sensitivity to initial conditions.
+
+### 📊 Lyapunov Exponent
+A key indicator of chaos is the Lyapunov exponent $\lambda$:
+
+$$\lambda=\lim_{t\to\infty} \frac{1}{t} \ln \frac{|\delta x(t)|}{|\delta x(0)|}$$
+
+- If $\lambda>0$, the system is **chaotic**.
+- If $\lambda<0$, the system is **stable and predictable**.
+
+### 🌀 Poincaré Section
+A visualization technique for chaos:
+- **Regular motion** forms closed loops.
+- **Chaotic motion** forms scattered, fractal-like structures.
+
+## 🌍 2.5 Physical Significance
+- **🚗 Engineering:** Used in shock absorbers and mechanical resonance analysis.
+- **🌦️ Climate Models:** Helps predict weather patterns and turbulence.
+- **🧠 Biological Systems:** Found in heart rhythms and neural oscillations.
+- **🪐 Astronomy:** Governs planetary motion, stability, and celestial mechanics.
+---
+### 📝 Summary
+- The behavior of oscillatory systems depends on damping, driving force, and frequency.
+- Resonance amplifies oscillations but can also lead to instability.
+- Nonlinearities introduce complex behaviors, including chaos.
+- Chaos is characterized by sensitivity to initial conditions, analyzed via Lyapunov exponents and Poincare sections.
+
+This document provides a detailed mathematical and conceptual framework for analyzing dynamical systems, emphasizing the transition from **order to chaos**.
+
+# 🔬 Practical Applications of Oscillatory Systems ⚙️
+
+Oscillatory systems play a crucial role in various engineering and scientific disciplines, governing the behavior of mechanical structures, electrical circuits, and energy harvesting technologies. By understanding these systems, engineers can design safer bridges, efficient energy systems, and optimized electronic devices. This section explores some key real-world applications, including energy harvesting, suspension bridges, and oscillating circuits.
+
+## ⚡ 1. Energy Harvesting
+
+Energy harvesting technologies utilize oscillatory and vibrational motions to generate electrical energy from ambient sources such as vibrations, thermal fluctuations, or mechanical motion. These systems often employ piezoelectric, electromagnetic, or electrostatic transduction mechanisms.
+
+The governing equation for a simple electromechanical energy harvester is given by:
+
+$$m\ddot{x}+c\dot{x}+kx=F_{ext}(t)$$
+
+where:
+- $m$ is the mass of the oscillating system,
+- $c$ is the damping coefficient,
+- $k$ is the stiffness constant,
+- $F_{ext}(t)$ represents the external excitation force.
+
+By incorporating an electromechanical coupling term, the output voltage $V$ across a piezoelectric material is given by:
+
+$$V=\frac{d_{31}F_{ext}(t)}{C_p}$$
+
+where:
+- $d_{31}$ is the piezoelectric charge constant,
+- $C_p$ is the capacitance of the piezoelectric element.
+
+**Applications:**
+
+- Powering remote sensors in industrial and environmental monitoring.
+
+- Harvesting kinetic energy from human motion for wearable electronics.
+
+- Utilizing ocean wave energy for renewable power generation.
+
+##  2. Suspension Bridges
+
+Suspension bridges are subject to oscillatory forces from wind, traffic loads, and seismic activity. The famous case of the **Tacoma Narrows Bridge collapse** in 1940 illustrates the importance of understanding resonance effects in structural engineering.
+
+The equation governing small oscillations of a bridge modeled as a beam is:
+
+$$EI\frac{\partial^4 y}{\partial x^4}+m\frac{\partial^2 y}{\partial t^2}+c\frac{\partial y}{\partial t}=F_{wind}(t)$$
+
+where:
+- $E$ is Young’s modulus (material stiffness),
+- $I$ is the second moment of area (beam shape factor),
+- $m$ is the mass per unit length,
+- $c$ is the damping coefficient,
+- $F_{wind}(t)$ represents wind-induced forcing.
+
+For stability, damping must be introduced to prevent resonance when the natural frequency $\omega_n$ matches the forcing frequency:
+
+$$\omega_n=\sqrt{\frac{k}{m}}$$
+
+**Applications:**
+- Design of earthquake-resistant bridges.
+- Optimization of bridge materials to reduce vibration amplitudes.
+- Wind tunnel testing for aerodynamically stable structures.
+
+##  3. Oscillating Circuits
+
+Electrical circuits containing inductors, capacitors, and resistors exhibit oscillatory behavior essential in communication systems, signal processing, and power electronics. The standard RLC circuit equation follows from Kirchhoff’s voltage law:
+
+$$L\frac{d^2 q}{d t^2}+R\frac{d q}{d t}+\frac{q}{C}=0$$
+
+where:
+- $L$ is the inductance,
+- $R$ is the resistance,
+- $C$ is the capacitance,
+- $q$ is the charge on the capacitor.
+
+The characteristic equation of the circuit is:
+
+$$s^2+\frac{R}{L}s+\frac{1}{LC}=0$$
+
+Solving for $s$, the damping factor $\zeta$ determines whether the circuit is overdamped, underdamped, or critically damped:
+
+$$\zeta=\frac{R}{2}\sqrt{\frac{C}{L}}$$
+
+**Applications:**
+- Design of radio frequency (RF) filters in communication devices.
+- Stability analysis of power supply circuits.
+- Development of resonant transformers and wireless charging systems.
+
+##  Summary
+
+Oscillatory systems are fundamental to many engineering applications, from structural mechanics to electronic circuit design and renewable energy solutions. Understanding their behavior through mathematical modeling allows for the **optimization of structures and devices** ,ensuring:
+✅ Stability against external perturbations.
+✅ Efficiency in energy conversion processes.
+✅ Performance improvement in electronic and mechanical systems.
+
+By mastering the principles of oscillatory dynamics, engineers and scientists can develop **safer, more efficient, and innovative** solutions to real-world challenges.
+
+![alt text](image-16.png)
+![alt text](image-17.png)
+
+## Python/ plot
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
-# Simple pendulum parameters
-b = 0.0  # damping
-A = 0.0  # forcing
-omega_f = 0.0
-g = 9.81
-L = 1.0
+# Define the pendulum parameters
+g = 9.81  # Gravity (m/s^2)
+L = 1.0   # Length of pendulum (m)
+m = 1.0   # Mass (kg)
+F0 = 1.5  # Driving force amplitude
+omega = 2.0  # Driving frequency
 
-def simple_pendulum(t, y):
-    theta, omega = y
-    dydt = [omega, -(g/L)*np.sin(theta)]
+# Define the equation of motion
+def forced_damped_pendulum(t, y, gamma, omega_0, f, omega):
+    theta, omega_theta = y
+    dydt = [
+        omega_theta,
+        -gamma * omega_theta - omega_0**2 * np.sin(theta) + f * np.cos(omega * t)
+    ]
     return dydt
 
-# Time points
+# Time span and initial conditions
 t_span = (0, 20)
 t_eval = np.linspace(*t_span, 1000)
-y0 = [0.2, 0.0]  # initial conditions: [angle, angular velocity]
+y0 = [np.pi / 4, 0]  # Initial angle and velocity
 
-# Solve
-sol = solve_ivp(simple_pendulum, t_span, y0, t_eval=t_eval)
+# Define damping cases
+damping_cases = {
+    "Underdamped": 0.5,
+    "Critically Damped": 2.0,
+    "Overdamped": 5.0
+}
 
-# Plot
-fig, axs = plt.subplots(1,2, figsize=(12,5))
-axs[0].plot(sol.t, sol.y[0], 'r')
-axs[0].set_title('Simple Pendulum - Time Series')
-axs[0].set_xlabel('Time (s)')
-axs[0].set_ylabel('Angle (rad)')
-
-axs[1].plot(sol.y[0], sol.y[1], 'r')
-axs[1].set_title('Simple Pendulum - Phase Portrait')
-axs[1].set_xlabel('Angle (rad)')
-axs[1].set_ylabel('Angular Velocity (rad/s)')
-
-plt.tight_layout()
-plt.show()
-```
-
-### 1.4 Resonance
-
-Resonance occurs when $\omega$ approaches the natural frequency:
-
-$$\omega_0=\sqrt{g/L}$$
-
-- **Undamped Case** ($b=0$):
-
-$$B\to\infty\text{ as }\omega\to\omega_0$$
-
-- **Damped Case**:
-  Maximum amplitude occurs at:
-
-$$\omega_{\text{res}}=\sqrt{\omega_0^2-(b^2/2)}$$
-
-  With maximum amplitude:
-
-$$B_{\text{max}}=A/(b\sqrt{\omega_0^2-(b^2/4)})$$
-
-#### 1.4.1 Resonance Curve Visualization
-
-The resonance curve plots the steady-state amplitude $B$ against driving frequency $\omega$, as given by:
-
-$$B=A/\sqrt{((g/L)-\omega^2)^2+(b\omega)^2}$$
-
-The following Python code computes $B$ for $\omega$ from 0.1 to 5 rad/s, with $g=9.81$ m/s$^2$, $L=1$ m, $b=0.2$ s$^{-1}$, and $A=0.5$ s$^{-2}$.
-
-![alt text](image-13.png)
-
-#### Additional Visualization: Resonance Behavior in the Undamped Pendulum
-
-Below we show the amplitude response $B$ versus driving frequency $\omega$ for an undamped pendulum ($b=0$).  
-As expected, the amplitude diverges sharply near the natural frequency $\omega_0=\sqrt{g/L}$, showing the classical resonance peak.
-
-![alt text](image-10.png)
----
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Parameters
-g = 9.81
-L = 1.0
-b = 0.2
-A = 0.5
-
-# Frequency range
-omega = np.linspace(0.1, 5, 500)
-
-# Amplitude B
-B = A / np.sqrt(((g/L) - omega**2)**2 + (b*omega)**2)
-
-# Plot
-plt.figure(figsize=(8, 5))
-plt.plot(omega, B, label=r'Amplitude $B$')
-plt.xlabel(r'Driving Frequency $\omega$ (rad/s)')
-plt.ylabel(r'Amplitude $B$ (rad)')
-plt.title('Resonance Curve of Forced Damped Pendulum')
-plt.grid(True)
-plt.legend()
-plt.show()
-```
-
-### 1.5 Energy Dynamics
-
-Total mechanical energy is:
-
-$$E(t)=(1/2)mL^2(d\theta/dt)^2+mgL(1-\cos\theta)$$
-
-- At resonance:
-  - Undamped: Energy grows without bound.
-  - Damped: Energy balances input and dissipation, yielding:
-
-$$E_{\text{steady}}\approx(1/2)mL^2B^2\omega^2$$
-
-#### Energy Evolution Over Time
-
-The plot below shows the total mechanical energy $E(t)$ of the pendulum over time for both damped and undamped cases.  
-In the undamped case, energy remains constant (or grows under forcing); in the damped case, energy stabilizes after transient behavior.
-
-
-```python
-# Forced pendulum parameters
-b = 0.0  # no damping
-A = 1.2  # forcing amplitude
-omega_f = 2.0/3.0  # forcing frequency
-
-def forced_pendulum(t, y):
-    theta, omega = y
-    dydt = [omega, -(g/L)*np.sin(theta) + A*np.cos(omega_f*t)]
-    return dydt
-
-# Solve
-sol = solve_ivp(forced_pendulum, t_span, y0, t_eval=t_eval)
-
-# Plot
-fig, axs = plt.subplots(1,2, figsize=(12,5))
-axs[0].plot(sol.t, sol.y[0], 'c')
-axs[0].set_title('Forced Pendulum - Time Series')
-axs[0].set_xlabel('Time (s)')
-axs[0].set_ylabel('Angle (rad)')
-
-axs[1].plot(sol.y[0], sol.y[1], 'c')
-axs[1].set_title('Forced Pendulum - Phase Portrait')
-axs[1].set_xlabel('Angle (rad)')
-axs[1].set_ylabel('Angular Velocity (rad/s)')
+# Solve and plot for each case
+plt.figure(figsize=(12, 8))
+for i, (label, gamma) in enumerate(damping_cases.items(), 1):
+    omega_0 = np.sqrt(g / L)
+    f = F0 / (m * L)
+    
+    sol = solve_ivp(forced_damped_pendulum, t_span, y0, t_eval=t_eval, args=(gamma, omega_0, f, omega))
+    
+    # Extract solutions
+    theta, omega_theta = sol.y
+    
+    # Phase diagram
+    plt.subplot(1, 3, i)
+    plt.plot(theta, omega_theta, label=label)
+    plt.xlabel("Theta (rad)")
+    plt.ylabel("Angular Velocity (rad/s)")
+    plt.title(f"Phase Diagram ({label})")
+    plt.legend()
+    plt.grid()
 
 plt.tight_layout()
 plt.show()
 ```
-### 1.6 Summary
-
-- The nonlinear ODE governs pendulum motion.
-- Small-angle approximation linearizes the system.
-- Solutions include damped and forced components.
-- Resonance amplifies oscillations, moderated by damping.
-
-## 2. Parametric Effects
-
-This section analyzes how parameters affect dynamics, focusing on damping, driving amplitude, and frequency.
-
-### 2.1 Damping Coefficient ($b$)
-
-Damping influences oscillation decay:
-
-- **Low $b$**:
-  - Sustained oscillations.
-  - Solution approximates undamped case:
-
-$$\theta(t)\approx B\cos(\omega t-\delta)$$
-
-- **High $b$**:
-  - Rapid decay to equilibrium.
-  - Overdamped solution ($b^2>4(g/L)$):
-
-$$\theta(t)=C_1e^{r_1t}+C_2e^{r_2t}$$
-
-### 2.2 Driving Amplitude ($A$)
-
-The amplitude $A$ scales the external force:
-
-- **Small $A$**:
-  - Oscillations decay unless near resonance.
-  - Amplitude scales linearly:
-
-$$B\propto A$$
-
-- **Large $A$**:
-  - Increases steady-state amplitude:
-
-$$B=A/\sqrt{((g/L)-\omega^2)^2+(b\omega)^2}$$
-
-### 2.3 Driving Frequency ($\omega$)
-
-Frequency determines forcing efficiency:
-
-- **Near $\omega_0$**:
-  - Large oscillations due to resonance.
-  - Amplitude peaks at $\omega_{\text{res}}$.
-
-- **Far from $\omega_0$**:
-  - Reduced amplitude:
-
-$$B\approx A/|(g/L)-\omega^2|$$
-
-### 2.4 Chaos and Nonlinearity
-
-For large $A$ or specific $\omega$, the nonlinear $\sin\theta$ term induces chaos:
-
-- **Periodic Motion**:
-  - Stable at low $A$, described by:
-
-$$\theta(t)\approx B\cos(\omega t-\delta)$$
-
-- **Chaotic Motion**:
-  - Sensitive to initial conditions.
-  - Characterized by positive Lyapunov exponent:
-
-$$\lambda>0$$
-
-### 2.5 Visualization Tools
-
-- **Phase Portrait**:
-  - Plots $\theta$ vs. $d\theta/dt$.
-  - Periodic motion: Closed loops.
-  - Chaotic motion: Irregular patterns.
- 
-  The following Python code generates a phase portrait for the pendulum with $g=9.81$ m/s$^2$, $L=1$ m, $b=0.2$ s$^{-1}$, $A=0.5$ s$^{-2}$, and $\omega=0.8\sqrt{g/L}$, showing a closed loop indicative of periodic motion.
-   ---
-   
-![alt text](image-14.png)
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.integrate import odeint
-
-# Parameters
-g = 9.81
-L = 1.0
-b = 0.2
-A = 0.5
-omega = 0.8 * np.sqrt(g/L)
-
-# ODE system
-def pendulum(state, t, b, g, L, A, omega):
-    theta, omega = state
-    dtheta_dt = omega
-    domega_dt = -b*omega - (g/L)*np.sin(theta) + A*np.cos(omega*t)
-    return [dtheta_dt, domega_dt]
-
-# Time array
-t = np.linspace(0, 20, 1000)
-
-# Initial conditions
-state0 = [0.1, 0.0]
-
-# Solve ODE
-solution = odeint(pendulum, state0, t, args=(b, g, L, A, omega))
-theta = solution[:, 0]
-dtheta_dt = solution[:, 1]
-
-# Plot
-plt.figure(figsize=(8, 5))
-plt.plot(theta, dtheta_dt, label=r"$\text{Phase Trajectory}$")
-plt.xlabel(r"$\theta$ (rad)")
-plt.ylabel(r"$\frac{d\theta}{dt}$ (rad/s)")
-plt.title(r"$\text{Phase Portrait of Forced Damped Pendulum}$")
-plt.grid(True)
-plt.legend()
-plt.show()
-
-# Poincaré Section Description:
-# Samples at $t=2\pi n/\omega$.
-# Periodic: Discrete points.
-# Chaotic: Scattered points.
-```
-### 2.6 Summary
-
-- Damping controls oscillation decay.
-- Amplitude scales forcing strength.
-- Frequency drives resonance or chaos.
-- Nonlinear effects lead to complex dynamics.
-
-## 3. Applications
-
-The model applies to systems with oscillatory dynamics.
-
-### 3.1 Energy Harvesting
-
-Vibrational harvesters convert motion to energy:
-
-- **Model**:
-  - Driving force: Ambient vibrations.
-  - Power output:
-
-$$P=(1/2)mL^2(d\theta/dt)^2$$
-
-- **Optimization**:
-  - Maximize at resonance:
-
-$$\omega=\omega_0$$
-
-### 3.2 Structural Engineering
-
-Bridges oscillate under external loads:
-
-- **Equation**:
-  - Similar to pendulum:
-
-$$d^2\theta/dt^2+b\,d\theta/dt+(g/L)\sin\theta=F_{\text{ext}}(t)$$
-
-- **Design**:
-  - Increase $b$ to avoid resonance.
-
-### 3.3 Electrical Circuits
-
-RLC circuits mirror pendulum dynamics:
-
-- **Equation**:
-  - Charge dynamics:
-
-$$Ld^2q/dt^2+R\,dq/dt+(1/C)q=V_{\text{ext}}(t)$$
-
-- **Resonance**:
-  - Maximizes current at:
-
-$$\omega=1/\sqrt{LC}$$
-
-### 3.4 Summary
-
-- Energy harvesting optimizes power at resonance.
-- Structures require damping to prevent failure.
-- Circuits control resonance for stability.
-
-#### Additional Visualization: Phase Portraits Under Different Conditions
-
-The following phase diagram shows the behavior of the pendulum for different scenarios:
-- (i) No damping and no external force (pure closed loops),
-- (ii) With damping (spiraling into equilibrium),
-- (iii) With external driving (limit cycles or chaotic behavior).
-
-![alt text](image-9.png)
-
-```python
-# Forced damped pendulum parameters (resonance-like)
-b = 0.05   # light damping
-A = 1.2    # forcing amplitude
-omega_f = 2.0/3.0  # forcing frequency
-
-def forced_damped_pendulum(t, y):
-    theta, omega = y
-    dydt = [omega, -(b)*omega - (g/L)*np.sin(theta) + A*np.cos(omega_f*t)]
-    return dydt
-
-# Solve
-sol = solve_ivp(forced_damped_pendulum, t_span, y0, t_eval=t_eval)
-
-# Plot
-fig, axs = plt.subplots(1,2, figsize=(12,5))
-axs[0].plot(sol.t, sol.y[0], 'm')
-axs[0].set_title('Forced Damped Pendulum - Time Series (Resonance-like)')
-axs[0].set_xlabel('Time (s)')
-axs[0].set_ylabel('Angle (rad)')
-
-axs[1].plot(sol.y[0], sol.y[1], 'm')
-axs[1].set_title('Forced Damped Pendulum - Phase Portrait (Resonance-like)')
-axs[1].set_xlabel('Angle (rad)')
-axs[1].set_ylabel('Angular Velocity (rad/s)')
-
-plt.tight_layout()
-plt.show()
-```
-#### Poincaré Section: Visualization of Periodicity and Chaos
-
-Below we plot the Poincaré section, sampling the pendulum's phase space at regular intervals ($t=2\pi n/\omega$):
-- For periodic motion: discrete isolated points appear.
-- For chaotic motion: scattered clouds of points emerge.
-![alt text](image-8.png)
-
-```python
-# Forced damped pendulum parameters (chaotic)
-b = 0.2    # stronger damping
-A = 1.5    # larger forcing
-omega_f = 2.0/3.0  # forcing frequency
-
-def chaotic_forced_damped_pendulum(t, y):
-    theta, omega = y
-    dydt = [omega, -(b)*omega - (g/L)*np.sin(theta) + A*np.cos(omega_f*t)]
-    return dydt
-
-# Solve
-sol = solve_ivp(chaotic_forced_damped_pendulum, t_span, y0, t_eval=t_eval)
-
-# Plot
-fig, axs = plt.subplots(1,2, figsize=(12,5))
-axs[0].plot(sol.t, sol.y[0], 'g')
-axs[0].set_title('Forced Damped Pendulum - Time Series (Chaotic)')
-axs[0].set_xlabel('Time (s)')
-axs[0].set_ylabel('Angle (rad)')
-
-axs[1].plot(sol.y[0], sol.y[1], 'g')
-axs[1].set_title('Forced Damped Pendulum - Phase Portrait (Chaotic)')
-axs[1].set_xlabel('Angle (rad)')
-axs[1].set_ylabel('Angular Velocity (rad/s)')
-
-plt.tight_layout()
-plt.show()
-```
+![alt text](image-18.png)
