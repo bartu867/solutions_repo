@@ -172,6 +172,134 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="measuring-earths-gravitational-acceleration-with-a-pendulum">📏 Measuring Earth's Gravitational Acceleration with a Pendulum</h1>
+<h2 id="theoretical-background">🔷 Theoretical Background</h2>
+<p>The gravitational acceleration (<span class="arithmatex">\(g\)</span>) is a fundamental constant in both classical and modern physics. One of the most classical and reliable methods to measure it is using a <strong>simple pendulum</strong>.</p>
+<p>For small oscillation angles (θ &lt; 15°), the period of a simple pendulum is given by:</p>
+<div class="arithmatex">\[
+T = 2\pi \sqrt{\frac{L}{g}} \quad \Rightarrow \quad g = \frac{4\pi^2 L}{T^2}
+\]</div>
+<p>Where:
+- <span class="arithmatex">\(T\)</span> is the period of the pendulum (time for one complete swing),
+- <span class="arithmatex">\(L\)</span> is the length from the pivot point to the center of mass of the bob,
+- <span class="arithmatex">\(g\)</span> is the local acceleration due to gravity.</p>
+<hr/>
+<h2 id="materials-and-setup">🧪 Materials and Setup</h2>
+<h3 id="required-materials">✅ Required Materials</h3>
+<ul>
+<li>A <strong>string</strong> (around 1–1.5 meters long)  </li>
+<li>A <strong>weight</strong> (e.g., salt pack, keychain, or bag of coins)  </li>
+<li>A <strong>stopwatch</strong> or smartphone timer  </li>
+<li>A <strong>ruler</strong> or measuring tape  </li>
+</ul>
+<hr/>
+<p><img alt="alt text" src="../image.png"/></p>
+<h1 id="experiment-determining-g-with-a-pendulum">Experiment: Determining <span class="arithmatex">\(g\)</span> with a Pendulum</h1>
+<h2 id="1-experimental-setup">1. Experimental Setup</h2>
+<ul>
+<li><strong>Pendulum Length (L):</strong> 1.2 m  </li>
+<li><strong>Weight Used:</strong> 500 g salt pack  </li>
+<li><strong>Measuring Tool Resolution:</strong> 1 mm  </li>
+<li><strong>Uncertainty in Length (ΔL):</strong> 0.0005 m (half of 1 mm)</li>
+</ul>
+<h2 id="2-time-measurements">2. Time Measurements</h2>
+<p>Each value below represents the time taken for <strong>10 complete oscillations</strong> of the pendulum:</p>
+<table>
+<thead>
+<tr>
+<th>Trial</th>
+<th>Time for 10 Oscillations (<span class="arithmatex">\(T_{10}\)</span>) [s]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>22.14</td>
+</tr>
+<tr>
+<td>2</td>
+<td>22.09</td>
+</tr>
+<tr>
+<td>3</td>
+<td>22.18</td>
+</tr>
+<tr>
+<td>4</td>
+<td>22.11</td>
+</tr>
+<tr>
+<td>5</td>
+<td>22.06</td>
+</tr>
+<tr>
+<td>6</td>
+<td>22.17</td>
+</tr>
+<tr>
+<td>7</td>
+<td>22.10</td>
+</tr>
+<tr>
+<td>8</td>
+<td>22.13</td>
+</tr>
+<tr>
+<td>9</td>
+<td>22.08</td>
+</tr>
+<tr>
+<td>10</td>
+<td>22.16</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Mean Time for 10 Oscillations (<span class="arithmatex">\(\overline{T}_{10}\)</span>):</strong> 22.122 s  </li>
+<li><strong>Standard Deviation (<span class="arithmatex">\(\sigma_T\)</span>):</strong> 0.041 s  </li>
+<li><strong>Uncertainty in Mean Time (<span class="arithmatex">\(\Delta T_{10}\)</span>):</strong> 0.013 s (<span class="arithmatex">\(\sigma_T / \sqrt{10}\)</span>)</li>
+</ul>
+<h2 id="3-period-and-uncertainty">3. Period and Uncertainty</h2>
+<ul>
+<li><strong>Period (T):</strong> </li>
+</ul>
+<div class="arithmatex">\[T = \frac{22.122}{10} = 2.212 \ \text{s}\]</div>
+<ul>
+<li><strong>Uncertainty in T (ΔT):</strong></li>
+</ul>
+<div class="arithmatex">\[\Delta T = \frac{0.013}{10} = 0.0013 \ \text{s}\]</div>
+<h2 id="4-calculating-gravitational-acceleration">4. Calculating Gravitational Acceleration</h2>
+<p>Using the formula:<br/>
+<span class="arithmatex">\(<span class="arithmatex">\(g = \frac{4\pi^2L}{T^2}\)</span>\)</span></p>
+<p>Substituting values:<br/>
+<span class="arithmatex">\(<span class="arithmatex">\(g = \frac{4\pi^2 \cdot 1.2}{(2.212)^2} \approx 9.65\ \text{m/s}^2\)</span>\)</span></p>
+<h2 id="5-uncertainty-in-g">5. Uncertainty in <span class="arithmatex">\(g\)</span></h2>
+<p>Propagating uncertainty:</p>
+<div class="arithmatex">\[
+\Delta g = g \cdot \sqrt{\left(\frac{\Delta L}{L}\right)^2 + \left(2\cdot\frac{\Delta T}{T}\right)^2}
+\]</div>
+<p>With values:
+- <span class="arithmatex">\(\frac{\Delta L}{L} = \frac{0.0005}{1.2} \approx 0.00042\)</span><br/>
+- <span class="arithmatex">\(\frac{\Delta T}{T} = \frac{0.0013}{2.212} \approx 0.00059\)</span> </p>
+<p>Then:
+$$
+\Delta g \approx 9.65 \cdot \sqrt{(0.00042)^2 + (2 \cdot 0.00059)^2} \approx 0.011\ \text{m/s}^2
+$$</p>
+<ul>
+<li><strong>Final Result:</strong><br/>
+<span class="arithmatex">\(<span class="arithmatex">\(g = 9.65 \pm 0.01\ \text{m/s}^2\)</span>\)</span></li>
+</ul>
+<h2 id="6-analysis">6. Analysis</h2>
+<ul>
+<li>The measured <span class="arithmatex">\(g\)</span> is slightly lower than the standard 9.81 m/s², possibly due to timing errors or slight violations of the small-angle approximation.</li>
+<li>Measurement precision affects <span class="arithmatex">\(\Delta L\)</span> — using a finer ruler would reduce this.</li>
+<li>Human reaction time is a key source of error in <span class="arithmatex">\(\Delta T\)</span>, even over 10 swings.</li>
+<li><strong>Assumptions Made:</strong> </li>
+<li>The pendulum swings in a perfect arc.  </li>
+<li>Air resistance and pivot friction are negligible.  </li>
+<li>The initial angle was below 15°.</li>
+</ul>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">

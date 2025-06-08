@@ -381,56 +381,62 @@ x = np.linspace(-10, 10, 500)
 y = np.linspace(-10, 10, 500)
 X, Y = np.meshgrid(x, y)
 
-</code></pre>
-<h1 id="define-wave-parameters">Define wave parameters</h1>
-<p>wavelength = 2  # Wavelength
+# Define wave parameters
+wavelength = 2  # Wavelength
 k = 2 * np.pi / wavelength  # Wave number
-omega = 2 * np.pi / 5       # Angular frequency</p>
-<h1 id="function-to-create-a-wave-from-a-single-source">Function to create a wave from a single source</h1>
-<p>def single_wave(X, Y, source, t):
-    r = np.sqrt((X - source[0])<strong>2 + (Y - source[1])</strong>2)
-    return np.sin(k * r - omega * t)</p>
-<h1 id="function-to-sum-multiple-waves-from-different-sources">Function to sum multiple waves from different sources</h1>
-<p>def multiple_waves(X, Y, sources, t):
+omega = 2 * np.pi / 5       # Angular frequency
+
+# Function to create a wave from a single source
+def single_wave(X, Y, source, t):
+    r = np.sqrt((X - source[0])**2 + (Y - source[1])**2)
+    return np.sin(k * r - omega * t)
+
+# Function to sum multiple waves from different sources
+def multiple_waves(X, Y, sources, t):
     Z = np.zeros_like(X)
     for source in sources:
         Z += single_wave(X, Y, source, t)
-    return Z</p>
-<h1 id="sources-definitions-for-5-sources-in-a-pentagon">Sources definitions for 5 sources (in a pentagon)</h1>
-<p>radius = 5
+    return Z
+
+# Sources definitions for 5 sources (in a pentagon)
+radius = 5
 angles = np.linspace(0, 2 * np.pi, 6)[:-1]
-sources_5 = [(radius * np.cos(a), radius * np.sin(a)) for a in angles]</p>
-<h1 id="create-gif-frames">Create GIF frames</h1>
-<p>num_frames = 100
-gif_frames = []</p>
-<h1 id="create-the-gif-frames-for-time-from-0-to-2pi">Create the GIF frames for time from 0 to 2*pi</h1>
-<p>for i in range(num_frames):
+sources_5 = [(radius * np.cos(a), radius * np.sin(a)) for a in angles]
+
+# Create GIF frames
+num_frames = 100
+gif_frames = []
+
+# Create the GIF frames for time from 0 to 2*pi
+for i in range(num_frames):
     t = i * 2 * np.pi / num_frames  # Varying time
-    Z = multiple_waves(X, Y, sources_5, t)</p>
-<pre><code># Plotting the frame
-fig, ax = plt.subplots(figsize=(8, 6))
-im = ax.imshow(Z, extent=[-10, 10, -10, 10], origin='lower', cmap='viridis', animated=True)
-ax.set_title(f"Interference of 5 Sources - Time = {t:.2f}", fontsize=16)
-ax.set_xlabel('X axis', fontsize=14)
-ax.set_ylabel('Y axis', fontsize=14)
-plt.colorbar(im, ax=ax)
+    Z = multiple_waves(X, Y, sources_5, t)
 
-# Ensure proper rendering
-plt.tight_layout()
+    # Plotting the frame
+    fig, ax = plt.subplots(figsize=(8, 6))
+    im = ax.imshow(Z, extent=[-10, 10, -10, 10], origin='lower', cmap='viridis', animated=True)
+    ax.set_title(f"Interference of 5 Sources - Time = {t:.2f}", fontsize=16)
+    ax.set_xlabel('X axis', fontsize=14)
+    ax.set_ylabel('Y axis', fontsize=14)
+    plt.colorbar(im, ax=ax)
 
-# Draw the figure to make sure it's rendered correctly before saving
-fig.canvas.draw()
+    # Ensure proper rendering
+    plt.tight_layout()
 
-# Convert to image and append to GIF frames
-gif_frames.append(np.array(fig.canvas.renderer.buffer_rgba()))
+    # Draw the figure to make sure it's rendered correctly before saving
+    fig.canvas.draw()
 
-# Close the plot to avoid memory issues in the loop
-plt.close(fig)
+    # Convert to image and append to GIF frames
+    gif_frames.append(np.array(fig.canvas.renderer.buffer_rgba()))
+
+    # Close the plot to avoid memory issues in the loop
+    plt.close(fig)
+
+# Create and save the GIF
+imageio.mimsave('interference_5_sources.gif', gif_frames, duration=0.1)
+
+print("GIF saved as 'interference_5_sources.gif'")
 </code></pre>
-<h1 id="create-and-save-the-gif">Create and save the GIF</h1>
-<p>imageio.mimsave('interference_5_sources.gif', gif_frames, duration=0.1)</p>
-<p>print("GIF saved as 'interference_5_sources.gif'")
-```</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
