@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>🛰️ Problem 2 – Escape Velocity and Celestial Bodies - Physics and Mathematics</title>
+<title>Problem 2 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "\ud83d\udef0\ufe0f Problem 2 \u2013 Escape Velocity and Celestial Bodies";
+        var mkdocs_page_name = "Problem 2";
         var mkdocs_page_input_path = "1 Physics/2 Gravity/Problem_2.md";
         var mkdocs_page_url = null;
       </script>
@@ -56,7 +56,7 @@
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Problem 1 – Orbital Period and Orbital Radius</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">🛰️ Problem 2 – Escape Velocity and Celestial Bodies</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
 <ul class="current">
 </ul>
 </li>
@@ -163,7 +163,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">2 Gravity</li>
-<li class="breadcrumb-item active">🛰️ Problem 2 – Escape Velocity and Celestial Bodies</li>
+<li class="breadcrumb-item active">Problem 2</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,11 +171,6 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-2-escape-velocity-and-celestial-bodies">🛰️ Problem 2 – Escape Velocity and Celestial Bodies</h1>
-<p><strong>Physics</strong> | <strong>Gravity</strong> | <strong>KW1 Assignment</strong><br/>
-<strong>Author:</strong> Bartu867<br/>
-<strong>Date:</strong> March 27, 2025</p>
-<hr/>
 <h1 id="problem-2">Problem 2</h1>
 <h1 id="escape-velocities-and-cosmic-velocities">Escape Velocities and Cosmic Velocities</h1>
 <h2 id="1-definitions-and-explanations">1. Definitions and Explanations</h2>
@@ -466,7 +461,6 @@ v_{\text{Jupiter}} = \sqrt{\frac{(6.67430 \times 10^{-11}) (1.989 \times 10^{30}
 <p>The result will give the orbital velocity of Jupiter in meters per second.</p>
 <hr/>
 <h2 id="python-code-implementation">Python Code Implementation</h2>
-<p><img alt="alt text" src="../image-2.png"/></p>
 <pre><code class="language-python">import math
 
 # Constants
@@ -477,127 +471,122 @@ M_sun = 1.989e30  # Mass of the Sun in kg
 def orbital_velocity(r):
     return math.sqrt(G * M_sun / r)
 
-</code></pre>
-<h1 id="planetary-data-in-meters">Planetary data (in meters)</h1>
-<p>r_earth = 1.496e11  # Orbital radius of Earth
+# Planetary data (in meters)
+r_earth = 1.496e11  # Orbital radius of Earth
 r_mars = 2.279e11  # Orbital radius of Mars
-r_jupiter = 7.785e11  # Orbital radius of Jupiter</p>
-<h1 id="calculate-velocities">Calculate velocities</h1>
-<p>v_earth = orbital_velocity(r_earth)
+r_jupiter = 7.785e11  # Orbital radius of Jupiter
+
+# Calculate velocities
+v_earth = orbital_velocity(r_earth)
 v_mars = orbital_velocity(r_mars)
-v_jupiter = orbital_velocity(r_jupiter)</p>
-<h1 id="output-results">Output results</h1>
-<p>print(f"Orbital velocity of Earth: {v_earth:.2f} m/s")
+v_jupiter = orbital_velocity(r_jupiter)
+
+# Output results
+print(f"Orbital velocity of Earth: {v_earth:.2f} m/s")
 print(f"Orbital velocity of Mars: {v_mars:.2f} m/s")
-print(f"Orbital velocity of Jupiter: {v_jupiter:.2f} m/s")</p>
-<pre><code>
-
----
-
-### 📊 Tabulated Results
-
-The table will look like this (values may vary slightly based on precision):
-
-| Planet  | v₁ (Orbital) [km/s] | v₂ (Escape) [km/s] | v₃ (Solar Escape) [km/s] |
-|---------|----------------------|---------------------|---------------------------|
-| Earth   | ~7.91                | ~11.18              | ~42.1                     |
-| Mars    | ~3.56                | ~5.03               | ~34.1                     |
-| Jupiter | ~42.1                | ~59.5               | ~87.3                     |
-
----
-
-### 📌 Notes
-
-- These computations assume:
-  - Spherical symmetry
-  - No atmospheric drag
-  - Instantaneous velocity achieved (no thrust phase)
-
-- $v_3$ is **approximate** and assumes escape velocity from Sun calculated at the orbital distance of the planet.
-
+print(f"Orbital velocity of Jupiter: {v_jupiter:.2f} m/s")
 </code></pre>
+<hr/>
+<h3 id="tabulated-results">📊 Tabulated Results</h3>
+<p>The table will look like this (values may vary slightly based on precision):</p>
+<table>
+<thead>
+<tr>
+<th>Planet</th>
+<th>v₁ (Orbital) [km/s]</th>
+<th>v₂ (Escape) [km/s]</th>
+<th>v₃ (Solar Escape) [km/s]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Earth</td>
+<td>~7.91</td>
+<td>~11.18</td>
+<td>~42.1</td>
+</tr>
+<tr>
+<td>Mars</td>
+<td>~3.56</td>
+<td>~5.03</td>
+<td>~34.1</td>
+</tr>
+<tr>
+<td>Jupiter</td>
+<td>~42.1</td>
+<td>~59.5</td>
+<td>~87.3</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h3 id="notes">📌 Notes</h3>
+<ul>
+<li>These computations assume:</li>
+<li>Spherical symmetry</li>
+<li>No atmospheric drag</li>
+<li>
+<p>Instantaneous velocity achieved (no thrust phase)</p>
+</li>
+<li>
+<p><span class="arithmatex">\(v_3\)</span> is <strong>approximate</strong> and assumes escape velocity from Sun calculated at the orbital distance of the planet.</p>
+</li>
+</ul>
 <hr/>
 <h2 id="4-visualizationsplots">4. Visualizations/Plots</h2>
 <p>In this section, we create visualizations to compare the cosmic velocities for Earth, Mars, and Jupiter. We will also explore how the velocities relate to the planet's mass and radius.</p>
 <hr/>
 <h3 id="bar-chart-cosmic-velocities-for-earth-mars-and-jupiter">📊 Bar Chart: Cosmic Velocities for Earth, Mars, and Jupiter</h3>
 <p>We will plot the <strong>first</strong>, <strong>second</strong>, and <strong>third cosmic velocities</strong> for each planet using bar charts for easy comparison.</p>
-<hr/>
-<pre><code class="language-python">
-import matplotlib.pyplot as plt
+<h2 id="_1"><img alt="alt text" src="../image-5.png"/></h2>
+<pre><code class="language-python">import matplotlib.pyplot as plt
 
-</code></pre>
-<h1 id="extracting-data-for-plotting">Extracting data for plotting</h1>
-<p>planets_names = ['Earth', 'Mars', 'Jupiter']
-v1_values = [row['v1 (Orbital) [km/s]'] for <em>, row in df.iterrows()]
-v2_values = [row['v2 (Escape) [km/s]'] for </em>, row in df.iterrows()]
-v3_values = [row['v3 (Solar Escape) [km/s]'] for _, row in df.iterrows()]</p>
-<h1 id="bar-chart">Bar chart</h1>
-<p>fig, ax = plt.subplots(figsize=(10, 6))
+# Extracting data for plotting
+planets_names = ['Earth', 'Mars', 'Jupiter']
+v1_values = [row['v1 (Orbital) [km/s]'] for _, row in df.iterrows()]
+v2_values = [row['v2 (Escape) [km/s]'] for _, row in df.iterrows()]
+v3_values = [row['v3 (Solar Escape) [km/s]'] for _, row in df.iterrows()]
+
+# Bar chart
+fig, ax = plt.subplots(figsize=(10, 6))
 width = 0.25  # Bar width
-x = np.arange(len(planets_names))</p>
-<h1 id="create-bars-for-each-velocity-type">Create bars for each velocity type</h1>
-<p>ax.bar(x - width, v1_values, width, label='First Cosmic Velocity')
+x = np.arange(len(planets_names))
+
+# Create bars for each velocity type
+ax.bar(x - width, v1_values, width, label='First Cosmic Velocity')
 ax.bar(x, v2_values, width, label='Second Cosmic Velocity')
-ax.bar(x + width, v3_values, width, label='Third Cosmic Velocity')</p>
-<h1 id="formatting">Formatting</h1>
-<p>ax.set_xlabel('Planets')
+ax.bar(x + width, v3_values, width, label='Third Cosmic Velocity')
+
+# Formatting
+ax.set_xlabel('Planets')
 ax.set_ylabel('Velocity (km/s)')
 ax.set_title('Cosmic Velocities for Earth, Mars, and Jupiter')
 ax.set_xticks(x)
 ax.set_xticklabels(planets_names)
-ax.legend()</p>
-<p>plt.tight_layout()
-plt.show()</p>
-<pre><code>
-### 🌍 Velocity vs. Planet Mass and Radius
+ax.legend()
 
-We will create two plots to investigate how the cosmic velocities vary with the **planet's mass** and **radius**. 
-
-#### 1. **Velocity vs. Planet Mass**
-
-We will create two plots to investigate how the cosmic velocities vary with the
-
-![alt text](image-13.png)
----
-
-#### 2. **Velocity vs. Planet Radius**
-
-![alt text](image-14.png)
----
-
-### 🌐 Optional: 3D or Animation-Based Visuals for Conceptual Understanding
-
-For deeper understanding, we can visualize the velocities in **3D space** or through **animations**.
-
-#### 1. **3D Plot of Cosmic Velocities**
-
-![alt text](image-15.png)
----
-
-
-#### 2. **Animation of Planetary Escape**
-
-![alt text](image-16.png)
----
-
-
-![alt text](image-17.png)
----
-
-
-### 📈 Final Thoughts
-
-- The bar charts and line plots offer a comparative view of **cosmic velocities** across different planets.
----
-
-## 5. Application &amp; Discussion
-
-### 🚀 1. Importance of Each Cosmic Velocity in Real-World Space Missions
-
-The concept of **cosmic velocities** plays a crucial role in modern space exploration. Understanding these velocities is essential for designing spacecraft and planning interplanetary or interstellar missions. Here we explore the significance of each cosmic velocity:
-
+plt.tight_layout()
+plt.show()
 </code></pre>
+<h3 id="velocity-vs-planet-mass-and-radius">🌍 Velocity vs. Planet Mass and Radius</h3>
+<p>We will create two plots to investigate how the cosmic velocities vary with the <strong>planet's mass</strong> and <strong>radius</strong>. </p>
+<h4 id="1-velocity-vs-planet-mass">1. <strong>Velocity vs. Planet Mass</strong></h4>
+<p>We will create two plots to investigate how the cosmic velocities vary with the</p>
+<h2 id="_2"><img alt="alt text" src="../image-6.png"/></h2>
+<h4 id="2-velocity-vs-planet-radius">2. <strong>Velocity vs. Planet Radius</strong></h4>
+<h2 id="_3"><img alt="alt text" src="../image-7.png"/></h2>
+<h3 id="optional-3d-or-animation-based-visuals-for-conceptual-understanding">🌐 Optional: 3D or Animation-Based Visuals for Conceptual Understanding</h3>
+<p>For deeper understanding, we can visualize the velocities in <strong>3D space</strong> or through <strong>animations</strong>.</p>
+<h4 id="1-3d-plot-of-cosmic-velocities">1. <strong>3D Plot of Cosmic Velocities</strong></h4>
+<h2 id="_4"><img alt="alt text" src="../image-8.png"/></h2>
+<h4 id="2-animation-of-planetary-escape">2. <strong>Animation of Planetary Escape</strong></h4>
+<h2 id="_5"><img alt="alt text" src="../image-9.png"/></h2>
+<h2 id="_6"><img alt="alt text" src="../image-10.png"/></h2>
+<h3 id="final-thoughts">📈 Final Thoughts</h3>
+<h2 id="-the-bar-charts-and-line-plots-offer-a-comparative-view-of-cosmic-velocities-across-different-planets">- The bar charts and line plots offer a comparative view of <strong>cosmic velocities</strong> across different planets.</h2>
+<h2 id="5-application-discussion">5. Application &amp; Discussion</h2>
+<h3 id="1-importance-of-each-cosmic-velocity-in-real-world-space-missions">🚀 1. Importance of Each Cosmic Velocity in Real-World Space Missions</h3>
+<p>The concept of <strong>cosmic velocities</strong> plays a crucial role in modern space exploration. Understanding these velocities is essential for designing spacecraft and planning interplanetary or interstellar missions. Here we explore the significance of each cosmic velocity:</p>
 <h4 id="11-first-cosmic-velocity-orbital-velocity_1">1.1 <strong>First Cosmic Velocity (Orbital Velocity)</strong></h4>
 <p>The <strong>first cosmic velocity</strong> is the minimum speed required for an object to remain in a stable orbit around a planet or star. </p>
 <ul>
