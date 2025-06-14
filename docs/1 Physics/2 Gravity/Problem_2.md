@@ -1,10 +1,3 @@
-# 🛰️ Problem 2 – Escape Velocity and Celestial Bodies
-
-**Physics** | **Gravity** | **KW1 Assignment**  
-**Author:** Bartu867  
-**Date:** March 27, 2025
-
----
 # Problem 2
 
 # Escape Velocities and Cosmic Velocities
@@ -353,7 +346,7 @@ The result will give the orbital velocity of Jupiter in meters per second.
 
 ## Python Code Implementation
 
-![alt text](image-2.png)
+
 
 ```python
 import math
@@ -366,7 +359,6 @@ M_sun = 1.989e30  # Mass of the Sun in kg
 def orbital_velocity(r):
     return math.sqrt(G * M_sun / r)
 
-```
 # Planetary data (in meters)
 r_earth = 1.496e11  # Orbital radius of Earth
 r_mars = 2.279e11  # Orbital radius of Mars
@@ -407,7 +399,6 @@ The table will look like this (values may vary slightly based on precision):
 
 - $v_3$ is **approximate** and assumes escape velocity from Sun calculated at the orbital distance of the planet.
 
-```
 ---
 
 ## 4. Visualizations/Plots
@@ -421,13 +412,11 @@ In this section, we create visualizations to compare the cosmic velocities for E
 We will plot the **first**, **second**, and **third cosmic velocities** for each planet using bar charts for easy comparison.
 
 
-
+![alt text](image-5.png)
 ---
 ```python
-
 import matplotlib.pyplot as plt
 
-```
 # Extracting data for plotting
 planets_names = ['Earth', 'Mars', 'Jupiter']
 v1_values = [row['v1 (Orbital) [km/s]'] for _, row in df.iterrows()]
@@ -464,12 +453,12 @@ We will create two plots to investigate how the cosmic velocities vary with the 
 
 We will create two plots to investigate how the cosmic velocities vary with the
 
-![alt text](image-13.png)
+![alt text](image-6.png)
 ---
 
 #### 2. **Velocity vs. Planet Radius**
 
-![alt text](image-14.png)
+![alt text](image-7.png)
 ---
 
 ### 🌐 Optional: 3D or Animation-Based Visuals for Conceptual Understanding
@@ -478,17 +467,17 @@ For deeper understanding, we can visualize the velocities in **3D space** or thr
 
 #### 1. **3D Plot of Cosmic Velocities**
 
-![alt text](image-15.png)
+![alt text](image-8.png)
 ---
 
 
 #### 2. **Animation of Planetary Escape**
 
-![alt text](image-16.png)
+![alt text](image-9.png)
 ---
 
 
-![alt text](image-17.png)
+![alt text](image-10.png)
 ---
 
 
@@ -503,7 +492,6 @@ For deeper understanding, we can visualize the velocities in **3D space** or thr
 
 The concept of **cosmic velocities** plays a crucial role in modern space exploration. Understanding these velocities is essential for designing spacecraft and planning interplanetary or interstellar missions. Here we explore the significance of each cosmic velocity:
 
-```
 #### 1.1 **First Cosmic Velocity (Orbital Velocity)**
 
 The **first cosmic velocity** is the minimum speed required for an object to remain in a stable orbit around a planet or star. 
