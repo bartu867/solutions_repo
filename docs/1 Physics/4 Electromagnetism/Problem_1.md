@@ -62,15 +62,14 @@ We simulate particle trajectories using the 4th-order Runge-Kutta method for acc
 
 See the attached Python script for full implementation: RK4 integration, Lorentz force application, and 3D visualization.
 
-![alt text](image-1.png)
-
+![alt text](image-3.png)
 ```python
 # Lorentz Force Simulation for a Macroscopic Body (1g, 1C)
 
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-```
+
 # Lorentz force
 def lorentz_force(q, v, E, B):
     return q * (E + np.cross(v, B))
@@ -122,6 +121,7 @@ def plot_trajectory(positions, title="Trajectory"):
     plt.tight_layout()
     plt.show()
 
+
 # Simulation Setup
 
 q = 1.0         # Charge in Coulombs
@@ -130,6 +130,7 @@ v0 = np.array([1e5, 0.0, 0.0])  # Initial velocity in m/s
 r0 = np.array([0.0, 0.0, 0.0])  # Initial position
 dt = 1e-6       # Time step (s)
 steps = 5000    # Number of steps
+
 
 # Scenario 1: Circular motion (B only)
 
@@ -152,6 +153,8 @@ E3 = np.array([0.0, 1e5, 0.0])       # Electric field along y
 B3 = np.array([0.0, 0.0, 10.0])      # Magnetic field along z
 pos3, _ = simulate_motion(E3, B3, q, m, v0, r0, dt, steps)
 plot_trajectory(pos3, title="Drift Motion in E ⊥ B")
+```
+![alt text](image-4.png)
 
 ---
 
@@ -180,10 +183,8 @@ $$
 
 **Expected motion:** helix, as velocity has components both parallel and perpendicular to $\vec{B}$.  
 
-**Plot:** 
-
-![alt text](image-2.png)
-
+**Plot:** [3D helical path]
+---
 ### Case 3: Crossed Fields (Drift)
 - $\vec{E} = [0, E, 0]$  
 ### Case 3: Crossed Fields (Drift)
@@ -200,20 +201,20 @@ $$
 
 ---
 ## İnteractive simulation with sliders 
-![alt text](image.png)
+![alt text](image-5.png)
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from ipywidgets import interact, FloatSlider
 import ipywidgets as widgets
-```
+
 # Lorentz Force
 def lorentz_force(q, v, E, B):
     return q * (E + np.cross(v, B))
 
 # RK4 Integrator
-
 def rk4_step(pos, vel, dt, q, m, E, B):
     def acceleration(v):
         return lorentz_force(q, v, E, B) / m
@@ -234,7 +235,7 @@ def rk4_step(pos, vel, dt, q, m, E, B):
     new_pos = pos + (k1x + 2*k2x + 2*k3x + k4x)/6
 
     return new_pos, new_vel
-```
+
 # Simulation
 def simulate_motion(E, B, q, m, v0, r0, dt=1e-11, steps=2000):
     positions = [r0]
@@ -245,7 +246,7 @@ def simulate_motion(E, B, q, m, v0, r0, dt=1e-11, steps=2000):
         positions.append(pos)
 
     return np.array(positions)
-```
+
 # Interactive plot function
 def interactive_lorentz_sim(q=1.6e-19, m=9.11e-31, 
                             Ex=0.0, Ey=0.0, Ez=0.0, 
@@ -267,7 +268,7 @@ def interactive_lorentz_sim(q=1.6e-19, m=9.11e-31,
     ax.set_zlabel('z (m)')
     ax.set_title('Charged Particle Trajectory (Lorentz Force)')
     plt.show()
----
+
 # Create interactive sliders
 interact(
     interactive_lorentz_sim,
@@ -279,8 +280,10 @@ interact(
     Bz=FloatSlider(min=-5, max=5, step=0.5, value=1.0, description='B_z'),
     v0x=FloatSlider(min=0, max=2e6, step=1e5, value=1e6, description='v0_x'),
     v0y=FloatSlider(min=0, max=2e6, step=1e5, value=0.0, description='v0_y'),
-    v0z=FloatSlider(min=0, max=2e6, step=1e5, value=0.0, description='v0_z'))
+    v0z=FloatSlider(min=0, max=2e6, step=1e5, value=0.0, description='v0_z')
+)
 ```
+
 ## What it does ?
 
 
@@ -311,12 +314,6 @@ $$
 Helps visualize how different field setups affect particle motion — such as circular, helical, or drifting paths.
 
 ---
-## Link to the interactive simulation:
-
-
-https://colab.research.google.com/#scrollTo=iYl2lqM_x6wC&uniqifier=4
-
-
 ## 6. Real-World Relevance
 - Cyclotrons exploit circular motion in magnetic fields.  
 - Magnetic traps and Penning traps confine particles using combined E and B fields.  
