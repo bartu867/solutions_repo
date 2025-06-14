@@ -214,51 +214,54 @@ m \frac{d\vec{v}}{dt} = q (\vec{E} + \vec{v} \times \vec{B})
 <hr/>
 <h2 id="4-code-implementation">4. Code Implementation</h2>
 <p>See the attached Python script for full implementation: RK4 integration, Lorentz force application, and 3D visualization.</p>
-<p><img alt="alt text" src="../image-1.png"/></p>
+<p><img alt="alt text" src="../image-3.png"/></p>
 <pre><code class="language-python"># Lorentz Force Simulation for a Macroscopic Body (1g, 1C)
 
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-</code></pre>
-<h1 id="lorentz-force">Lorentz force</h1>
-<p>def lorentz_force(q, v, E, B):
-    return q * (E + np.cross(v, B))</p>
-<h1 id="4th-order-runge-kutta">4th-order Runge-Kutta</h1>
-<p>def rk4_step(pos, vel, dt, q, m, E, B):
+
+# Lorentz force
+def lorentz_force(q, v, E, B):
+    return q * (E + np.cross(v, B))
+
+# 4th-order Runge-Kutta
+def rk4_step(pos, vel, dt, q, m, E, B):
     def acceleration(v):
-        return lorentz_force(q, v, E, B) / m</p>
-<pre><code>k1v = dt * acceleration(vel)
-k1x = dt * vel
+        return lorentz_force(q, v, E, B) / m
 
-k2v = dt * acceleration(vel + 0.5 * k1v)
-k2x = dt * (vel + 0.5 * k1v)
+    k1v = dt * acceleration(vel)
+    k1x = dt * vel
 
-k3v = dt * acceleration(vel + 0.5 * k2v)
-k3x = dt * (vel + 0.5 * k2v)
+    k2v = dt * acceleration(vel + 0.5 * k1v)
+    k2x = dt * (vel + 0.5 * k1v)
 
-k4v = dt * acceleration(vel + k3v)
-k4x = dt * (vel + k3v)
+    k3v = dt * acceleration(vel + 0.5 * k2v)
+    k3x = dt * (vel + 0.5 * k2v)
 
-new_vel = vel + (k1v + 2*k2v + 2*k3v + k4v) / 6
-new_pos = pos + (k1x + 2*k2x + 2*k3x + k4x) / 6
+    k4v = dt * acceleration(vel + k3v)
+    k4x = dt * (vel + k3v)
 
-return new_pos, new_vel
-</code></pre>
-<h1 id="simulation-function">Simulation function</h1>
-<p>def simulate_motion(E, B, q, m, v0, r0, dt=1e-6, steps=5000):
+    new_vel = vel + (k1v + 2*k2v + 2*k3v + k4v) / 6
+    new_pos = pos + (k1x + 2*k2x + 2*k3x + k4x) / 6
+
+    return new_pos, new_vel
+
+# Simulation function
+def simulate_motion(E, B, q, m, v0, r0, dt=1e-6, steps=5000):
     positions = [r0]
     velocities = [v0]
-    pos, vel = r0, v0</p>
-<pre><code>for _ in range(steps):
-    pos, vel = rk4_step(pos, vel, dt, q, m, E, B)
-    positions.append(pos)
-    velocities.append(vel)
+    pos, vel = r0, v0
 
-return np.array(positions), np.array(velocities)
-</code></pre>
-<h1 id="3d-plotting">3D Plotting</h1>
-<p>def plot_trajectory(positions, title="Trajectory"):
+    for _ in range(steps):
+        pos, vel = rk4_step(pos, vel, dt, q, m, E, B)
+        positions.append(pos)
+        velocities.append(vel)
+
+    return np.array(positions), np.array(velocities)
+
+# 3D Plotting
+def plot_trajectory(positions, title="Trajectory"):
     fig = plt.figure(figsize=(8, 6))
     ax = fig.add_subplot(111, projection='3d')
     ax.plot3D(positions[:, 0], positions[:, 1], positions[:, 2])
@@ -267,29 +270,42 @@ return np.array(positions), np.array(velocities)
     ax.set_ylabel('y (m)')
     ax.set_zlabel('z (m)')
     plt.tight_layout()
-    plt.show()</p>
-<h1 id="simulation-setup">Simulation Setup</h1>
-<p>q = 1.0         # Charge in Coulombs
+    plt.show()
+
+
+# Simulation Setup
+
+q = 1.0         # Charge in Coulombs
 m = 1.001       # Mass in kg (1 gram)
 v0 = np.array([1e5, 0.0, 0.0])  # Initial velocity in m/s
 r0 = np.array([0.0, 0.0, 0.0])  # Initial position
 dt = 1e-6       # Time step (s)
-steps = 5000    # Number of steps</p>
-<h1 id="scenario-1-circular-motion-b-only">Scenario 1: Circular motion (B only)</h1>
-<p>E1 = np.array([0.0, 0.0, 0.0])       # No electric field
+steps = 5000    # Number of steps
+
+
+# Scenario 1: Circular motion (B only)
+
+E1 = np.array([0.0, 0.0, 0.0])       # No electric field
 B1 = np.array([0.0, 0.0, 10.0])      # 10 Tesla magnetic field
 pos1, _ = simulate_motion(E1, B1, q, m, v0, r0, dt, steps)
-plot_trajectory(pos1, title="Circular Motion in B Field")</p>
-<h1 id="scenario-2-helical-motion-e-and-b-parallel">Scenario 2: Helical motion (E and B parallel)</h1>
-<p>E2 = np.array([0.0, 0.0, 1e5])       # Electric field along z
+plot_trajectory(pos1, title="Circular Motion in B Field")
+
+
+# Scenario 2: Helical motion (E and B parallel)
+
+E2 = np.array([0.0, 0.0, 1e5])       # Electric field along z
 B2 = np.array([0.0, 0.0, 10.0])      # Magnetic field along z
 pos2, _ = simulate_motion(E2, B2, q, m, v0, r0, dt, steps)
-plot_trajectory(pos2, title="Helical Motion in E || B")</p>
-<h1 id="scenario-3-drift-e-b">Scenario 3: Drift (E ⊥ B)</h1>
-<p>E3 = np.array([0.0, 1e5, 0.0])       # Electric field along y
+plot_trajectory(pos2, title="Helical Motion in E || B")
+
+# Scenario 3: Drift (E ⊥ B)
+
+E3 = np.array([0.0, 1e5, 0.0])       # Electric field along y
 B3 = np.array([0.0, 0.0, 10.0])      # Magnetic field along z
 pos3, _ = simulate_motion(E3, B3, q, m, v0, r0, dt, steps)
-plot_trajectory(pos3, title="Drift Motion in E ⊥ B")</p>
+plot_trajectory(pos3, title="Drift Motion in E ⊥ B")
+</code></pre>
+<p><img alt="alt text" src="../image-4.png"/></p>
 <hr/>
 <h2 id="5-results-and-visualizations">5. Results and Visualizations</h2>
 <h3 id="case-1-circular-motion">Case 1: Circular Motion</h3>
@@ -311,8 +327,7 @@ r_L = \frac{mv}{|q||B|} \quad \text{(Larmor radius)}
 <li><span class="arithmatex">\(\vec{B} = [0, 0, B]\)</span> </li>
 </ul>
 <p><strong>Expected motion:</strong> helix, as velocity has components both parallel and perpendicular to <span class="arithmatex">\(\vec{B}\)</span>.  </p>
-<p><strong>Plot:</strong> </p>
-<p><img alt="alt text" src="../image-2.png"/></p>
+<h2 id="plot-3d-helical-path"><strong>Plot:</strong> [3D helical path]</h2>
 <h3 id="case-3-crossed-fields-drift">Case 3: Crossed Fields (Drift)</h3>
 <ul>
 <li><span class="arithmatex">\(\vec{E} = [0, E, 0]\)</span> </li>
@@ -329,38 +344,40 @@ r_L = \frac{mv}{|q||B|} \quad \text{(Larmor radius)}
 <p><strong>Plot:</strong> [Curved motion with net drift]</p>
 <hr/>
 <h2 id="interactive-simulation-with-sliders">İnteractive simulation with sliders</h2>
-<p><img alt="alt text" src="../image.png"/></p>
+<p><img alt="alt text" src="../image-5.png"/></p>
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from ipywidgets import interact, FloatSlider
 import ipywidgets as widgets
-</code></pre>
-<h1 id="lorentz-force_1">Lorentz Force</h1>
-<p>def lorentz_force(q, v, E, B):
-    return q * (E + np.cross(v, B))</p>
-<h1 id="rk4-integrator">RK4 Integrator</h1>
-<p>def rk4_step(pos, vel, dt, q, m, E, B):
+
+# Lorentz Force
+def lorentz_force(q, v, E, B):
+    return q * (E + np.cross(v, B))
+
+# RK4 Integrator
+def rk4_step(pos, vel, dt, q, m, E, B):
     def acceleration(v):
-        return lorentz_force(q, v, E, B) / m</p>
-<pre><code>k1v = dt * acceleration(vel)
-k1x = dt * vel
+        return lorentz_force(q, v, E, B) / m
 
-k2v = dt * acceleration(vel + 0.5 * k1v)
-k2x = dt * (vel + 0.5 * k1v)
+    k1v = dt * acceleration(vel)
+    k1x = dt * vel
 
-k3v = dt * acceleration(vel + 0.5 * k2v)
-k3x = dt * (vel + 0.5 * k2v)
+    k2v = dt * acceleration(vel + 0.5 * k1v)
+    k2x = dt * (vel + 0.5 * k1v)
 
-k4v = dt * acceleration(vel + k3v)
-k4x = dt * (vel + k3v)
+    k3v = dt * acceleration(vel + 0.5 * k2v)
+    k3x = dt * (vel + 0.5 * k2v)
 
-new_vel = vel + (k1v + 2*k2v + 2*k3v + k4v)/6
-new_pos = pos + (k1x + 2*k2x + 2*k3x + k4x)/6
+    k4v = dt * acceleration(vel + k3v)
+    k4x = dt * (vel + k3v)
 
-return new_pos, new_vel
-</code></pre>
-<pre><code># Simulation
+    new_vel = vel + (k1v + 2*k2v + 2*k3v + k4v)/6
+    new_pos = pos + (k1x + 2*k2x + 2*k3x + k4x)/6
+
+    return new_pos, new_vel
+
+# Simulation
 def simulate_motion(E, B, q, m, v0, r0, dt=1e-11, steps=2000):
     positions = [r0]
     pos, vel = r0.copy(), v0.copy()
@@ -370,31 +387,31 @@ def simulate_motion(E, B, q, m, v0, r0, dt=1e-11, steps=2000):
         positions.append(pos)
 
     return np.array(positions)
-</code></pre>
-<h1 id="interactive-plot-function">Interactive plot function</h1>
-<p>def interactive_lorentz_sim(q=1.6e-19, m=9.11e-31, 
+
+# Interactive plot function
+def interactive_lorentz_sim(q=1.6e-19, m=9.11e-31, 
                             Ex=0.0, Ey=0.0, Ez=0.0, 
                             Bx=0.0, By=0.0, Bz=1.0,
-                            v0x=1e6, v0y=0.0, v0z=0.0):</p>
-<pre><code>E = np.array([Ex, Ey, Ez])
-B = np.array([Bx, By, Bz])
-v0 = np.array([v0x, v0y, v0z])
-r0 = np.array([0.0, 0.0, 0.0])
+                            v0x=1e6, v0y=0.0, v0z=0.0):
 
-positions = simulate_motion(E, B, q, m, v0, r0)
+    E = np.array([Ex, Ey, Ez])
+    B = np.array([Bx, By, Bz])
+    v0 = np.array([v0x, v0y, v0z])
+    r0 = np.array([0.0, 0.0, 0.0])
 
-fig = plt.figure(figsize=(10, 6))
-ax = fig.add_subplot(111, projection='3d')
-ax.plot3D(positions[:, 0], positions[:, 1], positions[:, 2])
-ax.set_xlabel('x (m)')
-ax.set_ylabel('y (m)')
-ax.set_zlabel('z (m)')
-ax.set_title('Charged Particle Trajectory (Lorentz Force)')
-plt.show()
-</code></pre>
-<hr/>
-<h1 id="create-interactive-sliders">Create interactive sliders</h1>
-<p>interact(
+    positions = simulate_motion(E, B, q, m, v0, r0)
+
+    fig = plt.figure(figsize=(10, 6))
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot3D(positions[:, 0], positions[:, 1], positions[:, 2])
+    ax.set_xlabel('x (m)')
+    ax.set_ylabel('y (m)')
+    ax.set_zlabel('z (m)')
+    ax.set_title('Charged Particle Trajectory (Lorentz Force)')
+    plt.show()
+
+# Create interactive sliders
+interact(
     interactive_lorentz_sim,
     Ex=FloatSlider(min=-1e6, max=1e6, step=1e5, value=0.0, description='E_x'),
     Ey=FloatSlider(min=-1e6, max=1e6, step=1e5, value=0.0, description='E_y'),
@@ -404,8 +421,9 @@ plt.show()
     Bz=FloatSlider(min=-5, max=5, step=0.5, value=1.0, description='B_z'),
     v0x=FloatSlider(min=0, max=2e6, step=1e5, value=1e6, description='v0_x'),
     v0y=FloatSlider(min=0, max=2e6, step=1e5, value=0.0, description='v0_y'),
-    v0z=FloatSlider(min=0, max=2e6, step=1e5, value=0.0, description='v0_z'))
-```</p>
+    v0z=FloatSlider(min=0, max=2e6, step=1e5, value=0.0, description='v0_z')
+)
+</code></pre>
 <h2 id="what-it-does">What it does ?</h2>
 <p>⚡️ <strong>Interactive Lorentz Force Simulation</strong></p>
 <p>🔍 <strong>What It Does</strong></p>
@@ -426,8 +444,6 @@ plt.show()
 <p>🎯 <strong>Purpose</strong></p>
 <p>Helps visualize how different field setups affect particle motion — such as circular, helical, or drifting paths.</p>
 <hr/>
-<h2 id="link-to-the-interactive-simulation">Link to the interactive simulation:</h2>
-<p>https://colab.research.google.com/#scrollTo=iYl2lqM_x6wC&amp;uniqifier=4</p>
 <h2 id="6-real-world-relevance">6. Real-World Relevance</h2>
 <ul>
 <li>Cyclotrons exploit circular motion in magnetic fields.  </li>
