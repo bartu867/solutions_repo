@@ -131,8 +131,9 @@ The next step is to implement and analyze these interference patterns computatio
 
 # Python/Models
 
-![alt text](image-2.png)
+![alt text](3d_wave.gif)
 
+![alt text](image-3.png)
 
 ```python
 import numpy as np
