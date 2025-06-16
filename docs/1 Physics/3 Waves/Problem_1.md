@@ -130,7 +130,8 @@ A Python script implementing the above equations will:
 The next step is to implement and analyze these interference patterns computationally.
 
 # Python/Models
-![alt text](image-1.png)
+
+![alt text](image-2.png)
 
 
 ```python
